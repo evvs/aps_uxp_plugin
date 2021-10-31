@@ -9,36 +9,25 @@ let content = {
   filename: '',
   data: ''
 }
-let file
-let result
 
-const loadCustomSettings = async() => {
+const loadSettigs = async(filename) => {
   try {
-    const file = await pluginFolder.getEntry("custom_settings.txt");
+    const file = await pluginFolder.getEntry(filename);
     return file
   } catch(e) {
-    throw new ReadFileError("can't open file", "custom_settings.txt")
-  }
-}
-
-const loadDefaultSettigs = async() => {
-  try {
-    const file = await pluginFolder.getEntry("default_settings.txt");
-    return file
-  } catch(e) {
-    throw new ReadFileError("can't open file", "default_settings.txt")
+    throw new ReadFileError("can't open file", filename)
   }
 }
 
 try {
-  file = await loadCustomSettings()
+  const file = await loadSettigs('custom_settings.txt')
   content = {
     filename: 'custom_settings.txt',
     data: await file.read()
   }
   } catch (e) {
     errors.push(e)
-    file = await loadDefaultSettigs();
+    const file = await loadSettigs('default_settings.txt')
     content = {
       filename: 'default_settings.txt',
       data: await file.read()
@@ -49,6 +38,7 @@ try {
   const result = parse(content.data);
   return [result, errors]
 } catch (e) {
+  const result = ''
   errors.push(e)
   return [result, errors]
 } 
