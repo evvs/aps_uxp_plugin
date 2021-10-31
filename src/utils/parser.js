@@ -85,9 +85,7 @@ const parse = (str) => {
 
   buttonsArr.forEach((el) => {
     const parsedElement = parseBtnBlock(el);
-    const alreadyExist = result.find(
-      (curElId) => curElId.id === parsedElement.id
-    );
+    const alreadyExist = result.find((curElId) => curElId.id === parsedElement.id);
     if (!alreadyExist) result.push(parsedElement);
   });
 

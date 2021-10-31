@@ -10,7 +10,7 @@ export default async () => {
     data: "",
   };
 
-  const loadSettigs = async (filename) => {
+  const loadSettings = async (filename) => {
     try {
       const file = await pluginFolder.getEntry(filename);
       return file;
@@ -20,14 +20,14 @@ export default async () => {
   };
 
   try {
-    const file = await loadSettigs("custom_settings.txt");
+    const file = await loadSettings("custom_settings.txt");
     content = {
       filename: "custom_settings.txt",
       data: await file.read(),
     };
   } catch (e) {
     errors.push(e);
-    const file = await loadSettigs("default_settings.txt");
+    const file = await loadSettings("default_settings.txt");
     content = {
       filename: "default_settings.txt",
       data: await file.read(),
