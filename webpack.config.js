@@ -46,7 +46,6 @@ module.exports = {
     plugins: [
         //new CleanWebpackPlugin(),
         new CopyPlugin(['plugin', {
-            from: path.resolve(__dirname, "custom_settings.txt"),
             from: path.resolve(__dirname, "default_settings.txt")
           },
         ], 

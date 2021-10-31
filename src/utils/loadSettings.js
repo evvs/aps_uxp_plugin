@@ -38,7 +38,7 @@ export default async () => {
     const result = parse(content.data);
     return [result, errors];
   } catch (e) {
-    const result = "";
+    const result = '';
     errors.push(e);
     return [result, errors];
   }
