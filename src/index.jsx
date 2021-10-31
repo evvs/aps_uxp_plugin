@@ -4,10 +4,17 @@ import "./styles.css";
 import { PanelController } from "./controllers/PanelController.jsx";
 import { CommandController } from "./controllers/CommandController.jsx";
 import { About } from "./components/About.jsx";
-import { Masks } from "./panels/Masks.jsx";
-import { Color } from "./panels/Color.jsx";
+import { AllActionsPanel } from "./panels/AllActionsPanel/AllActionsPanel.jsx";
+
 
 import { entrypoints } from "uxp";
+
+//fetch('./uisettings.txt').then((response) => {
+//  return response.text();
+//})
+//.then((data) => {
+//  console.log(data);
+//})
 
 const aboutController = new CommandController(
   ({ dialog }) => <About dialog={dialog} />,
@@ -17,44 +24,27 @@ const aboutController = new CommandController(
     size: { width: 480, height: 480 },
   }
 );
-const masksController = new PanelController(() => <Masks />, {
-  id: "masks",
+
+const allActionsController = new PanelController(() => <AllActionsPanel />, {
+  id: "apsretouch",
   menuItems: [
     {
-      id: "reload1",
+      id: "reload0",
       label: "Перезапустить плагин",
       enabled: true,
       checked: false,
       oninvoke: () => location.reload(),
     },
     {
-      id: "dialog1",
+      id: "dialog0",
       label: "About this Plugin",
       enabled: true,
       checked: false,
       oninvoke: () => aboutController.run(),
     },
   ],
-});
-const colorController = new PanelController(() => <Color />, {
-  id: "color",
-  menuItems: [
-    {
-      id: "reload2",
-      label: "Перезапустить плагин",
-      enabled: true,
-      checked: false,
-      oninvoke: () => location.reload(),
-    },
-    {
-      id: "dialog2",
-      label: "About this Plugin",
-      enabled: true,
-      checked: false,
-      oninvoke: () => aboutController.run(),
-    },
-  ],
-});
+})
+
 
 entrypoints.setup({
   plugin: {
@@ -66,10 +56,9 @@ entrypoints.setup({
     },
   },
   commands: {
-    showAbout: aboutController,
+    showAbout: aboutController
   },
   panels: {
-    masks: masksController,
-    color: colorController,
+    apsretouch: allActionsController
   },
 });
