@@ -5,6 +5,7 @@ import "./AllactionsPanel.css";
 
 import ActionButtons from "../../components/ActionButtons";
 import TopMenu from "../../components/TopMenu";
+import BottomMenu from "../../components/BottomMenu";
 
 const initialState = {
   data: false,
@@ -41,5 +42,6 @@ export const AllActionsPanel = () => {
   return <div>
     <TopMenu />
     {state.data && <ActionButtons buttons={state.data} />}
+    <BottomMenu />
   </div>;
 };
