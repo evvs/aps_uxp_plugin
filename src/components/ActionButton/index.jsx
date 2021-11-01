@@ -5,7 +5,7 @@ import "./styles.css"
 const uxp = require("uxp");
 const fs = uxp.storage.localFileSystem;
 
-const batchPlay = require("photoshop").action.batchPlay;
+/*const batchPlay = require("photoshop").action.batchPlay;
 
 async function ScriptRun(jsxFile) {
    let pluginFolder = await fs.getPluginFolder()
@@ -36,14 +36,23 @@ async function ScriptRun(jsxFile) {
       "modalBehavior": "fail"
    });
 
+} */
+
+
+
+const createFile = async() => {
+   console.log('file!!!!')
+   const folder = await fs.getTemporaryFolder();
+   const file = await folder.createFile("test.jsx", {
+      overwrite: true
+    });
+   await file.write(`qwertt`)
 }
 
 export default ({ name, description, color, standartActions, expandedEctions }) => {
   return (
       <sp-action-button title={description} class="action-btn"
-      onClick={() => {
-        ScriptRun('pseudoHdr.jsx')
-      }}
+      onClick={() => createFile()}
       >{name}</sp-action-button>
   );
 };
