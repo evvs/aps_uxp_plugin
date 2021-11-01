@@ -1,11 +1,14 @@
 import React, { useReducer, useEffect } from "react";
 
-import loadSettings from '../../utils/loadSettings'
-import "./AllactionsPanel.css"
+import loadSettings from "../../utils/loadSettings";
+import "./AllactionsPanel.css";
+
+import ActionButtons from "../../components/ActionButtons";
+import TopMenu from "../../components/TopMenu";
 
 const initialState = {
   data: false,
-  errors: []
+  errors: [],
 };
 
 const reducer = (state, action) => {
@@ -15,7 +18,7 @@ const reducer = (state, action) => {
     case "loaded":
       return {
         data: action.payload.data,
-        errors: action.payload.errors
+        errors: action.payload.errors,
       };
     default:
       return state;
@@ -24,19 +27,19 @@ const reducer = (state, action) => {
 
 const dataLoaded = (data, errors) => ({
   type: "loaded",
-  payload: {data, errors}
+  payload: { data, errors },
 });
 
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(async() => {
+  useEffect(async () => {
     const [data, errors] = await loadSettings();
-    dispatch(dataLoaded(data, errors))
-  }, [])
+    dispatch(dataLoaded(data, errors));
+  }, []);
 
-    return (
-        <div>
-        </div>
-        )
-}
+  return <div>
+    <TopMenu />
+    {state.data && <ActionButtons buttons={state.data} />}
+  </div>;
+};
