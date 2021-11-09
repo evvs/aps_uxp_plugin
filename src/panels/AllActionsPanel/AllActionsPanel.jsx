@@ -39,9 +39,11 @@ export const AllActionsPanel = () => {
     dispatch(dataLoaded(data, errors));
   }, []);
 
-  return <div>
-    <TopMenu />
-    {state.data && <ActionButtons buttons={state.data} />}
-    <BottomMenu />
-  </div>;
+  return (
+    <div>
+      <TopMenu state={state}/>
+      {state.data && <ActionButtons buttons={state.data} />}
+      <BottomMenu />
+    </div>
+  );
 };

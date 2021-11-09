@@ -1,4 +1,5 @@
 import React from "react";
+import runAction from "../../utils/runAction";
 
 import "./styles.css";
 
@@ -8,10 +9,22 @@ export default () => {
       <sp-action-button>
         <img src="./icons/help.svg" />
       </sp-action-button>
-      <sp-action-button>
+      <sp-action-button  onClick={()=>{
+     
+     runAction({
+        setName:'APs_RETOUCH_Guru', actionName: 'До / После         F2'
+      })
+      }
+    }>
         <img src="./icons/beforeAfter.svg" />
       </sp-action-button>
-      <sp-action-button>
+      <sp-action-button onClick={()=>{
+     
+     runAction({
+        setName:'APs_RETOUCH_Library', actionName: 'SERVICE_2 windows'
+      })
+      }
+    }>
         <img src="./icons/two_windows_15x16.svg" />
       </sp-action-button>
       <sp-action-button>
