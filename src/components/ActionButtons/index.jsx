@@ -7,13 +7,13 @@ export default ({ buttons }) => {
   return (
     <div className="actionbuttons">
       {buttons.length > 0 ?
-        buttons.map(({ id, name, description, color, standartActions, expandedEctions }) => (
+        buttons.map(({ id, name, description, color, standardActions, expandedEctions }) => (
           <ActionButton
             key={id}
             name={name}
             description={description}
             color={color}
-            standartActions={standartActions}
+            standartActions={standardActions}
             expandedEctions={expandedEctions}
           />
         )) :
