@@ -10,6 +10,9 @@ import BottomMenu from "../../components/BottomMenu";
 const initialState = {
   data: false,
   errors: [],
+  ui: {
+    fontSize: 13
+  }
 };
 
 const reducer = (state, action) => {
@@ -18,9 +21,17 @@ const reducer = (state, action) => {
       return initialState;
     case "loaded":
       return {
+        ...state,
         data: action.payload.data,
         errors: action.payload.errors,
       };
+    case "changeFontSize":
+      return {
+        ...state,
+        ui: {
+          fontSize: action.payload
+        }
+      }
     default:
       return state;
   }
@@ -30,6 +41,7 @@ const dataLoaded = (data, errors) => ({
   type: "loaded",
   payload: { data, errors },
 });
+
 
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -41,8 +53,8 @@ export const AllActionsPanel = () => {
 
   return (
     <div>
-      <TopMenu state={state}/>
-      {state.data && <ActionButtons buttons={state.data} />}
+      <TopMenu state={state} dispatch={dispatch}/>
+      {state.data && <ActionButtons state={state} />}
       <BottomMenu />
     </div>
   );

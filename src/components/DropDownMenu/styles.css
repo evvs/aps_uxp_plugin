@@ -1,0 +1,27 @@
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 1;
+  min-width: 250px;
+  background-color: var(--uxp-host-background-color);
+}
+.dd-item {
+  padding: 10px;
+}
+.dd-item:hover {
+  color: var(--uxp-host-toggle-background-color);
+  cursor: pointer;
+}
+.textsize-slider {
+  display: flex;
+  align-items: center;
+}
+.slider {
+  margin-left: 10px;
+  flex-grow: 1;
+}
+
+.checkbox-container {
+  padding-bottom: 10px;
+}

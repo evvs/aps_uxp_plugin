@@ -4,11 +4,12 @@ import "./styles.css";
 import runAction from "../../utils/runAction";
 import runScript from "../../utils/runScript";
 
-export default ({ name, description, color, standartActions, expandedEctions }) => {
+export default ({ name, description, color, standartActions, expandedEctions, fontSize }) => {
   return (
     <sp-action-button
       title={description}
       class="action-btn"
+      style={{ fontSize: `${fontSize}` }}
       onClick={() => {
         standartActions.actions.forEach((action) => {
           runAction(action);

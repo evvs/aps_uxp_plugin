@@ -1,13 +1,13 @@
 import React from "react";
 import ActionButton from "../ActionButton";
 
-import "./styles.css"
+import "./styles.css";
 
-export default ({ buttons }) => {
+export default ({ state }) => {
   return (
     <div className="actionbuttons">
-      {buttons.length > 0 ?
-        buttons.map(({ id, name, description, color, standartActions, expandedEctions }) => (
+      {state.data.length > 0 ? (
+        state.data.map(({ id, name, description, color, standartActions, expandedEctions }) => (
           <ActionButton
             key={id}
             name={name}
@@ -15,10 +15,12 @@ export default ({ buttons }) => {
             color={color}
             standartActions={standartActions}
             expandedEctions={expandedEctions}
+            fontSize={state.ui.fontSize}
           />
-        )) :
+        ))
+      ) : (
         <h1>No buttons to load</h1>
-        }
+      )}
     </div>
   );
 };

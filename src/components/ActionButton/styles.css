@@ -1,11 +1,8 @@
 .action-btn {
   margin: 1px;
   padding: 0;
-  flex-basis: 0;
+  min-width: 200px;
+  max-width: 400px;
   flex-grow: 1;
-  min-width: 125px;
-}
-
-.green-dark {
-    background-color: ;
+  overflow: hidden;
 }
