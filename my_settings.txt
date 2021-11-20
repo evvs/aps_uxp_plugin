@@ -1,0 +1,25 @@
+///[имя кнопки] [*] Всплывающая подсказка
+%standart%    // настройки кнопки для режима «Стандартный»
+    {A} имя набора | имя операции
+    {A} * | имя операции
+%expanded%    // настройки кнопки для режима «Расширенный»
+    {A} имя набора | имя операции
+    //{A} * | имя операции
+
+[Яркость] [green] Всплывающая подсказка
+%standart%
+    {A} APs_RETOUCH_Profi | Тон
+%expanded%
+    {A} APs_RETOUCH_Guru | Тон
+
+[Pseudo HDR] [blue] Всплывающая подсказка
+%standart%
+    {A} APs_RETOUCH_Profi | Pseudo HDR
+%expanded%
+    {A} APs_RETOUCH_Guru | Pseudo HDR
+
+[Dodge & Burn] [orange] Всплывающая подсказка
+%standart%
+    {A} APs_RETOUCH_Profi | Dodge & Burn
+%expanded%
+    {A} APs_RETOUCH_Guru | Dodge & Burn

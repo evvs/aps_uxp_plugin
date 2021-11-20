@@ -18,7 +18,8 @@ export default ({ state }) => {
             fontSize={state.ui.fontSize}
           />
         ))
-      ) : (
+      )
+      : (
         <h1>No buttons to load</h1>
       )}
     </div>
