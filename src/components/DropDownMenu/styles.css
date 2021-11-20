@@ -11,8 +11,9 @@
   padding: 10px;
 }
 .dd-item:hover {
-  color: var(--uxp-host-toggle-background-color);
+  /* color: var(--uxp-host-toggle-background-color); */
   cursor: pointer;
+  color: orange;
 }
 .textsize-slider {
   display: flex;

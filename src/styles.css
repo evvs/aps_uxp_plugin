@@ -2,10 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: white;
 
   font-weight: 300;
   font-size: 13px;
+}
+
+@media (prefers-color-scheme: lightest), (prefers-color-scheme:light) {
+  * {
+      color: black;
+    }
+}
+
+@media (prefers-color-scheme: darkest), (prefers-color-scheme:dark) {
+  * {
+      color: white;
+    }
 }
 
 a {

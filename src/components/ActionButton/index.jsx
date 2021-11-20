@@ -8,7 +8,7 @@ export default ({ name, description, color, standartActions, expandedEctions, fo
   return (
     <sp-action-button
       title={description}
-      class="action-btn"
+      class={`action-btn btn-${color}`}
       style={{ fontSize: `${fontSize}` }}
       onClick={() => {
         standartActions.actions.forEach((action) => {

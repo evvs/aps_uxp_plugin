@@ -32,7 +32,7 @@ export default ({ state, dispatch }) => {
       <sp-divider></sp-divider>
       <div className="checkbox-container">
         <div>
-          <sp-checkbox class="dd-item">режим расширенный</sp-checkbox>
+          <sp-checkbox class="dd-item">режим "Расширенный"</sp-checkbox>
         </div>
         <div>
           <sp-checkbox class="dd-item">режим "Двойной клик"</sp-checkbox>
