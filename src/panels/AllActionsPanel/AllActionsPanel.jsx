@@ -13,6 +13,12 @@ const initialState = {
   errors: [],
   ui: {
     fontSize: 13
+  },
+  modes: {
+    extended: false,
+    doubleClick: false,
+    about: false,
+    importantMark: false
   }
 };
 
@@ -31,6 +37,38 @@ const reducer = (state, action) => {
         ...state,
         ui: {
           fontSize: action.payload
+        }
+      }
+      case "changeExtendedMode": 
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          extended: !state.modes.extended
+        }
+      }
+      case "changeDoubleClickMode": 
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          doubleClick: !state.modes.doubleClick
+        }
+      }
+      case "changeAboutkMode": 
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          about: !state.modes.about
+        }
+      }
+      case "changeImportantMarkMode": 
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          importantMark: !state.modes.importantMark
         }
       }
     default:
@@ -56,6 +94,10 @@ export const AllActionsPanel = () => {
     const [data, errors] = await loadSettings();
     dispatch(dataLoaded(data, errors));
   }, []);
+
+  useEffect(() => {
+    console.log(state)
+  })
 
   return (
     <div>

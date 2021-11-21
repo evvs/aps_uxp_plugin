@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { check } from "prettier";
+import React from "react";
 
 import "./styles.css";
 
@@ -11,9 +12,24 @@ export default ({ state, dispatch }) => {
   const sliderEvent = ({ target: { value } }) => {
     console.log(value);
     dispatch(changeFontSize(value * 13));
-    //e.stopPropagation();
-    //e.nativeEvent.stopImmediatePropagation();
   };
+
+  const extendedModeEvent = () => {
+    dispatch({ type: "changeExtendedMode" });
+  };
+
+  const changeDoubleClickEvent = () => {
+    dispatch({ type: "changeDoubleClickMode" });
+  };
+
+  const changeAboutEvent = () => {
+    dispatch({ type: "changeAboutkMode" });
+  };
+
+  const changeImportantMarkEvent = () => {
+    dispatch({ type: "changeImportantMarkMode" });
+  };
+
   return (
     <div className="dropdown-menu">
       <div className="textsize-slider dd-item">
@@ -32,19 +48,46 @@ export default ({ state, dispatch }) => {
       <sp-divider></sp-divider>
       <div className="checkbox-container">
         <div>
-          <sp-checkbox class="dd-item">режим "Расширенный"</sp-checkbox>
+          <sp-checkbox
+            class="dd-item"
+            onClick={() => extendedModeEvent()}
+            {...(state.modes.extended ? { checked: true } : {})}
+          >
+            режим "Расширенный"
+          </sp-checkbox>
         </div>
         <div>
-          <sp-checkbox class="dd-item">режим "Двойной клик"</sp-checkbox>
+          <sp-checkbox
+            class="dd-item"
+            onClick={() => changeDoubleClickEvent()}
+            {...(state.modes.doubleClick ? { checked: true } : {})}
+          >
+            режим "Двойной клик"
+          </sp-checkbox>
         </div>
         <div>
-          <sp-checkbox class="dd-item">Подскази по сервисам</sp-checkbox>
+          <sp-checkbox
+            class="dd-item"
+            onClick={() => changeAboutEvent()}
+            {...(state.modes.about ? { checked: true } : {})}
+          >
+            режим "Подсказки"
+          </sp-checkbox>
+        </div>
+        <div>
+          <sp-checkbox
+            class="dd-item"
+            onClick={() => changeImportantMarkEvent()}
+            {...(state.modes.importantMark ? { checked: true } : {})}
+          >
+            метка "Важно"
+          </sp-checkbox>
         </div>
       </div>
       <sp-divider></sp-divider>
-      <div className="dd-item">Загрузить файл конфигурации</div>
-      <div className="dd-item">Сбросить настройки</div>
-      <div className="dd-item">О продукте</div>
+      <div className="dd-item">Редактировать кнопки</div>
+      <div className="dd-item">Сбросить режимы</div>
+      <div className="dd-item">Настройки</div>
     </div>
   );
 };
