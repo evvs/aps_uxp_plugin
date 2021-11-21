@@ -47,10 +47,10 @@ const dataLoaded = (data, errors) => ({
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const uploadUiSettingsFile = useCallback(async (fileName, isAbsolutePath) => {
-    const [data, errors] = await loadSettings(fileName, isAbsolutePath);
-    dispatch(dataLoaded(data, errors));
-  }, []);
+  // const uploadUiSettingsFile = useCallback(async (fileName, isAbsolutePath) => {
+  //   const [data, errors] = await loadSettings(fileName, isAbsolutePath);
+  //   dispatch(dataLoaded(data, errors));
+  // }, []);
 
   useEffect(async () => {
     const [data, errors] = await loadSettings();
@@ -62,7 +62,6 @@ export const AllActionsPanel = () => {
       <TopMenu state={state} dispatch={dispatch}/>
       {state.data && <ActionButtons state={state} />}
       <BottomMenu />
-      <Dialogs updateLayoutCb={uploadUiSettingsFile} />
     </div>
   );
 };

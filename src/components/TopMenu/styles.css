@@ -1,9 +1,10 @@
 .top-menu{
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-}
-
-.settings-btn {
-    position: relative;
+    right: 15px;
+    top: 0px;
+    position: absolute;
+    background: var(--uxp-host-background-color);
 }

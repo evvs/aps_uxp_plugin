@@ -57,7 +57,6 @@ export default ({state, dispatch}) => {
         <img src="./icons/favorites.svg" />
       </sp-action-button>
       <sp-action-button
-        class="settings-btn"
         onClick={() => setisVisibleDropDown(!isVisibleDropDown)}
       >
         <img src="./icons/settings.svg" />

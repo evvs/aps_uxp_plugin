@@ -8,69 +8,69 @@
 
 [Яркость] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Тон
+    {A} APs_RETOUCH_Standart | Тон
 %expanded%
-    {A} APs_RETOUCH_Guru | Тон
+    {A} APs_RETOUCH_Expanded | Тон
 
 [Pseudo HDR] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Pseudo HDR
+    {A} APs_RETOUCH_Standart | Pseudo HDR
 %expanded%
-    {A} APs_RETOUCH_Guru | Pseudo HDR
+    APs_RETOUCH_Expanded | Pseudo HDR
 
 [Dodge & Burn] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Dodge & Burn
+    {A} APs_RETOUCH_Standart | Dodge & Burn
 %expanded%
-    {A} APs_RETOUCH_Guru | Dodge & Burn
+    {A} APs_RETOUCH_Expanded | Dodge & Burn
 
 [Контраст] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Контраст
+    {A} APs_RETOUCH_Standart | Контраст
 %expanded%
-    {A} APs_RETOUCH_Guru | Контраст
+    {A} APs_RETOUCH_Expanded | Контраст
 
 [Объем] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Объём
+    {A} APs_RETOUCH_Standart | Объём
 %expanded%
-    {A} APs_RETOUCH_Guru | Объём
+    {A} APs_RETOUCH_Expanded | Объём
 
 [Блики] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Блики
+    {A} APs_RETOUCH_Standart | Блики
 %expanded%
-    {A} APs_RETOUCH_Guru | Блики
+    {A} APs_RETOUCH_Expanded | Блики
 
 [Резкость] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Резкость
+    {A} APs_RETOUCH_Standart | Резкость
 %expanded%
-    {A} APs_RETOUCH_Guru | Резкость
+    {A} APs_RETOUCH_Expanded | Резкость
 
 [Размытие] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Размытие
+    {A} APs_RETOUCH_Standart | Размытие
 %expanded%
-    {A} APs_RETOUCH_Guru | Размытие
+    {A} APs_RETOUCH_Expanded | Размытие
 
 [Пластика] [green] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Пластика
+    {A} APs_RETOUCH_Standart | Пластика
 %expanded%
-    {A} APs_RETOUCH_Guru | Пластика
+    {A} APs_RETOUCH_Expanded | Пластика
 
 [Дефекты] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Дефекты
+    {A} APs_RETOUCH_Standart | Дефекты
 %expanded%
-    {A} APs_RETOUCH_Guru | Дефекты
+    {A} APs_RETOUCH_Expanded | Дефекты
 
 [Искажения] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Искажения
+    {A} APs_RETOUCH_Standart | Искажения
 %expanded%
-    {A} APs_RETOUCH_Guru | Искажения
+    {A} APs_RETOUCH_Expanded | Искажения
 
 [Ретушь: FS] [orange] Всплывающая подсказка
 %standart%
@@ -80,127 +80,127 @@
 
 [Ретушь: Lite] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Ретушь: Lite
+    {A} APs_RETOUCH_Standart | Ретушь: Lite
 %expanded%
-    {A} APs_RETOUCH_Guru | Ретушь: Lite
+    {A} APs_RETOUCH_Expanded | Ретушь: Lite
 
 [Ретушь: Детали] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Ретушь: Детали
+    {A} APs_RETOUCH_Standart | Ретушь: Детали
 %expanded%
-    {A} APs_RETOUCH_Guru | Ретушь: Детали
+    {A} APs_RETOUCH_Expanded | Ретушь: Детали
 
 [Ретушь: FS (auto)] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Ретушь: FS (auto)
+    {A} APs_RETOUCH_Standart | Ретушь: FS (auto)
 %expanded%
-    {A} APs_RETOUCH_Guru | Ретушь: FS (auto)
+    {A} APs_RETOUCH_Expanded | Ретушь: FS (auto)
 
 [Ретушь: Текстуры] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Объекты-           F1
+    {A} APs_RETOUCH_Standart | Объекты-           F1
 %expanded%
-    {A} APs_RETOUCH_Guru | Объекты-           F1
+    {A} APs_RETOUCH_Expanded | Объекты-           F1
 
 [Кожа: Тон] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Кожа: Тон
+    {A} APs_RETOUCH_Standart | Кожа: Тон
 %expanded%
-    {A} APs_RETOUCH_Guru | Кожа: Тон
+    {A} APs_RETOUCH_Expanded | Кожа: Тон
 
 [Кожа: Макияж] [orange] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Кожа: Макияж
+    {A} APs_RETOUCH_Standart | Кожа: Макияж
 %expanded%
-    {A} APs_RETOUCH_Guru | Кожа: Макияж
+    {A} APs_RETOUCH_Expanded | Кожа: Макияж
 
 [Баланс белого] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Баланс белого
+    {A} APs_RETOUCH_Standart | Баланс белого
 %expanded%
-    {A} APs_RETOUCH_Guru | Баланс белого
+    {A} APs_RETOUCH_Expanded | Баланс белого
 
 [Насыщенность] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Насыщенность
+    {A} APs_RETOUCH_Standart | Насыщенность
 %expanded%
-    {A} APs_RETOUCH_Guru | Насыщенность
+    {A} APs_RETOUCH_Expanded | Насыщенность
 
 [Оттенки] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Оттенки
+    {A} APs_RETOUCH_Standart | Оттенки
 %expanded%
-    {A} APs_RETOUCH_Guru | Оттенки
+    {A} APs_RETOUCH_Expanded | Оттенки
 
 [ACR] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Camera Raw
+    {A} APs_RETOUCH_Standart | Camera Raw
 %expanded%
-    {A} APs_RETOUCH_Guru | Camera Raw
+    {A} APs_RETOUCH_Expanded | Camera Raw
 
 [Split-toning] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Цвет
+    {A} APs_RETOUCH_Standart | Цвет
 %expanded%
-    {A} APs_RETOUCH_Guru | Цвет
+    {A} APs_RETOUCH_Expanded | Цвет
 
 [Красить] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Красить
+    {A} APs_RETOUCH_Standart | Красить
 %expanded%
-    {A} APs_RETOUCH_Guru | Красить
+    {A} APs_RETOUCH_Expanded | Красить
 
 [Тонировки] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Тонировки
+    {A} APs_RETOUCH_Standart | Тонировки
 %expanded%
-    {A} APs_RETOUCH_Guru | Тонировки
+    {A} APs_RETOUCH_Expanded | Тонировки
 
 [Текстуры] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Текстуры
+    {A} APs_RETOUCH_Standart | Текстуры
 %expanded%
-    {A} APs_RETOUCH_Guru | Текстуры
+    {A} APs_RETOUCH_Expanded | Текстуры
 
 [Виньетки] [yellow] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | Эффекты
+    {A} APs_RETOUCH_Standart | Эффекты
 %expanded%
-    {A} APs_RETOUCH_Guru | Эффекты
+    {A} APs_RETOUCH_Expanded | Эффекты
 
 [mask: Применить] [gray] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | mask: Применить
+    {A} APs_RETOUCH_Standart | mask: Применить
 %expanded%
-    {A} APs_RETOUCH_Guru | mask: Применить
+    {A} APs_RETOUCH_Expanded | mask: Применить
 
 [mask: В слоях] [gray] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | mask: В слоях
+    {A} APs_RETOUCH_Standart | mask: В слоях
 %expanded%
-    {A} APs_RETOUCH_Guru | mask: В слоях
+    {A} APs_RETOUCH_Expanded | mask: В слоях
 
 [mask: Пресеты] [gray] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | mask: Пресеты
+    {A} APs_RETOUCH_Standart | mask: Пресеты
 %expanded%
-    {A} APs_RETOUCH_Guru | mask: Пресеты
+    {A} APs_RETOUCH_Expanded | mask: Пресеты
 
 [Операции 1] [gray] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | маска: Белая
+    {A} APs_RETOUCH_Standart | маска: Белая
 %expanded%
-    {A} APs_RETOUCH_Guru | маска: Белая
+    {A} APs_RETOUCH_Expanded | маска: Белая
 
 [Операции 2] [gray] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | маска: Чёрная
+    {A} APs_RETOUCH_Standart | маска: Чёрная
 %expanded%
-    {A} APs_RETOUCH_Guru | маска: Чёрная
+    {A} APs_RETOUCH_Expanded | маска: Чёрная
 
 
 [Операции 3] [gray] Всплывающая подсказка
 %standart%
-    {A} APs_RETOUCH_Profi | маска: Очистить
+    {A} APs_RETOUCH_Standart | маска: Очистить
 %expanded%
-    {A} APs_RETOUCH_Guru | маска: Очистить
+    {A} APs_RETOUCH_Expanded | маска: Очистить

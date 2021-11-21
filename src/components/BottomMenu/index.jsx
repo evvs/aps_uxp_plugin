@@ -5,7 +5,7 @@ import "./styles.css"
 
 export default () => {
 
-    return <div className="top-menu">
+    return <div className="bottom-menu">
         <sp-action-button>
             <img src="./icons/eraser.svg" />
         </sp-action-button>
