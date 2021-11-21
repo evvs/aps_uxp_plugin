@@ -29,6 +29,10 @@ export default ({ state, dispatch }) => {
     dispatch({ type: "changeImportantMarkMode" });
   };
 
+  const resetModesEvent = () => {
+    dispatch({ type: "resetModes" });
+  };
+
   return (
     <div className="dropdown-menu">
       <div className="textsize-slider dd-item">
@@ -85,7 +89,9 @@ export default ({ state, dispatch }) => {
       </div>
       <sp-divider></sp-divider>
       <div className="dd-item">Редактировать кнопки</div>
-      <div className="dd-item">Сбросить режимы</div>
+      <div className="dd-item" onClick={() => resetModesEvent()}>
+        Сбросить режимы
+      </div>
       <div className="dd-item">Настройки</div>
     </div>
   );

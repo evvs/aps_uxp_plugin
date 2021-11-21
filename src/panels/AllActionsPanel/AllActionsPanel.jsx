@@ -12,14 +12,14 @@ const initialState = {
   data: false,
   errors: [],
   ui: {
-    fontSize: 13
+    fontSize: 13,
   },
   modes: {
     extended: false,
     doubleClick: false,
     about: false,
-    importantMark: false
-  }
+    importantMark: false,
+  },
 };
 
 const reducer = (state, action) => {
@@ -36,41 +36,51 @@ const reducer = (state, action) => {
       return {
         ...state,
         ui: {
-          fontSize: action.payload
-        }
-      }
-      case "changeExtendedMode": 
+          fontSize: action.payload,
+        },
+      };
+    case "changeExtendedMode":
       return {
         ...state,
         modes: {
           ...state.modes,
-          extended: !state.modes.extended
-        }
-      }
-      case "changeDoubleClickMode": 
+          extended: !state.modes.extended,
+        },
+      };
+    case "changeDoubleClickMode":
       return {
         ...state,
         modes: {
           ...state.modes,
-          doubleClick: !state.modes.doubleClick
-        }
-      }
-      case "changeAboutkMode": 
+          doubleClick: !state.modes.doubleClick,
+        },
+      };
+    case "changeAboutkMode":
       return {
         ...state,
         modes: {
           ...state.modes,
-          about: !state.modes.about
-        }
-      }
-      case "changeImportantMarkMode": 
+          about: !state.modes.about,
+        },
+      };
+    case "changeImportantMarkMode":
       return {
         ...state,
         modes: {
           ...state.modes,
-          importantMark: !state.modes.importantMark
-        }
-      }
+          importantMark: !state.modes.importantMark,
+        },
+      };
+    case "resetModes":
+      return {
+        ...state,
+        modes: {
+          extended: false,
+          doubleClick: false,
+          about: false,
+          importantMark: false,
+        },
+      };
     default:
       return state;
   }
@@ -80,7 +90,6 @@ const dataLoaded = (data, errors) => ({
   type: "loaded",
   payload: { data, errors },
 });
-
 
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -96,12 +105,12 @@ export const AllActionsPanel = () => {
   }, []);
 
   useEffect(() => {
-    console.log(state)
-  })
+    console.log(state);
+  });
 
   return (
     <div>
-      <TopMenu state={state} dispatch={dispatch}/>
+      <TopMenu state={state} dispatch={dispatch} />
       {state.data && <ActionButtons state={state} />}
       <BottomMenu />
     </div>
