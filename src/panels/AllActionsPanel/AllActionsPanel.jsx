@@ -15,7 +15,7 @@ const initialState = {
     fontSize: 13,
   },
   modes: {
-    extended: false,
+    expanded: false,
     doubleClick: false,
     about: false,
     importantMark: false,
@@ -39,12 +39,12 @@ const reducer = (state, action) => {
           fontSize: action.payload,
         },
       };
-    case "changeExtendedMode":
+    case "changeExpandedMode":
       return {
         ...state,
         modes: {
           ...state.modes,
-          extended: !state.modes.extended,
+          expanded: !state.modes.expanded,
         },
       };
     case "changeDoubleClickMode":
@@ -75,7 +75,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         modes: {
-          extended: false,
+          expanded: false,
           doubleClick: false,
           about: false,
           importantMark: false,

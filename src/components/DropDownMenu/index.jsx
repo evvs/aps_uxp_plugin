@@ -13,8 +13,8 @@ export default ({ state, dispatch }) => {
     dispatch(changeFontSize(value * 13));
   };
 
-  const extendedModeEvent = () => {
-    dispatch({ type: "changeExtendedMode" });
+  const expandedModeEvent = () => {
+    dispatch({ type: "changeExpandedMode" });
   };
 
   const changeDoubleClickEvent = () => {
@@ -53,8 +53,8 @@ export default ({ state, dispatch }) => {
         <div>
           <sp-checkbox
             class="dd-item"
-            onClick={() => extendedModeEvent()}
-            {...(state.modes.extended ? { checked: true } : {})}
+            onClick={() => expandedModeEvent()}
+            {...(state.modes.expanded ? { checked: true } : {})}
           >
             режим "Расширенный"
           </sp-checkbox>

@@ -7,15 +7,17 @@ export default ({ state }) => {
   return (
     <div className="actionbuttons">
       {state.data.length > 0 ? (
-        state.data.map(({ id, name, description, color, standartActions, expandedEctions }) => (
+        state.data.map(({ id, name, description, color, standartActions, expandedActions }) => (
           <ActionButton
             key={id}
             name={name}
             description={description}
             color={color}
             standartActions={standartActions}
-            expandedEctions={expandedEctions}
+            expandedActions={expandedActions}
             fontSize={state.ui.fontSize}
+            isExpanded = {state.modes.expanded}
+            isDoubleClick = {state.modes.doubleClick}
           />
         ))
       )
