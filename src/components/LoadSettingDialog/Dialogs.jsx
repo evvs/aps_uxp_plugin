@@ -9,13 +9,7 @@ export const Dialogs = ({ updateLayoutCb }) => {
     if (!preferencesDialog) {
       preferencesDialog = document.createElement("dialog");
       ReactDOM.render(
-        <Preferences
-          dialog={preferencesDialog}
-          updateLayoutCb={(fileName) => {
-            console.log("передать функции апдейта шкурки для подгрузки данных по новому файлу");
-            updateLayoutCb(fileName, true);
-          }}
-        />,
+        <Preferences dialog={preferencesDialog} updateLayoutCb={updateLayoutCb} />,
         preferencesDialog
       );
     }

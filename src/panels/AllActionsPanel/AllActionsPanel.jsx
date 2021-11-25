@@ -104,12 +104,18 @@ export const AllActionsPanel = () => {
     dispatch(dataLoaded(data, errors));
   }, []);
 
+  const updateLayout = useCallback(async (filename) => {
+    const [data, errors] = await loadSettings(filename);
+    dispatch(dataLoaded(data, errors));
+  }, []);
+
   useEffect(() => {
     console.log(state);
   });
 
   return (
     <div>
+      <Dialogs updateLayoutCb={updateLayout} />
       <TopMenu state={state} dispatch={dispatch} />
       {state.data && <ActionButtons state={state} />}
       <BottomMenu />
