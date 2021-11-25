@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import parse from "../../utils/parser";
+
 import uxp from "uxp";
 
 const fs = uxp.storage.localFileSystem;
@@ -10,14 +12,29 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
   const [settingsJsonFileData, setSettingsJsonFileData] = useState();
   const [settingsFileToken, setSettingsFileToken] = useState();
 
+  const [newSelectedFileContent, setNewSelectedFileContent] = useState();
+  const [newSelectedFileName, setNewSelectedFileName] = useState();
+
+  const [error, setError] = useState();
+
   const openChosingFileDialog = async () => {
-    const file = await fs.getFileForOpening();
-    if (file) {
-      if (file.isFile) {
-        setInputFilePath(file.nativePath);
+    try {
+      const file = await fs.getFileForOpening({ types: ["txt"] });
+      if (file) {
+        if (file.isFile) {
+          const filename = file.nativePath.split("\\").reverse()[0];
+          const text = await file.read();
+
+          setNewSelectedFileContent(text);
+          setNewSelectedFileName(filename);
+          setInputFilePath(file.nativePath);
+          setError(undefined);
+        }
       }
+      return;
+    } catch (e) {
+      console.log(e);
     }
-    return;
   };
 
   const writeCurrentFile = async () => {
@@ -25,39 +42,82 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
     console.log("write process");
 
     try {
+      const pluginFolder = await fs.getPluginFolder();
       const entry = await fs.getEntryForPersistentToken(settingsFileToken);
+
+      const newTxtFile = await pluginFolder.createFile(newSelectedFileName, {
+        overwrite: true,
+      });
+      const newSettingsCustomFileToken = await fs.createPersistentToken(newTxtFile);
+      const mewFileEntry = await fs.getEntryForPersistentToken(newSettingsCustomFileToken);
+
       if (entry.isFile) {
-        const writedResult = await entry.write(
-          JSON.stringify({ ...settingsJsonFileData, file: inputFilePath })
-        );
+        try {
+          const res = parse(newSelectedFileContent);
+          if (!res.length) {
+            setError("В файле должна быть хотя бы 1 валидная инструкция");
+            return false;
+          }
+        } catch (e) {
+          setError("Невалидный формат файла");
+          throw e;
+        }
+
+        try {
+          await mewFileEntry.write(newSelectedFileContent);
+          await entry.write(JSON.stringify({ ...settingsJsonFileData, file: newSelectedFileName }));
+        } catch (e) {
+          setError("Произошла ошибка при записи файла");
+          throw e;
+        }
       }
     } catch (e) {
       console.log("ошибка при записи", e);
       return false;
     }
     // todo нужно понимать результат обработки для информирования какой файл был загружен
-    updateLayoutCb && updateLayoutCb(inputFilePath);
     return true;
   };
 
-  const onAccept = () => {
-    const isWriteSuccess = writeCurrentFile();
+  const onAccept = async () => {
+    const isWriteSuccess = await writeCurrentFile();
     if (!isWriteSuccess) {
       //  информируем об ошибках
       return;
     }
+    try {
+      updateLayoutCb && updateLayoutCb(newSelectedFileName);
+    } catch (e) {
+      console.log(e, 666);
+    }
+
     // можно передать данные в область основной панели
-    isWriteSuccess && dialog.close({});
+    dialog.close({});
   };
 
   //прогнать файл через парсер чтобы дать юхеру понять что он валиден или нет
-  const validate = () => {};
+  const validate = async () => {
+    console.log(newSelectedFileContent);
+    if (!newSelectedFileContent) return;
+    try {
+      const res = parse(newSelectedFileContent);
+      if (!res.length) {
+        setError("В файле должна быть хотя бы 1 валидная инструкция");
+        return;
+      }
+    } catch (e) {
+      setError("Невалидный формат файла");
+      return;
+    }
+    setError(undefined);
+  };
 
   // читаем файл настроек пользователя и вытаскием путь ведущий к файлу с кнпоками шкурки
   useEffect(() => {
     const processUserSettingsFile = async () => {
       try {
         console.log("initial process");
+
         const pluginFolder = await fs.getPluginFolder();
         const settingsFile = await pluginFolder.getEntry(userSettingsFile);
         const token = await fs.createPersistentToken(settingsFile);
@@ -72,7 +132,7 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
           const currentSettingsFilePath = parsed.file;
 
           setCurrentFilePath(currentSettingsFilePath);
-          setInputFilePath(currentSettingsFilePath);
+          setInputFilePath(`${pluginFolder.nativePath}${currentSettingsFilePath}`);
         }
       } catch (e) {
         console.log("ошибка при чтении текущего файла настроек пользователя", e);
@@ -119,6 +179,12 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
             Валидировать
           </sp-button>
         </div>
+
+        {error && (
+          <div className="row" style={{ justifyContent: `flex-start` }}>
+            {error}
+          </div>
+        )}
       </div>
       <div className="row" style={{ justifyContent: `flex-end` }}>
         <sp-button variant="secondary" onClick={() => dialog.close("reasonCanceled")}>

@@ -1,7 +1,5 @@
 import { EmptyDataError } from "./Errors";
 
-const result = [];
-
 const parseBtnBlock = (btntxt) => {
   const normalizedStr = btntxt
     .split("\n")
@@ -65,6 +63,8 @@ const parseBtnBlock = (btntxt) => {
 };
 
 const parse = (str) => {
+  const result = [];
+
   if (str.length === 0) {
     throw new EmptyDataError("Data is empty");
   }
