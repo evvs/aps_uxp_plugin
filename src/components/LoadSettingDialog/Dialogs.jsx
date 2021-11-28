@@ -23,7 +23,6 @@ export const Dialogs = ({ updateLayoutCb }) => {
       },
     });
     // Do whatever you need with the {smartObject, vectorContent} result
-    console.log(result);
     preferencesDialog.remove();
   };
 

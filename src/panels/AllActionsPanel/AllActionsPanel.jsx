@@ -115,8 +115,8 @@ export const AllActionsPanel = () => {
 
   return (
     <div>
-      <Dialogs updateLayoutCb={updateLayout} />
-      <TopMenu state={state} dispatch={dispatch} />
+      {/*<Dialogs updateLayoutCb={updateLayout} />*/}
+      <TopMenu state={state} dispatch={dispatch}/>
       {state.data && <ActionButtons state={state} />}
       <BottomMenu />
     </div>

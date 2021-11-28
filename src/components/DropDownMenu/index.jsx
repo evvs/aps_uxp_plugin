@@ -9,7 +9,6 @@ const changeFontSize = (fontSize) => ({
 
 export default ({ state, dispatch }) => {
   const sliderEvent = ({ target: { value } }) => {
-    console.log(value);
     dispatch(changeFontSize(value * 13));
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import "./styles.css";
 
 import runAction from "../../utils/runAction";
@@ -64,9 +64,13 @@ export default ({
     <sp-action-button
       title={description}
       class={`action-btn btn-${color}`}
-      style={{ fontSize: `${fontSize}` }}
       onClick={() => setClick((prev) => prev + 1)}
       onDoubleClick={() => setClick((prev) => prev + 1)}
+      style={{
+        fontSize: `${fontSize}`,
+        minWidth: `${70 + 6 * fontSize}px`,
+        height: `${fontSize + 10}px`,
+      }}
     >
       {name}
     </sp-action-button>
