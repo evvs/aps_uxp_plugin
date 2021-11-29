@@ -1,6 +1,6 @@
 .dropdown-menu {
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 40px;
   z-index: 1;
   min-width: 250px;
