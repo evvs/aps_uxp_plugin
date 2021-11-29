@@ -114,7 +114,7 @@ export const AllActionsPanel = () => {
   });
 
   return (
-    <div>
+    <div class="flexcontainer">
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
       <TopMenu state={state} dispatch={dispatch}/>
       {state.data && <ActionButtons state={state} />}

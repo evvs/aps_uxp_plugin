@@ -5,7 +5,7 @@ import DropDownMenu from "../DropDownMenu";
 import "./styles.css";
 
 export default ({state, dispatch}) => {
-  const [isVisibleDropDown, setisVisibleDropDown] = useState(true);
+  const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
 
   return (
     <div className="top-menu">
