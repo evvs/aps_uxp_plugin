@@ -1,7 +1,7 @@
 .dropdown-menu {
   position: absolute;
-  right: -7px;
-  top: 35px;
+  right: 5px;
+  top: 40px;
   z-index: 1;
   min-width: 250px;
   background-color: var(--uxp-host-background-color);

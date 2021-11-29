@@ -7,16 +7,16 @@
   font-size: 13px;
 }
 
-@media (prefers-color-scheme: lightest), (prefers-color-scheme:light) {
+@media (prefers-color-scheme: lightest), (prefers-color-scheme: light) {
   * {
-      color: black;
-    }
+    color: black;
+  }
 }
 
-@media (prefers-color-scheme: darkest), (prefers-color-scheme:dark) {
+@media (prefers-color-scheme: darkest), (prefers-color-scheme: dark) {
   * {
-      color: white;
-    }
+    color: white;
+  }
 }
 
 a {
