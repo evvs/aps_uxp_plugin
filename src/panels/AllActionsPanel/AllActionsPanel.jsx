@@ -7,12 +7,15 @@ import ActionButtons from "../../components/ActionButtons";
 import TopMenu from "../../components/TopMenu";
 import BottomMenu from "../../components/BottomMenu";
 import { Dialogs } from "../../components/LoadSettingDialog/Dialogs";
+const uxp = require("uxp");
+const fs = uxp.storage.localFileSystem;
 
 const initialState = {
   data: false,
   errors: [],
   ui: {
     fontSize: 13,
+    importantBtnsIds: [],
   },
   modes: {
     expanded: false,
@@ -32,10 +35,16 @@ const reducer = (state, action) => {
         data: action.payload.data,
         errors: action.payload.errors,
       };
+    case "uiDataLoaded":
+      return {
+        ...state,
+        ui: { ...action.payload },
+      };
     case "changeFontSize":
       return {
         ...state,
         ui: {
+          ...state.ui,
           fontSize: action.payload,
         },
       };
@@ -91,6 +100,22 @@ const dataLoaded = (data, errors) => ({
   payload: { data, errors },
 });
 
+const uiDataLoading = (uiData) => ({
+  type: "uiDataLoaded",
+  payload: uiData,
+});
+
+const loadUiSettings = async () => {
+  const temporaryFolder = await fs.getTemporaryFolder();
+  try {
+    const uiSettingsFile = await temporaryFolder.getEntry("ui_settings.json");
+    const uiData = JSON.parse(await uiSettingsFile.read());
+    return uiData;
+  } catch (e) {
+    return false;
+  }
+};
+
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -101,6 +126,10 @@ export const AllActionsPanel = () => {
 
   useEffect(async () => {
     const [data, errors] = await loadSettings();
+    const uiData = await loadUiSettings();
+    if (uiData) {
+      dispatch(uiDataLoading(uiData));
+    }
     dispatch(dataLoaded(data, errors));
   }, []);
 
@@ -116,7 +145,7 @@ export const AllActionsPanel = () => {
   return (
     <div class="panel-container">
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
-      <TopMenu state={state} dispatch={dispatch}/>
+      <TopMenu state={state} dispatch={dispatch} />
       {state.data && <ActionButtons state={state} />}
       <BottomMenu />
     </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import saveUiSettings from "../../utils/saveUiSettings";
 
 import "./styles.css";
 
@@ -8,8 +9,18 @@ const changeFontSize = (fontSize) => ({
 });
 
 export default ({ state, dispatch }) => {
-  const sliderEvent = ({ target: { value } }) => {
+  const [fontSize, setFontSize] = useState(state.ui.fontSize);
+
+  useEffect(() => {
+    let timer = setTimeout(() => saveUiSettings(state.ui, "fontSize", fontSize), 1000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [fontSize]);
+
+  const sliderEvent = async ({ target: { value } }) => {
     dispatch(changeFontSize(value * 13));
+    setFontSize(value * 13);
   };
 
   const expandedModeEvent = () => {
