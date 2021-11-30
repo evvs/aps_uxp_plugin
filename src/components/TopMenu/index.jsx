@@ -4,13 +4,13 @@ import DropDownMenu from "../DropDownMenu";
 
 import "./styles.css";
 
-export default ({state, dispatch}) => {
+export default ({ state, dispatch }) => {
   const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
 
   return (
     <div className="top-menu">
       <sp-action-button>
-        <img src="./icons/help.svg" />
+        <img src="./icons/help.svg" className="filter-green" />
       </sp-action-button>
       <sp-action-button
         onClick={() => {
@@ -56,12 +56,10 @@ export default ({state, dispatch}) => {
       <sp-action-button>
         <img src="./icons/favorites.svg" />
       </sp-action-button>
-      <sp-action-button
-        onClick={() => setisVisibleDropDown(!isVisibleDropDown)}
-      >
+      <sp-action-button onClick={() => setisVisibleDropDown(!isVisibleDropDown)}>
         <img src="./icons/settings.svg" />
       </sp-action-button>
-      {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch}/>}
+      {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch} />}
     </div>
   );
 };

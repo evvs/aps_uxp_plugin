@@ -119,6 +119,8 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
         console.log("initial process");
 
         const pluginFolder = await fs.getPluginFolder();
+        const sdsds = await fs.getDataFolder("C:\\Users\\User\\Desktop\\jstasks");
+        console.log(sdsds);
         const settingsFile = await pluginFolder.getEntry(userSettingsFile);
         const token = await fs.createPersistentToken(settingsFile);
         setSettingsFileToken(token);

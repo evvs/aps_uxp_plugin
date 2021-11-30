@@ -156,7 +156,7 @@ export const AllActionsPanel = () => {
   });
 
   return (
-    <div class="panel-container">
+    <div className="panel-container">
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
       <TopMenu state={state} dispatch={dispatch} />
       {state.data && <ActionButtons state={state} dispatch={dispatch} />}

@@ -1,31 +1,20 @@
 .action-btn {
-  /*margin: 1px;*/
-  /* padding: 1px;*/
-  display: inline-flex;
-  flex-grow: 1;
-  /*min-width: 200px;*/
-  overflow: hidden;
-  /*min-width: calc(100% / 4)*/
-  /*  max-width: calc(100% / 3);*/
-
-  margin: 1.5px;
+  overflow-x: hidden;
+  display: inline-block;
   height: auto;
+  margin: 2px;
   min-height: 18px;
   text-align: center;
   vertical-align: middle;
-  /*min-width: content;*/
-  /*max-width: auto;*/
+  min-width: initial;
+  border-radius: 3px;
+  padding: 0;
 }
 
-.importantBtn {
-  background: #ff5542;
-}
-
-@media only screen and (min-width: 960px) {
-  /* styles for browsers larger than 960px; */
-  /*.action-btn {*/
-  /*  max-width: calc(100% / 3);*/
-  /*}*/
+.action-btn p {
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .action-btn:hover {
@@ -73,6 +62,7 @@
   .btn-gray {
     background: #797979;
     border: 1px solid #797979;
+
   }
 }
 
