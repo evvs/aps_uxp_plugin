@@ -24,14 +24,19 @@ export default ({ state, dispatch }) => {
           <ActionButton
             size={size}
             key={id}
+            btnid={id}
             name={name}
             description={description}
             color={color}
             standartActions={standartActions}
             expandedActions={expandedActions}
+            importantBtnsIds={state.ui.importantBtnsIds}
             fontSize={state.ui.fontSize}
             isExpanded={state.modes.expanded}
             isDoubleClick={state.modes.doubleClick}
+            isImportantMark={state.modes.importantMark}
+            dispatch={dispatch}
+            state={state}
           />
         ))
       ) : (

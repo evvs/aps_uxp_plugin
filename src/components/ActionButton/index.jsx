@@ -1,21 +1,37 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import "./styles.css";
 
+import saveUiSettings from "../../utils/saveUiSettings";
 import runAction from "../../utils/runAction";
 import runScript from "../../utils/runScript";
 
+const changeImportantBtnsIds = (btnid) => ({
+  type: "changeImportantBtnsIds",
+  payload: btnid,
+});
+
 export default ({
+  btnid,
   name,
   size,
   description,
   color,
   standartActions,
   expandedActions,
+  importantBtnsIds,
   fontSize,
   isExpanded,
   isDoubleClick,
+  isImportantMark,
+  dispatch,
+  state
 }) => {
   const onClickHandler = () => {
+    if (isImportantMark) {
+      dispatch(changeImportantBtnsIds(btnid));
+      saveUiSettings(state.ui, "importantBtnsIds", btnid);
+      return;
+    }
     if (isExpanded) {
       console.log("Расширенный");
       expandedActions.actions.forEach((action) => {
@@ -83,7 +99,7 @@ export default ({
   return (
     <sp-action-button
       title={description}
-      class={`action-btn btn-${color}`}
+      class={`action-btn ${importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`}`}
       onClick={() => setClick((prev) => prev + 1)}
       onDoubleClick={() => setClick((prev) => prev + 1)}
       style={{

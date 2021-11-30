@@ -48,6 +48,19 @@ const reducer = (state, action) => {
           fontSize: action.payload,
         },
       };
+    case "changeImportantBtnsIds":
+      const importantBtnsIdsArr = state.ui.importantBtnsIds;
+      const newIdsArr = importantBtnsIdsArr.includes(action.payload)
+        ? importantBtnsIdsArr.filter((id) => id !== action.payload)
+        : [...state.ui.importantBtnsIds, action.payload];
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          importantBtnsIds: newIdsArr,
+        },
+      };
     case "changeExpandedMode":
       return {
         ...state,
@@ -146,7 +159,7 @@ export const AllActionsPanel = () => {
     <div class="panel-container">
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
       <TopMenu state={state} dispatch={dispatch} />
-      {state.data && <ActionButtons state={state} />}
+      {state.data && <ActionButtons state={state} dispatch={dispatch} />}
       <BottomMenu />
     </div>
   );

@@ -15,7 +15,10 @@
   vertical-align: middle;
   /*min-width: content;*/
   /*max-width: auto;*/
+}
 
+.importantBtn {
+  background: #ff5542;
 }
 
 @media only screen and (min-width: 960px) {
@@ -70,7 +73,6 @@
   .btn-gray {
     background: #797979;
     border: 1px solid #797979;
-
   }
 }
 

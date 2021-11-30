@@ -19,8 +19,9 @@ export default ({ state, dispatch }) => {
   }, [fontSize]);
 
   const sliderEvent = async ({ target: { value } }) => {
-    dispatch(changeFontSize(value * 13));
-    setFontSize(value * 13);
+    const fontSize = value * 13;
+    dispatch(changeFontSize(fontSize));
+    setFontSize(fontSize);
   };
 
   const expandedModeEvent = () => {
