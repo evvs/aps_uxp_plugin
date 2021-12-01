@@ -119,14 +119,18 @@ const uiDataLoading = (uiData) => ({
 });
 
 const loadUiSettings = async () => {
-  const temporaryFolder = await fs.getTemporaryFolder();
-  try {
-    const uiSettingsFile = await temporaryFolder.getEntry("ui_settings.json");
-    const uiData = JSON.parse(await uiSettingsFile.read());
-    return uiData;
-  } catch (e) {
-    return false;
+  const pluginFolder = await fs.getPluginFolder();
+  const settingsFile = await pluginFolder.getEntry("user_settings.json");
+  const token = await fs.createPersistentToken(settingsFile);
+  // setSettingsFileToken(token);
+
+  const entry = await fs.getEntryForPersistentToken(token);
+  if (entry.isFile) {
+    const data = await entry.read();
+    return JSON.parse(data).ui;
   }
+
+  return false;
 };
 
 export const AllActionsPanel = () => {
@@ -140,6 +144,7 @@ export const AllActionsPanel = () => {
   useEffect(async () => {
     const [data, errors] = await loadSettings();
     const uiData = await loadUiSettings();
+    console.log(uiData);
     if (uiData) {
       dispatch(uiDataLoading(uiData));
     }
@@ -160,7 +165,7 @@ export const AllActionsPanel = () => {
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
       <TopMenu state={state} dispatch={dispatch} />
       {state.data && <ActionButtons state={state} dispatch={dispatch} />}
-      <BottomMenu />
+      <BottomMenu state={state} />
     </div>
   );
 };

@@ -1,4 +1,8 @@
 {
   "file": "default_settings.txt",
-  "defaultFile": "default_settings.txt"
+  "defaultFile": "default_settings.txt",
+  "ui": {
+    "fontSize": 13,
+    "importantBtnsIds": []
+  }
 }
