@@ -11,6 +11,10 @@
   padding: 0;
 }
 
+.importantBtn {
+  background: #ff5542;
+}
+
 .action-btn p {
   white-space: nowrap;
   text-align: center;
