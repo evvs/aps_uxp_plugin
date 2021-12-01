@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+
 import runAction from "../../utils/runAction";
 import DropDownMenu from "../DropDownMenu";
 
 import "./styles.css";
 
-export default ({state, dispatch}) => {
+export default ({ state, dispatch }) => {
   const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
 
   return (
@@ -56,12 +57,10 @@ export default ({state, dispatch}) => {
       <sp-action-button>
         <img src="./icons/favorites.svg" />
       </sp-action-button>
-      <sp-action-button
-        onClick={() => setisVisibleDropDown(!isVisibleDropDown)}
-      >
+      <sp-action-button onClick={() => setisVisibleDropDown(!isVisibleDropDown)}>
         <img src="./icons/settings.svg" />
       </sp-action-button>
-      {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch}/>}
+      {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch} />}
     </div>
   );
 };
