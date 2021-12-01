@@ -42,12 +42,11 @@ const createFile = async (action) => {
     overwrite: true,
   });
 
-  nativePath = platform === 'darwin' ? nativePath : nativePath.replace(/\\/gi,'/');
+  nativePath = platform === "darwin" ? nativePath : nativePath.replace(/\\/gi, "/");
 
-  await file.write(`$.evalFile('${nativePath}scripts/_APsRETOUCH_FirmLib_ru.jsm')
-  $.evalFile('${nativePath}scripts/_APsRETOUCH_KeywordsLib_ru.jsm')
-
-do_Action('${setName}', '${actionName}', false, undefined);`);
+  await file.write(`$.evalFile('${nativePath}scripts/_APsRETOUCH_FirmLib_ru.jsm');
+  $.evalFile('${nativePath}scripts/_APsRETOUCH_KeywordsLib_ru.jsm');
+  do_Action('${setName}', '${actionName}', false, undefined);`);
 
   return "action.jsx";
 };

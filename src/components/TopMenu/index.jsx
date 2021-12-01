@@ -11,7 +11,7 @@ export default ({ state, dispatch }) => {
   return (
     <div className="top-menu">
       <sp-action-button>
-        <img src="./icons/help.svg" />
+        <img src="./icons/help.svg" className="filter-green" />
       </sp-action-button>
       <sp-action-button
         onClick={() => {
