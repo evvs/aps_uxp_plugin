@@ -3,7 +3,32 @@ import runAction from "../../utils/runAction";
 
 import "./styles.css";
 
-export default ({ state }) => {
+const btnsHints = {
+  helpBtn: "«ПОМОЩЬ» (F4): Подсказки по работе с текущим инструментом и его слоями.",
+  beforeAfterBtn: "сервис: До/После (F2)",
+  twoWindowsBtn: "сервис: Два окна. Удобно использовать для контроля ретуши...",
+  snapshotBtn: "Сделать снимок видимых слоёв вверху документа",
+  rawBtn:
+    "Добавить вверху документа слой смарт-объект с исходными Raw данными (В папке текущего документа (учитывая все под-папки) ищется одноимённый документ любого формата Raw. Если не находит - создаётся смарт-объект со снимком слоёв.)",
+  containerBtn: "Добавить тематический «Контейнер»",
+  layersBtn: "сервис: Слои",
+  documentBtn: "сервис: Документ",
+  folderBtn: "сервис: Открыть папку",
+  presetBtn: "сервис: Сохранить в пресет",
+  favoritesBtn: "Открыть системную под-панель «ИЗБРАННОЕ» (F5)",
+};
+
+const changeBottomMenuHint = (hint) => ({
+  type: "changeBottomMenuHint",
+  payload: hint,
+});
+
+export default ({ state, dispatch }) => {
+
+  const onChangeHintEvent = (hint) => {
+    dispatch(changeTopMenuHint(hint));
+  };
+
   const standartExpandedLibraryOnClick = (action) => {
     if (state.modes.expanded) {
       runAction({

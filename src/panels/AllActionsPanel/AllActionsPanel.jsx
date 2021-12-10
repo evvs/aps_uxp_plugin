@@ -222,7 +222,7 @@ export const AllActionsPanel = () => {
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
       <TopMenu state={state} dispatch={dispatch} />
       {state.data && <ActionButtons state={state} dispatch={dispatch} />}
-      <BottomMenu state={state} />
+      <BottomMenu state={state} dispatch={dispatch}/>
     </div>
   );
 };

@@ -85,6 +85,11 @@ export default ({ state, dispatch }) => {
       ) : (
         <h1>No buttons to load</h1>
       )}
+      {state.ui.bottomMenuHint.length > 0 && (
+        <div style={{ fontSize: `${state.ui.fontSize}` }} className="bottom-hint">
+          {state.ui.topMenuHint}
+        </div>
+      )}
     </div>
   );
 };

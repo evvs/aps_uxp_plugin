@@ -18,6 +18,7 @@ const btnsHints = {
   folderBtn: "сервис: Открыть папку",
   presetBtn: "сервис: Сохранить в пресет",
   favoritesBtn: "Открыть системную под-панель «ИЗБРАННОЕ» (F5)",
+  settingsBtn: "Настройки панели"
 };
 
 const changeTopMenuHint = (hint) => ({
@@ -171,7 +172,9 @@ export default ({ state, dispatch }) => {
         <img src="./icons/favorites.svg" />
       </sp-action-button>
 
-      <sp-action-button onClick={() => setisVisibleDropDown(!isVisibleDropDown)}>
+      <sp-action-button onClick={() => setisVisibleDropDown(!isVisibleDropDown)}
+              onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.settingsBtn)}
+              onMouseLeave={() => onChangeHintEvent("")}>
         <img src="./icons/settings.svg" />
       </sp-action-button>
       {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch} />}
