@@ -50,6 +50,11 @@ export default ({ state, dispatch }) => {
 
   return (
     <div className="actionbuttons" ref={elRef}>
+      {state.ui.topMenuHint.length > 0 && (
+        <div style={{ fontSize: `${state.ui.fontSize}` }} className="top-hint">
+          {state.ui.topMenuHint}
+        </div>
+      )}
       {state.data.length > 0 ? (
         state.data.map(({ id, name, description, color, standartActions, expandedActions }) => (
           <ActionButton
@@ -73,6 +78,11 @@ export default ({ state, dispatch }) => {
         ))
       ) : (
         <h1>No buttons to load</h1>
+      )}
+      {state.ui.bottomMenuHint.length > 0 && (
+        <div style={{ fontSize: `${state.ui.fontSize}` }} className="bottom-hint">
+          {state.ui.bottomMenuHint}
+        </div>
       )}
     </div>
   );

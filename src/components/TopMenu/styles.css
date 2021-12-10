@@ -5,6 +5,6 @@
     flex-wrap: wrap;
     /* right: 15px; */
     /*top: 0px;*/
-    /* position: sticky; */
+    position: relative;
     background: var(--uxp-host-background-color);
 }
