@@ -144,7 +144,6 @@ export const AllActionsPanel = () => {
   useEffect(async () => {
     const [data, errors] = await loadSettings();
     const uiData = await loadUiSettings();
-    console.log(uiData);
     if (uiData) {
       dispatch(uiDataLoading(uiData));
     }
@@ -155,10 +154,6 @@ export const AllActionsPanel = () => {
     const [data, errors] = await loadSettings(filename);
     dispatch(dataLoaded(data, errors));
   }, []);
-
-  useEffect(() => {
-    console.log(state);
-  });
 
   return (
     <div className="panel-container">

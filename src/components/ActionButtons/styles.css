@@ -1,8 +1,20 @@
+
 .actionbuttons {
     /*display: flex;*/
     /*flex-wrap: wrap;*/
     /* padding: 25px 0px; */
-     max-height: 70vh;
+    /*height: 80%;*/
     overflow: auto;
     overflow-x: hidden;
 }
+
+/*@media (max-width: 400px) {*/
+/*    .actionbuttons {*/
+/*        !*display: flex;*!*/
+/*        !*flex-wrap: wrap;*!*/
+/*        !* padding: 25px 0px; *!*/
+/*        height: 74%;*/
+/*        overflow: auto;*/
+/*        overflow-x: hidden;*/
+/*    }*/
+/*}*/

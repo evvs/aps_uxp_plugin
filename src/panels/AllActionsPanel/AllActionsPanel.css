@@ -1,3 +1,5 @@
 .panel-container {
-    max-height: 80vh;
+    height: 98vh;
+    display: flex;
+    flex-direction: column
 }

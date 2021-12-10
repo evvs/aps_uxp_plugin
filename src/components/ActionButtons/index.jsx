@@ -6,6 +6,8 @@ import "./styles.css";
 export default ({ state, dispatch }) => {
   const [size, setSize] = useState(0);
   const [min, setMin] = useState(94);
+  const [btnWidth, setBtnWidth] = useState(94);
+  const [marg, setMarg] = useState(0);
   const elRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -15,57 +17,49 @@ export default ({ state, dispatch }) => {
         setSize(e.target.clientWidth);
       }
     }
-    function debounce(func, wait, immediate) {
-      let timeout;
 
-      return function executedFunction() {
-        const context = this;
-        const args = arguments;
-
-        const later = function () {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-
-        const callNow = immediate && !timeout;
-
-        clearTimeout(timeout);
-
-        timeout = setTimeout(later, wait);
-
-        if (callNow) func.apply(context, args);
-      };
-    }
     const el = elRef.current;
 
-    el.addEventListener("resize", debounce(updateSize, 200));
+    el.addEventListener("resize", updateSize);
     updateSize();
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const all = document.querySelectorAll(".action-btn > p");
     let val = 0;
     all.forEach((btnText) => {
       if (btnText.clientWidth > val) val = btnText.clientWidth;
     });
-    const vv = val + state.ui.fontSize - 13;
+    val += 20;
+    if (val > size) val = size - 12;
+    console.log(val, " min");
 
-    setMin(vv);
+    setMin(val);
   }, [size, state.ui.fontSize]);
+
+  useLayoutEffect(() => {
+    const count = state.data.length;
+    let columnsCount = Math.floor(size / min);
+    columnsCount = Math.max(Math.floor((size - count * 6 - columnsCount * 4) / min), 1);
+    const containersCountInRow = Math.min(columnsCount, count);
+
+    setBtnWidth(100 / containersCountInRow);
+    setMarg((columnsCount * 3) / columnsCount);
+  }, [size, state.ui.fontSize, min]);
 
   return (
     <div className="actionbuttons" ref={elRef}>
       {state.data.length > 0 ? (
         state.data.map(({ id, name, description, color, standartActions, expandedActions }) => (
           <ActionButton
-            size={size}
+            btnWidth={btnWidth}
             key={id}
+            marg={marg}
             btnid={id}
             name={name}
             description={description}
             color={color}
-            min={min}
             standartActions={standartActions}
             expandedActions={expandedActions}
             importantBtnsIds={state.ui.importantBtnsIds}

@@ -13,8 +13,8 @@ const changeImportantBtnsIds = (btnid) => ({
 export default ({
   btnid,
   name,
-  min,
-  size,
+  marg,
+  btnWidth,
   description,
   color,
   standartActions,
@@ -25,10 +25,8 @@ export default ({
   isDoubleClick,
   isImportantMark,
   dispatch,
-  state
+  state,
 }) => {
-  const [styles, setStyles] = useState({});
-
   const onClickHandler = () => {
     if (isImportantMark) {
       dispatch(changeImportantBtnsIds(btnid));
@@ -80,23 +78,17 @@ export default ({
     return () => clearTimeout(timer);
   }, [click]);
 
-  //   вынести выше
-  useEffect(() => {
-    const columnsCount = Math.floor(size / min);
-
-    setStyles({
-      fontSize: `${fontSize}`,
-      width: size / columnsCount - 4 + "px",
-    });
-  }, [size, min]);
-
   return (
     <sp-action-button
       title={description}
       class={`action-btn ${importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`}`}
       onClick={() => setClick((prev) => prev + 1)}
       onDoubleClick={() => setClick((prev) => prev + 1)}
-      style={styles}
+      style={{
+        fontSize: `${fontSize}`,
+        // width: btnWidth + "px",
+        width: "calc(" + btnWidth + "% - " + marg + "px)",
+      }}
     >
       <p
         style={{

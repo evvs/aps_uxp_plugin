@@ -1,6 +1,5 @@
 import React from "react";
 import runAction from "../../utils/runAction";
-
 import "./styles.css";
 
 export default ({ state }) => {
