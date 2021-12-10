@@ -3,6 +3,7 @@
     /*flex-wrap: wrap;*/
     /* padding: 25px 0px; */
     /*height: 80%;*/
+    max-height: 92vh;
     overflow: auto;
     overflow-x: hidden;
     position: relative;
