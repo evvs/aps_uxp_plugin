@@ -4,18 +4,7 @@ import runAction from "../../utils/runAction";
 import "./styles.css";
 
 const btnsHints = {
-  helpBtn: "«ПОМОЩЬ» (F4): Подсказки по работе с текущим инструментом и его слоями.",
-  beforeAfterBtn: "сервис: До/После (F2)",
-  twoWindowsBtn: "сервис: Два окна. Удобно использовать для контроля ретуши...",
-  snapshotBtn: "Сделать снимок видимых слоёв вверху документа",
-  rawBtn:
-    "Добавить вверху документа слой смарт-объект с исходными Raw данными (В папке текущего документа (учитывая все под-папки) ищется одноимённый документ любого формата Raw. Если не находит - создаётся смарт-объект со снимком слоёв.)",
-  containerBtn: "Добавить тематический «Контейнер»",
-  layersBtn: "сервис: Слои",
-  documentBtn: "сервис: Документ",
-  folderBtn: "сервис: Открыть папку",
-  presetBtn: "сервис: Сохранить в пресет",
-  favoritesBtn: "Открыть системную под-панель «ИЗБРАННОЕ» (F5)",
+  eraserBtn: "Выбрать инструмент «Ластик (мягкая круглая)» с настройками для маски текущего слоя",
 };
 
 const changeBottomMenuHint = (hint) => ({
@@ -24,9 +13,8 @@ const changeBottomMenuHint = (hint) => ({
 });
 
 export default ({ state, dispatch }) => {
-
   const onChangeHintEvent = (hint) => {
-    dispatch(changeTopMenuHint(hint));
+    dispatch(changeBottomMenuHint(hint));
   };
 
   const standartExpandedLibraryOnClick = (action) => {
@@ -59,7 +47,11 @@ export default ({ state, dispatch }) => {
 
   return (
     <div className="bottom-menu">
-      <sp-action-button onClick={() => standartExpandedLibraryOnClick("Ластик")}>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("Ластик")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.eraserBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
         <img src="./icons/eraser.svg" />
       </sp-action-button>
 

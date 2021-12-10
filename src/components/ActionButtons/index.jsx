@@ -87,7 +87,7 @@ export default ({ state, dispatch }) => {
       )}
       {state.ui.bottomMenuHint.length > 0 && (
         <div style={{ fontSize: `${state.ui.fontSize}` }} className="bottom-hint">
-          {state.ui.topMenuHint}
+          {state.ui.bottomMenuHint}
         </div>
       )}
     </div>
