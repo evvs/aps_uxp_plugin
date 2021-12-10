@@ -9,6 +9,37 @@ import BottomMenu from "../../components/BottomMenu";
 import { Dialogs } from "../../components/LoadSettingDialog/Dialogs";
 const uxp = require("uxp");
 const fs = uxp.storage.localFileSystem;
+const batchPlay = require("photoshop").action.batchPlay;
+
+async function runPathScript(jsxFile) {
+  let pluginFolder = await fs.getPluginFolder();
+  try {
+    let jsxFileObject = await pluginFolder.getEntry(jsxFile);
+    var filetoken = await fs.createSessionToken(jsxFileObject);
+  } catch (e) {
+    console.log("File Can't be found!");
+  }
+  return await batchPlay(
+    [
+      {
+        _obj: "AdobeScriptAutomation Scripts",
+        javaScript: {
+          _path: filetoken,
+          _kind: "local",
+        },
+        javaScriptMessage: "JSM",
+        _isCommand: true,
+        _options: {
+          dialogOptions: "dontDisplay",
+        },
+      },
+    ],
+    {
+      synchronousExecution: false,
+      modalBehavior: "fail",
+    }
+  );
+}
 
 const initialState = {
   data: false,
@@ -16,6 +47,8 @@ const initialState = {
   ui: {
     fontSize: 13,
     importantBtnsIds: [],
+    topMenuHint: "",
+    bottomMenuHint: "",
   },
   modes: {
     expanded: false,
@@ -38,7 +71,10 @@ const reducer = (state, action) => {
     case "uiDataLoaded":
       return {
         ...state,
-        ui: { ...action.payload },
+        ui: {
+          ...state.ui,
+          ...action.payload,
+        },
       };
     case "changeFontSize":
       return {
@@ -46,6 +82,22 @@ const reducer = (state, action) => {
         ui: {
           ...state.ui,
           fontSize: action.payload,
+        },
+      };
+    case "changeTopMenuHint":
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          topMenuHint: action.payload,
+        },
+      };
+    case "changeBottomMenuHint":
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          bottomMenuHint: action.payload,
         },
       };
     case "changeImportantBtnsIds":
@@ -142,13 +194,18 @@ export const AllActionsPanel = () => {
   // }, []);
 
   useEffect(async () => {
-    const [data, errors] = await loadSettings();
-    const uiData = await loadUiSettings();
-    console.log(uiData);
-    if (uiData) {
-      dispatch(uiDataLoading(uiData));
+    try {
+      // await runPathScript("call_set_setttings.jsx");
+      const [data, errors] = await loadSettings();
+      const uiData = await loadUiSettings();
+      console.log(uiData);
+      if (uiData) {
+        dispatch(uiDataLoading(uiData));
+      }
+      dispatch(dataLoaded(data, errors));
+    } catch (e) {
+      console.log(e);
     }
-    dispatch(dataLoaded(data, errors));
   }, []);
 
   const updateLayout = useCallback(async (filename) => {

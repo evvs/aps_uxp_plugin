@@ -5,8 +5,32 @@ import DropDownMenu from "../DropDownMenu";
 
 import "./styles.css";
 
+const btnsHints = {
+  helpBtn: "«ПОМОЩЬ» (F4): Подсказки по работе с текущим инструментом и его слоями.",
+  beforeAfterBtn: "сервис: До/После (F2)",
+  twoWindowsBtn: "сервис: Два окна. Удобно использовать для контроля ретуши...",
+  snapshotBtn: "Сделать снимок видимых слоёв вверху документа",
+  rawBtn:
+    "Добавить вверху документа слой смарт-объект с исходными Raw данными (В папке текущего документа (учитывая все под-папки) ищется одноимённый документ любого формата Raw. Если не находит - создаётся смарт-объект со снимком слоёв.)",
+  containerBtn: "Добавить тематический «Контейнер»",
+  layersBtn: "сервис: Слои",
+  documentBtn: "сервис: Документ",
+  folderBtn: "сервис: Открыть папку",
+  presetBtn: "сервис: Сохранить в пресет",
+  favoritesBtn: "Открыть системную под-панель «ИЗБРАННОЕ» (F5)",
+};
+
+const changeTopMenuHint = (hint) => ({
+  type: "changeTopMenuHint",
+  payload: hint,
+});
+
 export default ({ state, dispatch }) => {
   const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
+
+  const onChangeHintEvent = (hint) => {
+    dispatch(changeTopMenuHint(hint));
+  };
 
   const standartExpandedLibraryOnClick = (action) => {
     if (state.modes.expanded) {
@@ -42,14 +66,18 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           standartExpandedLibraryOnClick("ПОМОЩЬ          F4");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.helpBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/help.svg" className="filter-green" />
+        <img src="./icons/help.svg" />
       </sp-action-button>
 
       <sp-action-button
         onClick={() => {
           standartExpandedLibraryOnClick("До / После         F2");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.beforeAfterBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/beforeAfter.svg" />
       </sp-action-button>
@@ -58,14 +86,19 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchLibraryOnClick("SERVICE_2 windows");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.twoWindowsBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/two_windows_15x16.svg" />
       </sp-action-button>
 
       <sp-action-button
+        snapshotBtn
         onClick={() => {
           retouchLibraryOnClick("LAYERS_Shot visible_Top of the document");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.snapshotBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/snapshot.svg" />
       </sp-action-button>
@@ -74,6 +107,8 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchLibraryOnClick("Smart-object_Download RAW source");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.rawBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/raw.svg" />
       </sp-action-button>
@@ -82,6 +117,8 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchServicesLibraryOnClick("Контейнер");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.containerBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/container.svg" />
       </sp-action-button>
@@ -90,6 +127,8 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchServicesLibraryOnClick("Слои");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.layersBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/layers.svg" />
       </sp-action-button>
@@ -98,6 +137,8 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchServicesLibraryOnClick("Документ");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.documentBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/document.svg" />
       </sp-action-button>
@@ -106,6 +147,8 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchServicesLibraryOnClick("Папка");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.folderBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/folders_16x15.svg" />
       </sp-action-button>
@@ -114,11 +157,17 @@ export default ({ state, dispatch }) => {
         onClick={() => {
           retouchServicesLibraryOnClick("Пресет");
         }}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.presetBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
       >
         <img src="./icons/preset.svg" />
       </sp-action-button>
 
-      <sp-action-button onClick={() => standartExpandedLibraryOnClick("ИЗБРАННОЕ      F5")}>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("ИЗБРАННОЕ      F5")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.favoritesBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
         <img src="./icons/favorites.svg" />
       </sp-action-button>
 
