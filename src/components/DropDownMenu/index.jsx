@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import saveUiSettings from "../../utils/saveUiSettings";
+import runPathScript from "../../utils/changeBtnSettings"
 
 import "./styles.css";
 
@@ -99,7 +100,16 @@ export default ({ state, dispatch }) => {
         </div>
       </div>
       <sp-divider></sp-divider>
-      <div className="dd-item">Редактировать кнопки</div>
+      <div
+        className="dd-item"
+        onClick={() =>
+          (async () => {
+            await runPathScript("call_set_setttings.jsx");
+          })()
+        }
+      >
+        Редактировать кнопки
+      </div>
       <div className="dd-item" onClick={() => resetModesEvent()}>
         Сбросить режимы
       </div>

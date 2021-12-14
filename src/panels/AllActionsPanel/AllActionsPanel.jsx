@@ -9,37 +9,6 @@ import BottomMenu from "../../components/BottomMenu";
 import { Dialogs } from "../../components/LoadSettingDialog/Dialogs";
 const uxp = require("uxp");
 const fs = uxp.storage.localFileSystem;
-const batchPlay = require("photoshop").action.batchPlay;
-
-async function runPathScript(jsxFile) {
-  let pluginFolder = await fs.getPluginFolder();
-  try {
-    let jsxFileObject = await pluginFolder.getEntry(jsxFile);
-    var filetoken = await fs.createSessionToken(jsxFileObject);
-  } catch (e) {
-    console.log("File Can't be found!");
-  }
-  return await batchPlay(
-    [
-      {
-        _obj: "AdobeScriptAutomation Scripts",
-        javaScript: {
-          _path: filetoken,
-          _kind: "local",
-        },
-        javaScriptMessage: "JSM",
-        _isCommand: true,
-        _options: {
-          dialogOptions: "dontDisplay",
-        },
-      },
-    ],
-    {
-      synchronousExecution: false,
-      modalBehavior: "fail",
-    }
-  );
-}
 
 const initialState = {
   data: false,
@@ -195,7 +164,6 @@ export const AllActionsPanel = () => {
 
   useEffect(async () => {
     try {
-      // await runPathScript("call_set_setttings.jsx");
       const [data, errors] = await loadSettings();
       const uiData = await loadUiSettings();
       console.log(uiData);
