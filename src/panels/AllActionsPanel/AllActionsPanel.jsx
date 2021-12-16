@@ -199,7 +199,11 @@ export const AllActionsPanel = () => {
     elTop.addEventListener("resize", updateSizeT);
     elBtm.addEventListener("resize", updateSizeB);
     updateSize();
-    return () => window.removeEventListener("resize", updateSize);
+    return () => {
+      window.removeEventListener("resize", updateSize);
+      window.removeEventListener("resize", updateSizeT);
+      window.removeEventListener("resize", updateSizeB);
+    };
   }, []);
 
   useEffect(async () => {
