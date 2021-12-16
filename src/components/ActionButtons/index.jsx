@@ -3,27 +3,25 @@ import ActionButton from "../ActionButton";
 
 import "./styles.css";
 
-export default ({ state, dispatch }) => {
-  const [size, setSize] = useState(0);
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  return debouncedValue;
+}
+
+export default ({ state, dispatch, size, top, btm }) => {
   const [min, setMin] = useState(94);
   const [btnWidth, setBtnWidth] = useState(94);
   const [marg, setMarg] = useState(0);
-  const elRef = useRef(null);
-
-  useLayoutEffect(() => {
-    function updateSize(e) {
-      if (e) {
-        console.log(e.target.clientWidth, "size");
-        setSize(e.target.clientWidth);
-      }
-    }
-
-    const el = elRef.current;
-
-    el.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  const debouncedsize = useDebounce(size, 20);
+  const debouncedmin = useDebounce(min, 20);
 
   useLayoutEffect(() => {
     const all = document.querySelectorAll(".action-btn > p");
@@ -32,24 +30,26 @@ export default ({ state, dispatch }) => {
       if (btnText.clientWidth > val) val = btnText.clientWidth;
     });
     val += 20;
-    if (val > size) val = size - 12;
-    console.log(val, " min");
+    if (val > size) val = size - 26;
 
-    setMin(val);
-  }, [size, state.ui.fontSize]);
+    setMin(val - 54);
+  }, [size, state.ui.fontSize, debouncedsize]);
 
   useLayoutEffect(() => {
     const count = state.data.length;
-    let columnsCount = Math.floor(size / min);
-    columnsCount = Math.max(Math.floor((size - count * 6 - columnsCount * 4) / min), 1);
+    let columnsCount = Math.floor(debouncedsize / debouncedmin);
+    columnsCount = Math.max(
+      Math.floor((debouncedsize - count * 6 - columnsCount * 4) / debouncedmin),
+      1
+    );
     const containersCountInRow = Math.min(columnsCount, count);
 
     setBtnWidth(100 / containersCountInRow);
     setMarg((columnsCount * 3) / columnsCount);
-  }, [size, state.ui.fontSize, min]);
+  }, [debouncedsize, state.ui.fontSize, debouncedmin]);
 
   return (
-    <div className="actionbuttons" ref={elRef}>
+    <div className="actionbuttons" style={{ maxHeight: `calc(100vh - ${top + btm}px)` }}>
       {state.ui.topMenuHint.length > 0 && (
         <div style={{ fontSize: `${state.ui.fontSize}` }} className="top-hint">
           {state.ui.topMenuHint}

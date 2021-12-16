@@ -1,6 +1,30 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import runAction from "../../utils/runAction";
 import "./styles.css";
+import Analyse from "../../../plugin/icons/Analyse";
+import Brush from "../../../plugin/icons/Brush";
+import MaskWhite from "../../../plugin/icons/MaskWhite";
+import MaskBlack from "../../../plugin/icons/MaskBlack";
+import MaskRestore from "../../../plugin/icons/MaskRestore";
+import Defects from "../../../plugin/icons/Defects";
+import Services from "../../../plugin/icons/Services";
+import Difference from "../../../plugin/icons/Difference";
+import SaveAutoIndex from "../../../plugin/icons/SaveAutoIndex";
+import Next from "../../../plugin/icons/Next";
+import MergeLayers from "../../../plugin/icons/MergeLayers";
+import Divide from "../../../plugin/icons/Divide";
+import Objects from "../../../plugin/icons/Objects";
+import Preset from "../../../plugin/icons/Preset";
+import Raw from "../../../plugin/icons/Raw";
+import Snapshot from "../../../plugin/icons/Snapshot";
+import Layers from "../../../plugin/icons/Layers";
+import Help from "../../../plugin/icons/Help";
+import Favorites from "../../../plugin/icons/Favorites";
+import Document from "../../../plugin/icons/Document";
+import Container from "../../../plugin/icons/Container";
+import BeforeAfter from "../../../plugin/icons/BeforeAfter";
+import TwoWindows from "../../../plugin/icons/TwoWindows";
+import Settings from "../../../plugin/icons/Settings";
 
 const btnsHints = {
   eraserBtn: "Выбрать инструмент «Ластик (мягкая круглая)» с настройками для маски текущего слоя",
@@ -22,7 +46,8 @@ const changeBottomMenuHint = (hint) => ({
   payload: hint,
 });
 
-export default ({ state, dispatch }) => {
+export default forwardRef(({ state, dispatch }, ref) => {
+  console.log(state.dispatch, ref, 6666);
   const onChangeHintEvent = (hint) => {
     dispatch(changeBottomMenuHint(hint));
   };
@@ -56,13 +81,22 @@ export default ({ state, dispatch }) => {
   };
 
   return (
-    <div className="bottom-menu">
+    <div className="bottom-menu" ref={ref}>
       <sp-action-button
+        className="testicon"
         onClick={() => standartExpandedLibraryOnClick("Ластик")}
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.eraserBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/eraser.svg" />
+        <Analyse />
+      </sp-action-button>
+      <sp-action-button
+        className="testicon"
+        onClick={() => standartExpandedLibraryOnClick("Ластик")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.eraserBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <BeforeAfter />
       </sp-action-button>
 
       <sp-action-button
@@ -70,15 +104,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.brushBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/brush.svg" />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => retouchLibraryOnClick("TOOL_Brush Mixer")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.brushMixBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <img src="./icons/brushMix.svg" />
+        <Brush />
       </sp-action-button>
 
       <sp-action-button
@@ -86,7 +112,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.stumpBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/stamp.svg" />
+        <MaskWhite />
       </sp-action-button>
 
       <sp-action-button
@@ -94,7 +120,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.analyzeBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/analyse.svg" />
+        <MaskBlack />
       </sp-action-button>
 
       <sp-action-button
@@ -102,7 +128,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.defectsBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/defects.svg" />
+        <MaskRestore />
       </sp-action-button>
 
       <sp-action-button
@@ -110,7 +136,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.divideBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/divide.svg" />
+        <Analyse />
       </sp-action-button>
 
       <sp-action-button
@@ -118,7 +144,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.differenceBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/difference.svg" />
+        <Defects />
       </sp-action-button>
 
       <sp-action-button
@@ -130,7 +156,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.servicesBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/services_panel_16x16.svg" />
+        <Services />
       </sp-action-button>
 
       <sp-action-button
@@ -138,7 +164,7 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.mergeBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/mergeLayers.svg" />
+        <Difference />
       </sp-action-button>
 
       <sp-action-button
@@ -146,7 +172,23 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.saveAutoIndexBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/saveAutoIndex.svg" />
+        <Services />
+      </sp-action-button>
+
+      <sp-action-button
+        onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.saveAutoIndexBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <MergeLayers />
+      </sp-action-button>
+
+      <sp-action-button
+        onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.saveAutoIndexBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <SaveAutoIndex />
       </sp-action-button>
 
       <sp-action-button
@@ -154,8 +196,78 @@ export default ({ state, dispatch }) => {
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <img src="./icons/next.svg" />
+        <Next />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Divide />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Objects />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Preset />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Raw />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Snapshot />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Layers />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Help />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Favorites />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Document />
+      </sp-action-button>
+      <sp-action-button
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseLeave={() => onChangeHintEvent("")}
+      >
+        <Container />
       </sp-action-button>
     </div>
   );
-};
+});

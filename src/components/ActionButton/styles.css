@@ -7,7 +7,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   display: inline-block;
-  height: auto;
   vertical-align: top;
   text-align: center;
   margin: 1.5px 1.5px;
@@ -16,14 +15,12 @@
 
 .action-btn p {
   display: inline-block;
-  height: auto;
-  min-height: 18px;
   text-align: center;
   vertical-align: middle;
   border-radius: 3px;
   padding: 0;
   white-space: nowrap;
-  margin: 2px 0 2px 0;
+  margin: 0;
 }
 
 

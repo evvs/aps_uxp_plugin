@@ -1,4 +1,11 @@
-import React, { useReducer, useEffect, useCallback } from "react";
+import React, {
+  useReducer,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+  useState,
+  useRef,
+} from "react";
 
 import loadSettings from "../../utils/loadSettings";
 import "./AllactionsPanel.css";
@@ -156,14 +163,48 @@ const loadUiSettings = async () => {
 
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const top = React.createRef();
+  const btm = React.createRef();
+  const [size, setSize] = useState(0);
+  const [btmHeight, setBtmHeight] = useState(0);
+  const [topHeight, setTopHeight] = useState(0);
+  const elRef = useRef(null);
   // const uploadUiSettingsFile = useCallback(async (fileName, isAbsolutePath) => {
   //   const [data, errors] = await loadSettings(fileName, isAbsolutePath);
   //   dispatch(dataLoaded(data, errors));
   // }, []);
 
+  useLayoutEffect(() => {
+    function updateSize(e) {
+      if (e) {
+        setSize(e.target.clientWidth);
+      }
+    }
+    function updateSizeB(e) {
+      if (e) {
+        setBtmHeight(e.target.clientHeight);
+      }
+    }
+    function updateSizeT(e) {
+      if (e) {
+        setTopHeight(e.target.clientHeight);
+      }
+    }
+
+    const el = elRef.current;
+    const elTop = top.current;
+    const elBtm = btm.current;
+
+    el.addEventListener("resize", updateSize);
+    elTop.addEventListener("resize", updateSizeT);
+    elBtm.addEventListener("resize", updateSizeB);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   useEffect(async () => {
     try {
+      // await runPathScript("call_set_setttings.jsx");
       const [data, errors] = await loadSettings();
       const uiData = await loadUiSettings();
       console.log(uiData);
@@ -182,11 +223,19 @@ export const AllActionsPanel = () => {
   }, []);
 
   return (
-    <div className="panel-container">
+    <div className="panel-container" ref={elRef}>
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
-      <TopMenu state={state} dispatch={dispatch} />
-      {state.data && <ActionButtons state={state} dispatch={dispatch} />}
-      <BottomMenu state={state} dispatch={dispatch}/>
+      <TopMenu state={state} dispatch={dispatch} ref={top} />
+      {state.data && (
+        <ActionButtons
+          state={state}
+          dispatch={dispatch}
+          size={size}
+          top={topHeight}
+          btm={btmHeight}
+        />
+      )}
+      <BottomMenu state={state} dispatch={dispatch} ref={btm} />
     </div>
   );
 };

@@ -79,9 +79,9 @@ export default ({
   }, [click]);
 
   return (
-    <sp-action-button
+    <div
       title={description}
-      class={`action-btn ${importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`}`}
+      className={`action-btn ${importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`}`}
       onClick={() => setClick((prev) => prev + 1)}
       onDoubleClick={() => setClick((prev) => prev + 1)}
       style={{
@@ -97,6 +97,6 @@ export default ({
       >
         {name}
       </p>
-    </sp-action-button>
+    </div>
   );
 };

@@ -22,3 +22,12 @@
         margin-bottom: 30px;
     }
 }
+
+.bottom-menu svg path{
+    fill: #3f624c;
+}
+.bottom-menu svg {
+    width: 20px;
+    height: 20px;
+}
+

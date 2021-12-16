@@ -1,35 +1,24 @@
 .actionbuttons {
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-    /* padding: 25px 0px; */
-    /*height: 80%;*/
-    max-height: 92vh;
-    overflow: auto;
+    margin: 0;
+    overflow-y: auto;
     overflow-x: hidden;
-    position: relative;
+    display: inline-block;
+    height: auto;
+    vertical-align: top;
 }
 
-/*@media (max-width: 400px) {*/
-/*    .actionbuttons {*/
-/*        !*display: flex;*!*/
-/*        !*flex-wrap: wrap;*!*/
-/*        !* padding: 25px 0px; *!*/
-/*        height: 74%;*/
-/*        overflow: auto;*/
-/*        overflow-x: hidden;*/
-/*    }*/
-/*}*/
 .top-hint {
     position: absolute;
-    top: 0px;
+    top: 0;
     background-color: var(--uxp-host-background-color);
     z-index: 10;
     padding: 5px;
     width: 100%;
 }
+
 .bottom-hint {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   background-color: var(--uxp-host-background-color);
   z-index: 10;
   padding: 5px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 
 import runAction from "../../utils/runAction";
 import DropDownMenu from "../DropDownMenu";
@@ -26,7 +26,7 @@ const changeTopMenuHint = (hint) => ({
   payload: hint,
 });
 
-export default ({ state, dispatch }) => {
+export default forwardRef(({ state, dispatch }, ref) => {
   const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
 
   const onChangeHintEvent = (hint) => {
@@ -62,7 +62,7 @@ export default ({ state, dispatch }) => {
   };
 
   return (
-    <div className="top-menu">
+    <div className="top-menu" ref={ref}>
       <sp-action-button
         onClick={() => {
           standartExpandedLibraryOnClick("ПОМОЩЬ          F4");
@@ -182,4 +182,4 @@ export default ({ state, dispatch }) => {
       {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch} />}
     </div>
   );
-};
+});
