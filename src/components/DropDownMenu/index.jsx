@@ -64,7 +64,7 @@ export default ({ state, dispatch }) => {
       <div className="checkbox-container">
         <div>
           <sp-checkbox
-            class="dd-item"
+            class="checkbox-item"
             onClick={() => expandedModeEvent()}
             {...(state.modes.expanded ? { checked: true } : {})}
           >
@@ -73,7 +73,7 @@ export default ({ state, dispatch }) => {
         </div>
         <div>
           <sp-checkbox
-            class="dd-item"
+            class="checkbox-item"
             onClick={() => changeDoubleClickEvent()}
             {...(state.modes.doubleClick ? { checked: true } : {})}
           >
@@ -82,7 +82,7 @@ export default ({ state, dispatch }) => {
         </div>
         <div>
           <sp-checkbox
-            class="dd-item"
+            class="checkbox-item"
             onClick={() => changeAboutEvent()}
             {...(state.modes.about ? { checked: true } : {})}
           >
@@ -91,7 +91,7 @@ export default ({ state, dispatch }) => {
         </div>
         <div>
           <sp-checkbox
-            class="dd-item"
+            class="checkbox-item"
             onClick={() => changeImportantMarkEvent()}
             {...(state.modes.importantMark ? { checked: true } : {})}
           >
