@@ -1,0 +1,34 @@
+.scroll-wrapper {
+    overflow: hidden;
+    display: flex;
+}
+
+
+.scroll-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.scrollbar {
+    width: 14px;
+    flex-shrink: 0;
+    background: black;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+.scrollbar-thumb {
+    position: relative;
+    background: rgb(124, 97, 197);
+    width: 12px;
+}
+.scroll-content-area {
+    position: relative;
+    flex-grow:1;
+}
