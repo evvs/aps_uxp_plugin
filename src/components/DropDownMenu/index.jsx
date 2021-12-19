@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import saveUiSettings from "../../utils/saveUiSettings";
-import runPathScript from "../../utils/changeBtnSettings"
+import runPathScript from "../../utils/changeBtnSettings";
+import runOption from "../../utils/runOption";
 
 import "./styles.css";
 
@@ -113,7 +114,9 @@ export default ({ state, dispatch }) => {
       <div className="dd-item" onClick={() => resetModesEvent()}>
         Сбросить режимы
       </div>
-      <div className="dd-item">Настройки</div>
+      <div className="dd-item" onClick={() => runOption("aboutProduct();")}>
+        Настройки
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@
     display: inline-block;
     height: auto;
     vertical-align: top;
+    position: relative;
 }
 
 .top-hint {
