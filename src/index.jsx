@@ -5,7 +5,7 @@ import { PanelController } from "./controllers/PanelController.jsx";
 import { CommandController } from "./controllers/CommandController.jsx";
 import { About } from "./components/About.jsx";
 import { AllActionsPanel } from "./panels/AllActionsPanel/AllActionsPanel.jsx";
-import runAction from "./utils/runAction";
+import runOption from "./utils/runOption";
 
 import { entrypoints } from "uxp";
 
@@ -30,42 +30,42 @@ const allActionsController = new PanelController(() => <AllActionsPanel />, {
       label: "APs CATALOG",
       enabled: true,
       checked: false,
-      oninvoke: () => {},
+      oninvoke: () => runOption("show_APsCatFld();"),
     },
     {
       id: "panel0",
       label: "APs Панель",
       enabled: true,
       checked: false,
-      oninvoke: () => {},
+      oninvoke: () => runOption("show_APsPanelFld();"),
     },
     {
       id: "scripts0",
       label: "APs Скрипты",
       enabled: true,
       checked: false,
-      oninvoke: () => {},
+      oninvoke: () => runOption("show_APsScripts();"),
     },
     {
       id: "operations0",
       label: "APs Операции",
       enabled: true,
       checked: false,
-      oninvoke: () => {},
+      oninvoke: () =>  runOption("show_APsActions();"),
     },
     {
       id: "workspaces0",
       label: "APs Рабочие среды",
       enabled: true,
       checked: false,
-      oninvoke: () => {},
+      oninvoke: () => runOption("show_APsWorkspaces();"),
     },
     {
       id: "maintenance0",
       label: "Тех обслуживание",
       enabled: true,
       checked: false,
-      oninvoke: () => {},
+      oninvoke: () => runOption("callMaintenance();"),
     },
   ],
 });
