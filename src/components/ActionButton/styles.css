@@ -2,7 +2,9 @@
 .importantBtn {
   background: #ff5542;
 }
-
+.importantBtn * {
+  color: white!important;
+}
 .action-btn {
   overflow-y: auto;
   overflow-x: hidden;
@@ -140,9 +142,7 @@
   }
 
   .btn-gray {
-    background: linear-gradient(#FB9575, #dedede 48%, #989898 52%, #f02f17);
-
-    /*background: #989898;*/
+    background: #989898;
     border: 1px solid #989898;
   }
 }

@@ -50,28 +50,26 @@ export default ({ state, dispatch, size, top, btm }) => {
         </div>
       )}
       {state.data.length > 0 ? (
-        state.data.map(
-          ({ id, name, description, color, standartActions, expandedActions }, ind) => (
-            <ActionButton
-              btnWidth={btnWidth}
-              key={id}
-              marg={marg}
-              btnid={id}
-              name={name}
-              description={description}
-              color={color}
-              standartActions={standartActions}
-              expandedActions={expandedActions}
-              importantBtnsIds={state.ui.importantBtnsIds}
-              fontSize={state.ui.fontSize}
-              isExpanded={state.modes.expanded}
-              isDoubleClick={state.modes.doubleClick}
-              isImportantMark={state.modes.importantMark}
-              dispatch={dispatch}
-              state={state}
-            />
-          )
-        )
+        state.data.map(({ id, name, description, color, standartActions, expandedActions }) => (
+          <ActionButton
+            btnWidth={btnWidth}
+            key={id}
+            marg={marg}
+            btnid={id}
+            name={name}
+            description={description}
+            color={color}
+            standartActions={standartActions}
+            expandedActions={expandedActions}
+            importantBtnsIds={state.ui.importantBtnsIds}
+            fontSize={state.ui.fontSize}
+            isExpanded={state.modes.expanded}
+            isDoubleClick={state.modes.doubleClick}
+            isImportantMark={state.modes.importantMark}
+            dispatch={dispatch}
+            state={state}
+          />
+        ))
       ) : (
         <h1>No buttons to load</h1>
       )}
