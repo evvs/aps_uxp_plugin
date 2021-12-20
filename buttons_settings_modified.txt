@@ -1,0 +1,205 @@
+///[имя кнопки] [*] Всплывающая подсказка
+%standart%    // настройки кнопки для режима «Стандартный» 
+    {A} имя набора | имя операции
+    {A} * | имя операции
+%expanded%    // настройки кнопки для режима «Расширенный» 
+    {A} имя набора | имя операции
+    //{A} * | имя операции
+
+[Яркость] [green] Высветлить и Затемнить
+%standart%
+    {A} APs_RETOUCH_Standart | Тон
+%expanded%
+    {A} APs_RETOUCH_Expanded | Тон
+
+[Pseudo HDR] [blue] Расширить динамический диапазон
+%standart%
+    {A} APs_RETOUCH_Standart | Pseudo HDR
+%expanded%
+    {A} APs_RETOUCH_Expanded | Pseudo HDR
+
+[Dodge & Burn] [orange] Создать слои для работы с техникой "Dodge & Burn"
+%standart%
+    {A} APs_RETOUCH_Standart | Dodge & Burn
+%expanded%
+    {A} APs_RETOUCH_Expanded | Dodge & Burn
+
+[Контраст] [yellow] Усилить или уменьшить контраст
+%standart%
+    {A} APs_RETOUCH_Standart | Контраст
+%expanded%
+    {A} APs_RETOUCH_Expanded | Контраст
+
+[Объём] [gray] Усилить или уменьшить объём
+%standart%
+    {A} APs_RETOUCH_Standart | Объём
+%expanded%
+    {A} APs_RETOUCH_Expanded | Объём
+
+[Блики] [gray] Усилить или уменьшить блики (самые светлые обрасти)
+%standart%
+    {A} APs_RETOUCH_Standart | Блики
+%expanded%
+    {A} APs_RETOUCH_Expanded | Блики
+
+[Резкость] [gray] Усилить или уменьшить резкость
+%standart%
+    {A} APs_RETOUCH_Standart | Резкость
+%expanded%
+    {A} APs_RETOUCH_Expanded | Резкость
+
+[Размытие] [gray] Добавить эффект размытия
+%standart%
+    {A} APs_RETOUCH_Standart | Размытие
+%expanded%
+    {A} APs_RETOUCH_Expanded | Размытие
+
+[Пластика] [gray] Открыть фильтр "Пластика"
+%standart%
+    {A} APs_RETOUCH_Standart | Пластика
+%expanded%
+    {A} APs_RETOUCH_Expanded | Пластика
+
+[Дефекты] [gray] Удалить дефекты (царапины, прыщи и т. п.)
+%standart%
+    {A} APs_RETOUCH_Standart | Дефекты
+%expanded%
+    {A} APs_RETOUCH_Expanded | Дефекты
+
+[Искажения] [gray] Виньетирование
+%standart%
+    {A} APs_RETOUCH_Standart | Искажения
+%expanded%
+    {A} APs_RETOUCH_Expanded | Искажения
+
+[Ретушь: FS] [gray] Создать слои по методу частотного разложения
+%standart%
+    {S} APsRETOUCH_FS_ru
+%expanded%
+    {S} APsRETOUCH_FS_ru
+
+[Ретушь: Lite] [gray] Выбрать и применить метод быстрой ретуши
+%standart%
+    {A} APs_RETOUCH_Standart | Ретушь: Lite
+%expanded%
+    {A} APs_RETOUCH_Expanded | Ретушь: Lite
+
+[Ретушь: Детали] [gray] Выбрать инструмент для редактирования отдельных дефектов кожи
+%standart%
+    {A} APs_RETOUCH_Standart | Ретушь: Детали
+%expanded%
+    {A} APs_RETOUCH_Expanded | Ретушь: Детали
+
+[Ретушь: FS (auto)] [gray] Автоматически создать слои по методу частотного разложения
+%standart%
+    {A} APs_RETOUCH_Standart | Ретушь: FS (auto)
+%expanded%
+    {A} APs_RETOUCH_Expanded | Ретушь: FS (auto)
+
+[Ретушь: Текстуры] [gray] Всплывающая подсказка
+%standart%
+    {A} APs_RETOUCH_Standart | Объекты-           F1
+%expanded%
+    {A} APs_RETOUCH_Expanded | Объекты-           F1
+
+[Кожа: Тон] [gray] Цветокоррекция тона кожи
+%standart%
+    {A} APs_RETOUCH_Standart | Кожа: Тон
+%expanded%
+    {A} APs_RETOUCH_Expanded | Кожа: Тон
+
+[Кожа: Макияж] [gray] Цветокоррекция: глаза, губы, зубы...
+%standart%
+    {A} APs_RETOUCH_Standart | Кожа: Макияж
+%expanded%
+    {A} APs_RETOUCH_Expanded | Кожа: Макияж
+
+[Баланс белого] [gray] Редактировать баланс белого
+%standart%
+    {A} APs_RETOUCH_Standart | Баланс белого
+%expanded%
+    {A} APs_RETOUCH_Expanded | Баланс белого
+
+[Насыщенность] [gray] Усилить или ослабить насыщенность
+%standart%
+    {A} APs_RETOUCH_Standart | Насыщенность
+%expanded%
+    {A} APs_RETOUCH_Expanded | Насыщенность
+
+[Оттенки] [gray] Редактировать отдельные оттенки
+%standart%
+    {A} APs_RETOUCH_Standart | Оттенки
+%expanded%
+    {A} APs_RETOUCH_Expanded | Оттенки
+
+[Camera Raw] [gray] Открыть фильтр Camera Raw в смарт-объекте
+%standart%
+    {A} APs_RETOUCH_Standart | Camera Raw
+%expanded%
+    {A} APs_RETOUCH_Expanded | Camera Raw
+
+[Split-toning] [gray] Тонировки: Раздельное тонирование
+%standart%
+    {A} APs_RETOUCH_Standart | Цвет
+%expanded%
+    {A} APs_RETOUCH_Expanded | Цвет
+
+[Красить] [gray] Создать группу слоёв для ручной перекраски отдельных областей изображения
+%standart%
+    {A} APs_RETOUCH_Standart | Красить
+%expanded%
+    {A} APs_RETOUCH_Expanded | Красить
+
+[Тонировки] [gray] Выбрать и применить тонировку
+%standart%
+    {A} APs_RETOUCH_Standart | Тонировки
+%expanded%
+    {A} APs_RETOUCH_Expanded | Тонировки
+
+[Текстуры] [gray] Выбрать и применить текстуру
+%standart%
+    {A} APs_RETOUCH_Standart | Текстуры
+%expanded%
+    {A} APs_RETOUCH_Expanded | Текстуры
+
+[Виньетки] [gray] Выбрать и применить виньетку
+%standart%
+    {A} APs_RETOUCH_Standart | Эффекты
+%expanded%
+    {A} APs_RETOUCH_Expanded | Эффекты
+
+[mask: Применить] [gray] Настроить и применить маску
+%standart%
+    {A} APs_RETOUCH_Standart | mask: Применить
+%expanded%
+    {A} APs_RETOUCH_Expanded | mask: Применить
+
+[mask: В слоях] [gray] Создать рисунок маски в корректирующих слоях
+%standart%
+    {A} APs_RETOUCH_Standart | mask: В слоях
+%expanded%
+    {A} APs_RETOUCH_Expanded | mask: В слоях
+
+[mask: Пресеты] [gray] Выбрать и применить маску из пресета
+%standart%
+    {A} APs_RETOUCH_Standart | mask: Пресеты
+%expanded%
+    {A} APs_RETOUCH_Expanded | mask: Пресеты
+
+[Операции 1] [gray] Выполнить свою операцию
+%standart%
+    {A} APs_RETOUCH_Standart | маска: Белая
+%expanded%
+    {A} APs_RETOUCH_Expanded | маска: Белая
+
+[Операции 2] [gray] Выполнить свою операцию
+%standart%
+    {A} APs_RETOUCH_Standart | маска: Чёрная
+%expanded%
+    {A} APs_RETOUCH_Expanded | маска: Чёрная
+
+[Операции 3] [gray] Выполнить свою операцию
+%standart%
+    {A} APs_RETOUCH_Standart | маска: Очистить
+%expanded%
+    {A} APs_RETOUCH_Expanded | маска: Очистить

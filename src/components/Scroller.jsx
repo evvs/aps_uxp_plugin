@@ -14,8 +14,8 @@ const Scroller = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      const contentHeight = el.content.offsetHeight;
-      const wrapperHeight = el.wrapper.offsetHeight;
+      const contentHeight = el.current.content.offsetHeight;
+      const wrapperHeight = el.current.wrapper.offsetHeight;
       setState({
         contentHeight,
         wrapperHeight,
@@ -25,19 +25,20 @@ const Scroller = (props) => {
   });
 
   const onThumbMouseDown = (e) => {
-    mouse.y = e.pageY;
+    setMouse({ y: e.pageY });
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   };
 
   const onMouseMove = (e) => {
     const delta = e.pageY - mouse.y;
-    mouse.y = e.pageY;
-    const thumbTop = parseFloat(el.thumb.style.top || "0") + delta;
-    const contentTop = parseFloat(el.content.style.top || "0") - delta / state.pixelRatio;
+    setMouse({ y: e.pageY });
+
+    const thumbTop = parseFloat(el.current.thumb.style.top || "0") + delta;
+    const contentTop = parseFloat(el.current.content.style.top || "0") - delta / state.pixelRatio;
     if (contentTop >= -(state.contentHeight - state.wrapperHeight) && contentTop <= 0) {
-      el.thumb.style.top = `${thumbTop}px`;
-      el.content.style.top = `${contentTop}px`;
+      el.current.thumb.style.top = `${thumbTop}px`;
+      el.current.content.style.top = `${contentTop}px`;
     }
   };
 
@@ -48,11 +49,11 @@ const Scroller = (props) => {
   return (
     <div
       className="scroll-wrapper"
-      ref={(el) => (el.wrapper = el)}
+      ref={(el) => (el.current.wrapper = el)}
       style={{ height: props.height || "100%" }}
     >
       <div className="scroll-content-area">
-        <div className="scroll-content" ref={(el) => (el.content = el)}>
+        <div className="scroll-content" ref={(el) => (el.current.content = el)}>
           {props.children}
         </div>
       </div>
@@ -61,7 +62,7 @@ const Scroller = (props) => {
           className="scrollbar-thumb"
           style={{ height: state.pixelRatio * state.wrapperHeight }}
           onMouseDown={onThumbMouseDown}
-          ref={(el) => (el.thumb = el)}
+          ref={(el) => (el.current.thumb = el)}
         ></div>
       </div>
     </div>
