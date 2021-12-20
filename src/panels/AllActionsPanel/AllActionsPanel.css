@@ -1,8 +1,6 @@
 .panel-container {
     height: 100%;
-    /*display: flex;*/
-    /*flex-direction: column*/
-    margin: 1px auto;
+    margin: 2px auto;
     width: 100%;
     padding: 0;
 }

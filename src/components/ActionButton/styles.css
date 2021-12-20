@@ -10,7 +10,7 @@
   vertical-align: top;
   text-align: center;
   margin: 1.5px 1.5px;
-
+  border-radius: 4px;
 }
 
 .action-btn p {
@@ -20,7 +20,7 @@
   border-radius: 3px;
   padding: 0;
   white-space: nowrap;
-  margin: 0;
+  margin-bottom: 1px;
 }
 
 

@@ -1,45 +1,33 @@
-.top-menu{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    /* right: 15px; */
-    /*top: 0px;*/
-    position: relative;
-    background: var(--uxp-host-background-color);
+.top-menu {
+  margin-bottom: 4px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  position: relative;
+  background: var(--uxp-host-background-color);
 }
 
-/*.top-menu {*/
-/*         right: 15px;*/
-/*        top: 0px;*/
-/*        position: relative;*/
-/*    margin-bottom: 2px;*/
-/*    margin-top: 1px;*/
-/*    width: 100%;*/
-/*    text-align: right;*/
-/*    padding: 0;*/
-/*    min-height: 25px;*/
-/*    font-size: 0;*/
-/*    background: var(--uxp-host-background-color);*/
-/*}*/
-
-.top-menu > sp-action-button {
-    margin: 0px 1.5px;
-    height: 28px;
-    border-radius: 2px;
-    display: inline-block;
-    text-align: center;
-    width: inherit;
-    max-width: 30px;
-    border: 1px solid rgba(0,0,0,0);
-    padding: 0;
-    background: var(--uxp-host-background-color);
-
+.top-menu svg path {
+  fill: var(--uxp-host-text-color);
 }
 
-.top-menu img {
-    max-height: 26px;
-    margin: 5px 7px 4px 7px;
-    display: block;
-    background: var(--uxp-host-background-color);
+.top-menu svg {
+  width: 20px;
+  height: 20px;
+}
+
+.top-menu sp-action-button {
+  height: 28px;
+}
+.top-menu sp-action-button:not(:first-child) {
+  margin-left: 1px;
+}
+
+.red-btn svg path {
+  fill: red;
+}
+
+.red-btn svg {
+  height: 16px;
 }

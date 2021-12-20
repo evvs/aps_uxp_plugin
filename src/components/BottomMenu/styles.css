@@ -3,10 +3,8 @@
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    /* position: absolute;
-    right: 15px;
-    bottom: 0px; */
     background: var(--uxp-host-background-color);
+    margin-top: 4px;
 }
 
 @media (max-width: 400px) {
@@ -15,19 +13,23 @@
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap;
-        /* position: absolute;
-        right: 15px;
-        bottom: 0px; */
         background: var(--uxp-host-background-color);
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     }
 }
 
 .bottom-menu svg path{
-    fill: #3f624c;
+    fill: var(--uxp-host-text-color);
 }
+
 .bottom-menu svg {
     width: 20px;
     height: 20px;
+}
+.bottom-menu sp-action-button {
+    height: 28px;
+}
+.bottom-menu sp-action-button:not(:first-child) {
+    margin-left:1px;
 }
 

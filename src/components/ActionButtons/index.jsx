@@ -49,7 +49,7 @@ export default ({ state, dispatch, size, top, btm }) => {
   }, [debouncedsize, state.ui.fontSize, debouncedmin]);
 
   return (
-    <div className="actionbuttons" style={{ maxHeight: `calc(100vh - ${top + btm}px)` }}>
+    <div className="actionbuttons" style={{ maxHeight: `calc(100vh - ${top + btm + 12}px)` }}>
       {state.ui.topMenuHint.length > 0 && (
         <div style={{ fontSize: `${state.ui.fontSize}` }} className="top-hint">
           {state.ui.topMenuHint}

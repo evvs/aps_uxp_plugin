@@ -83,23 +83,6 @@ export default forwardRef(({ state, dispatch }, ref) => {
   return (
     <div className="bottom-menu" ref={ref}>
       <sp-action-button
-        className="testicon"
-        onClick={() => standartExpandedLibraryOnClick("Ластик")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.eraserBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Analyse />
-      </sp-action-button>
-      <sp-action-button
-        className="testicon"
-        onClick={() => standartExpandedLibraryOnClick("Ластик")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.eraserBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <BeforeAfter />
-      </sp-action-button>
-
-      <sp-action-button
         onClick={() => standartExpandedLibraryOnClick("Кисть")}
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.brushBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
@@ -148,15 +131,11 @@ export default forwardRef(({ state, dispatch }, ref) => {
       </sp-action-button>
 
       <sp-action-button
-        onClick={() => {
-          standartExpandedLibraryOnClick(
-            state.modes.expanded ? "Сервисы      (Guru)" : "Сервисы      (Profi)"
-          );
-        }}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.servicesBtn)}
+        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
-        <Services />
+        <Divide />
       </sp-action-button>
 
       <sp-action-button
@@ -197,76 +176,6 @@ export default forwardRef(({ state, dispatch }, ref) => {
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Next />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Divide />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Objects />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Preset />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Raw />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Snapshot />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Layers />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Help />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Favorites />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Document />
-      </sp-action-button>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Container />
       </sp-action-button>
     </div>
   );

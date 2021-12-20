@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default const Scroller = () => {
-    state = {
-      pixelRatio: 0,
-      contentHeight: 0,
-      wrapperHeight: 0,
-    };
-    el = {};
-    mouse = {
-      y: 0,
-    };
-  }
+const Scroller = (props) => {
+  const el = useRef(null);
 
-  useEffect(() =>
+  const [mouse, setMouse] = useState({
+    y: 0,
+  });
+  const [state, setState] = useState({
+    pixelRatio: 0,
+    contentHeight: 0,
+    wrapperHeight: 0,
+  });
+
+  useEffect(() => {
     setTimeout(() => {
       const contentHeight = el.content.offsetHeight;
       const wrapperHeight = el.wrapper.offsetHeight;
@@ -22,8 +22,7 @@ export default const Scroller = () => {
         pixelRatio: wrapperHeight / contentHeight,
       });
     }, 100);
-  })
-
+  });
 
   const onThumbMouseDown = (e) => {
     mouse.y = e.pageY;
@@ -46,26 +45,26 @@ export default const Scroller = () => {
     document.removeEventListener("mousemove", onMouseMove);
   };
 
-
-return (
-  <div
-    className="scroll-wrapper"
-    ref={(el) => (el.wrapper = el)}
-    style={{ height: props.height || "100%" }}
-  >
-    <div className="scroll-content-area">
-      <div className="scroll-content" ref={(el) => (el.content = el)}>
-        {props.children}
+  return (
+    <div
+      className="scroll-wrapper"
+      ref={(el) => (el.wrapper = el)}
+      style={{ height: props.height || "100%" }}
+    >
+      <div className="scroll-content-area">
+        <div className="scroll-content" ref={(el) => (el.content = el)}>
+          {props.children}
+        </div>
+      </div>
+      <div className={"scrollbar "}>
+        <div
+          className="scrollbar-thumb"
+          style={{ height: state.pixelRatio * state.wrapperHeight }}
+          onMouseDown={onThumbMouseDown}
+          ref={(el) => (el.thumb = el)}
+        ></div>
       </div>
     </div>
-    <div className={"scrollbar "}>
-      <div
-        className="scrollbar-thumb"
-        style={{ height: state.pixelRatio * state.wrapperHeight }}
-        onMouseDown={onThumbMouseDown}
-        ref={(el) => (el.thumb = el)}
-      ></div>
-    </div>
-  </div>
-);
-}
+  );
+};
+export default Scroller;
