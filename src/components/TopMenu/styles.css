@@ -19,6 +19,7 @@
 
 .top-menu sp-action-button {
   height: 28px;
+  background: var(--uxp-host-background-color);
 }
 .top-menu sp-action-button:not(:first-child) {
   margin-left: 1px;
@@ -31,3 +32,5 @@
 .red-btn svg {
   height: 16px;
 }
+
+

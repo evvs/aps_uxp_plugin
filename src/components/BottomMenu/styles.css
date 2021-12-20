@@ -28,6 +28,8 @@
 }
 .bottom-menu sp-action-button {
     height: 28px;
+    background: var(--uxp-host-background-color);
+
 }
 .bottom-menu sp-action-button:not(:first-child) {
     margin-left:1px;
