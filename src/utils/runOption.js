@@ -46,9 +46,6 @@ const createFile = async (funcName) => {
   nativePath = platform === "darwin" ? nativePath : nativePath.replace(/\\/gi, "/");
 
   await file.write(`$.evalFile('${nativePath}jsx/_APs_PanelCalls.jsx');
-  $.evalFile('${nativePath}jsx/_APs_PanelTools_ru.jsm');
-  $.evalFile('${nativePath}jsx/APsRETOUCH_SelectPanelSettings_ru.jsx');
-  $.evalFile('${nativePath}jsx/APsRETOUCH_SelectProject_ru.jsx');
   ${funcName}`);
 
   return "option.jsx";

@@ -1,10 +1,6 @@
 ﻿
 ///////////////////////////////
 
-function checkAndLoadModules()
-{
-    var all_ok = true;
-
 var presetsScrs = Folder(app.path + "/" + localize("$$$/ScriptingSupport/InstalledScripts=Presets/Scripts")).absoluteURI;
 var retouchScrPath = presetsScrs + "/APs_Scripts/APs_RETOUCH_set_ru/";
 var apsPath = presetsScrs + "/APs_Scripts";
@@ -22,26 +18,29 @@ var look_go_Tittle="Automate-Ps.com";
 
 H=22;
 
+var hasModules = true;
+
+//function checkAndLoadModules()
+{	
 if (!Folder(apsPath).exists)
 {
 	$.evalFile(File($.fileName).parent.absoluteURI + "/_APs_FirmLibLite_ru.jsm");
 	NoApsFldAlert_Lite();
-	return false;
+	hasModules = false;
 }
 else
 	if (!File(flPath).exists || !File(klPath).exists)
 	{
-		$.evalFile(File($.fileName).parent.absoluteURI + "/_APs_FirmLibLite_ru.jsm");	
+		$.evalFile(File($.fileName).parent.absoluteURI + "/_APs_FirmLibLite_ru.jsm");
 		NoFirmLibAlert_Lite();
-		return false;
+		hasModules = false;
 	}
 	else {
-		$.evalFile(flPath);
 		$.evalFile(klPath);
+		$.evalFile(flPath);		
         $.evalFile(File($.fileName).parent.absoluteURI + "/_APs_PanelTools_ru.jsm");
-
-        return true;
-
+			
+        hasModules = true;
 		}
 }
 
@@ -49,7 +48,7 @@ else
 
 function aboutProduct()
 {
-    if (checkAndLoadModules())
+    if (hasModules)
         dlgAboutRETOUCH ();
 }
 
@@ -63,30 +62,30 @@ function callMaintenance()
 
 function show_APsCatFld()
 {
-	if (checkAndLoadModules())
+	if (hasModules)
         showAPsCatFld();
 }
 
 function show_APsPanelFld()
 {
-	if (checkAndLoadModules())
+	if (hasModules)
         showFld (File($.fileName).parent.parent.fsName);
 }
 
 function show_APsScripts()
 {
-    if (checkAndLoadModules())
+    if (hasModules)
         showAPsScripts();
 }
 
 function show_APsActions()
 {
-	if (checkAndLoadModules())
+	if (hasModules)
         showAPsActions();
 }
 
 function show_APsWorkspaces()
 {
-	if (checkAndLoadModules())
+	if (hasModules)
         showAPsWorkspaces();
 }

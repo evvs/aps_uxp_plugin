@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import saveUiSettings from "../../utils/saveUiSettings";
-import runPathScript from "../../utils/changeBtnSettings";
+import changeBtnSettings from "../../utils/changeBtnSettings";
 import runOption from "../../utils/runOption";
 
 import "./styles.css";
@@ -105,7 +105,7 @@ export default ({ state, dispatch }) => {
         className="dd-item"
         onClick={() =>
           (async () => {
-            await runPathScript("call_set_setttings.jsx");
+            await changeBtnSettings();
           })()
         }
       >
