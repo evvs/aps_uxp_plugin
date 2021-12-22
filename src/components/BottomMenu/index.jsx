@@ -28,17 +28,20 @@ import Settings from "../../../plugin/icons/Settings";
 
 const btnsHints = {
   eraserBtn: "Выбрать инструмент «Ластик (мягкая круглая)» с настройками для маски текущего слоя",
-  brushBtn: "Выбрать инструмент «Кисть (мягкая круглая)» с настройками для маски текущего слоя",
+  maskWhiteBtn: "Заменить маску на текущем слое на белую",
+  maskBlackBtn: "Заменить маску на текущем слое на чёрную",
+  maskRestoreBtn: "Восстановить (очистить) маску на текущем слое",
+  brushBtn: "Выбрать инструмент «Кисть» (мягкая круглая) с настройками для маски текущего слоя",
   brushMixBtn: "Выбрать инструмент «Кисть-Микс»",
   stumpBtn: "Выбрать инструмент «Штамп»",
   analyzeBtn: "сервис: Анализ изображения (F3)",
-  defectsBtn: 'сервис: "Проявить дефекты"',
+  defectsBtn: "сервис «Проявить дефекты»",
   divideBtn: "Разложить эффект текущего слоя на составляющие: ТОН и ЦВЕТ",
-  differenceBtn: "сервис: Показать разницу",
-  servicesBtn: "Выбрать сервис для анализа и обработки изображения",
-  mergeBtn: "сервис: Свести слои",
-  saveAutoIndexBtn: "сервис: Сохранить текущий документ с индексом",
-  nextBtn: "сервис: Сохранить текущий документ и открыть следующий",
+  differenceBtn: "сервис «Разница» ",
+  servicesBtn: "под-панель «Сервисы» ",
+  mergeBtn: "Свести слои",
+  saveAutoIndexBtn: "Сохранить текущий документ с индексом",
+  nextBtn: "Сохранить текущий документ и открыть следующий",
 };
 
 const changeBottomMenuHint = (hint) => ({
@@ -92,7 +95,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => retouchLibraryOnClick("TOOL_Stamp")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.stumpBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.maskWhiteBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <MaskWhite />
@@ -100,7 +103,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => standartExpandedLibraryOnClick("Анализ               F3")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.analyzeBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.maskBlackBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <MaskBlack />
@@ -108,7 +111,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => retouchLibraryOnClick("SERVICE_Defects_Show_Solarization")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.defectsBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.maskRestoreBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <MaskRestore />
@@ -116,7 +119,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => retouchLibraryOnClick("SERVICE_Decomposition_Color-Luminosity")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.divideBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.analyzeBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Analyse />
@@ -124,7 +127,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => retouchLibraryOnClick("СЕРВИС_Разница")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.differenceBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.defectsBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Defects />
@@ -132,7 +135,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.divideBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Divide />
@@ -140,7 +143,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => standartExpandedLibraryOnClick("Соединить слои")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.mergeBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.differenceBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Difference />
@@ -148,7 +151,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.saveAutoIndexBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.servicesBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Services />
@@ -156,7 +159,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
 
       <sp-action-button
         onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.saveAutoIndexBtn)}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.mergeBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <MergeLayers />

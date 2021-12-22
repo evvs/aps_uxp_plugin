@@ -1,9 +1,6 @@
 import React, { forwardRef, useState } from "react";
-
 import runAction from "../../utils/runAction";
 import DropDownMenu from "../DropDownMenu";
-
-import "./styles.css";
 import Objects from "../../../plugin/icons/Objects";
 import Preset from "../../../plugin/icons/Preset";
 import Raw from "../../../plugin/icons/Raw";
@@ -12,25 +9,27 @@ import Layers from "../../../plugin/icons/Layers";
 import Help from "../../../plugin/icons/Help";
 import Favorites from "../../../plugin/icons/Favorites";
 import Document from "../../../plugin/icons/Document";
-import Container from "../../../plugin/icons/Container";
 import BeforeAfter from "../../../plugin/icons/BeforeAfter";
 import TwoWindows from "../../../plugin/icons/TwoWindows";
 import Folder from "../../../plugin/icons/Folder";
 import Settings from "../../../plugin/icons/Settings";
+import "./styles.css";
 
 const btnsHints = {
   helpBtn: "«ПОМОЩЬ» (F4): Подсказки по работе с текущим инструментом и его слоями.",
   beforeAfterBtn: "сервис: До/После (F2)",
-  twoWindowsBtn: "сервис: Два окна. Удобно использовать для контроля ретуши...",
-  snapshotBtn: "Сделать снимок видимых слоёв вверху документа",
+  objectsBtn:
+    "Объекты- (F1): Выделите объект и выполните эту команду чтобы удалить объект «с учётом содержимого»",
+  twoWindowsBtn: "Два окна. Удобно использовать для контроля ретуши",
+  snapshotBtn: "Слой-снимок текущего состояния документа.",
   rawBtn:
-    "Добавить вверху документа слой смарт-объект с исходными Raw данными (В папке текущего документа (учитывая все под-папки) ищется одноимённый документ любого формата Raw. Если не находит - создаётся смарт-объект со снимком слоёв.)",
+    "Добавить вверху документа слой смарт-объект с исходными Raw данными. В папке текущего документа (учитывая все под-папки) ищется одноимённый документ любого формата Raw. Если не находит - создаётся смарт-объект со снимком слоёв.",
   containerBtn: "Добавить тематический «Контейнер»",
-  layersBtn: "сервис: Слои",
-  documentBtn: "сервис: Документ",
-  folderBtn: "сервис: Открыть папку",
-  presetBtn: "сервис: Сохранить в пресет",
-  favoritesBtn: "Открыть системную под-панель «ИЗБРАННОЕ» (F5)",
+  layersBtn: "сервис «Слои»",
+  documentBtn: "сервис «Документ»",
+  folderBtn: "сервис «Открыть папку»",
+  presetBtn: "сервис: «Сохранить в пресет»",
+  favoritesBtn: "Системная под-панель «ИЗБРАННОЕ» (F5)",
   settingsBtn: "Настройки панели",
 };
 
@@ -97,8 +96,8 @@ export default forwardRef(({ state, dispatch }, ref) => {
       </sp-action-button>
 
       <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
+        onClick={() => standartExpandedLibraryOnClick("APs_RETOUCH_Services | Объекты-")}
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.objectsBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Objects />

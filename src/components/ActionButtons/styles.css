@@ -1,25 +1,27 @@
 .actionbuttons {
-    margin: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: inline-block;
-    height: auto;
-    vertical-align: top;
-    position: relative;
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: inline-block;
+  height: auto;
+  vertical-align: top;
+  position: relative;
 }
 
 .top-hint {
-    position: absolute;
-    top: 0;
-    background-color: var(--uxp-host-background-color);
-    z-index: 10;
-    padding: 5px;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--uxp-host-background-color);
+  z-index: 10;
+  padding: 5px;
+  width: 100%;
 }
 
 .bottom-hint {
   position: absolute;
   bottom: 0;
+  left: 0;
   background-color: var(--uxp-host-background-color);
   z-index: 10;
   padding: 5px;
