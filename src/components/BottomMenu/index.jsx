@@ -150,7 +150,11 @@ export default forwardRef(({ state, dispatch }, ref) => {
       </sp-action-button>
 
       <sp-action-button
-        onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
+        onClick={() =>
+          standartExpandedLibraryOnClick(
+            state.modes.expanded ? "Сервисы      (Guru)" : "Сервисы      (Profi)"
+          )
+        }
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.servicesBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
@@ -158,7 +162,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
       </sp-action-button>
 
       <sp-action-button
-        onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
+        onClick={() => standartExpandedLibraryOnClick("Соединить слои")}
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.mergeBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
