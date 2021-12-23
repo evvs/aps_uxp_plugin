@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useEffect } from "react";
 import runAction from "../../utils/runAction";
 import DropDownMenu from "../DropDownMenu";
 import Objects from "../../../plugin/icons/Objects";
@@ -40,6 +40,23 @@ const changeTopMenuHint = (hint) => ({
 
 export default forwardRef(({ state, dispatch }, ref) => {
   const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
+  const [click, setClick] = useState(0);
+
+  const onClickHandler = () => setisVisibleDropDown(!isVisibleDropDown);
+
+  const onDoubleClickHandler = () => dispatch({ type: "changeExpandedMode" });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // simple click
+      if (click === 1) onClickHandler();
+      setClick(0);
+    }, 150); //delay
+
+    if (click === 2) onDoubleClickHandler();
+
+    return () => clearTimeout(timer);
+  }, [click]);
 
   const onChangeHintEvent = (hint) => {
     dispatch(changeTopMenuHint(hint));
@@ -182,8 +199,9 @@ export default forwardRef(({ state, dispatch }, ref) => {
       </sp-action-button>
 
       <sp-action-button
-        onClick={() => setisVisibleDropDown(!isVisibleDropDown)}
-        class="red-btn"
+        onClick={() => setClick((prev) => prev + 1)}
+        onDoubleClick={() => setClick((prev) => prev + 1)}
+        class={state.modes.expanded ? "red-btn" : ""}
         onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.settingsBtn)}
         onMouseLeave={() => onChangeHintEvent("")}
       >
