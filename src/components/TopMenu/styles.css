@@ -33,4 +33,8 @@
   height: 16px;
 }
 
+.important svg path {
+  fill: #ff5542;
+}
+
 
