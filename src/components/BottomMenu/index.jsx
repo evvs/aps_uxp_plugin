@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import runAction from "../../utils/runAction";
 import "./styles.css";
+import saveUiSettings from "../../utils/saveUiSettings";
 import Analyse from "../../../plugin/icons/Analyse";
 import Brush from "../../../plugin/icons/Brush";
 import MaskWhite from "../../../plugin/icons/MaskWhite";
@@ -26,164 +27,164 @@ import BeforeAfter from "../../../plugin/icons/BeforeAfter";
 import TwoWindows from "../../../plugin/icons/TwoWindows";
 import Settings from "../../../plugin/icons/Settings";
 
-const btnsHints = {
-  eraserBtn: "Выбрать инструмент «Ластик (мягкая круглая)» с настройками для маски текущего слоя",
-  maskWhiteBtn: "Заменить маску на текущем слое на белую",
-  maskBlackBtn: "Заменить маску на текущем слое на чёрную",
-  maskRestoreBtn: "Восстановить (очистить) маску на текущем слое",
-  brushBtn: "Выбрать инструмент «Кисть» (мягкая круглая) с настройками для маски текущего слоя",
-  brushMixBtn: "Выбрать инструмент «Кисть-Микс»",
-  stumpBtn: "Выбрать инструмент «Штамп»",
-  analyzeBtn: "сервис: Анализ изображения (F3)",
-  defectsBtn: "сервис «Проявить дефекты»",
-  divideBtn: "Разложить эффект текущего слоя на составляющие: ТОН и ЦВЕТ",
-  differenceBtn: "сервис «Разница» ",
-  servicesBtn: "под-панель «Сервисы» ",
-  mergeBtn: "Свести слои",
-  saveAutoIndexBtn: "Сохранить текущий документ с индексом",
-  nextBtn: "Сохранить текущий документ и открыть следующий",
+const standartExpandedLibraryOnClick = (action, state) => {
+  if (state.modes.expanded) {
+    runAction({
+      setName: "APs_RETOUCH_Expanded",
+      actionName: action,
+    });
+  } else {
+    runAction({
+      setName: "APs_RETOUCH_Standart",
+      actionName: action,
+    });
+  }
 };
+
+const retouchLibraryOnClick = (action, state) => {
+  runAction({
+    setName: "APs_RETOUCH_Library",
+    actionName: action,
+  });
+};
+
+const retouchServicesLibraryOnClick = (action, state) => {
+  runAction({
+    setName: "APs_RETOUCH_Services",
+    actionName: action,
+  });
+};
+
+
+
+const btns = [
+  {
+    hint: "Выбрать инструмент «Кисть» (мягкая круглая) с настройками для маски текущего слоя",
+    id: "brushBtn",
+    clickHandler: (state) => standartExpandedLibraryOnClick("Кисть", state),
+    icon: <Brush />,
+  },
+  {
+    hint: "Заменить маску на текущем слое на белую",
+    id: "maskWhiteBtn",
+    clickHandler: (state) => retouchLibraryOnClick("TOOL_Stamp", state),
+    icon: <MaskWhite />,
+  },
+  {
+    hint: "Заменить маску на текущем слое на чёрную",
+    id: "maskBlackBtn",
+    clickHandler: (state) => standartExpandedLibraryOnClick("Анализ               F3", state),
+    icon: <MaskBlack />,
+  },
+  {
+    hint: "Восстановить (очистить) маску на текущем слое",
+    id: "maskRestoreBtn",
+    clickHandler: (state) => retouchLibraryOnClick("SERVICE_Defects_Show_Solarization", state),
+    icon: <MaskRestore />,
+  },
+  {
+    hint: "сервис: Анализ изображения (F3)",
+    id: "analyzeBtn",
+    clickHandler: (state) => retouchLibraryOnClick("SERVICE_Decomposition_Color-Luminosity", state),
+    icon: <Analyse />,
+  },
+  {
+    hint: "сервис «Проявить дефекты»",
+    id: "defectsBtn",
+    clickHandler: (state) => retouchLibraryOnClick("СЕРВИС_Разница", state),
+    icon: <Defects />,
+  },
+  {
+    hint: "Разложить эффект текущего слоя на составляющие: ТОН и ЦВЕТ",
+    id: "divideBtn",
+    clickHandler: (state) => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ", state),
+    icon: <Divide />,
+  },
+  {
+    hint: "сервис «Разница» ",
+    id: "differenceBtn",
+    clickHandler: (state) => standartExpandedLibraryOnClick("Соединить слои", state),
+    icon: <Difference />,
+  },
+  {
+    hint: "под-панель «Сервисы» ",
+    id: "servicesBtn",
+    clickHandler: (state) =>
+      standartExpandedLibraryOnClick(
+        state.modes.expanded ? "Сервисы      (Guru)" : "Сервисы      (Profi)",
+        state
+      ),
+    icon: <Services />,
+  },
+  {
+    hint: "Свести слои",
+    id: "mergeBtn",
+    clickHandler: (state) => standartExpandedLibraryOnClick("Соединить слои", state),
+    icon: <MergeLayers />,
+  },
+  {
+    hint: "Сохранить текущий документ с индексом",
+    id: "saveAutoIndexBtn",
+    clickHandler: (state) => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex", state),
+    icon: <SaveAutoIndex />,
+  },
+  {
+    hint: "Сохранить текущий документ и открыть следующий",
+    id: "nextBtn",
+    clickHandler: (state) => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ", state),
+    icon: <Next />,
+  },
+];
+
+const changeImportantBtnsIds = (btnid) => ({
+  type: "changeImportantBtnsIds",
+  payload: btnid,
+});
+
 
 const changeBottomMenuHint = (hint) => ({
   type: "changeBottomMenuHint",
   payload: hint,
 });
 
-export default forwardRef(({ state, dispatch }, ref) => {
-  console.log(state.dispatch, ref, 6666);
+const BottomButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   const onChangeHintEvent = (hint) => {
     dispatch(changeBottomMenuHint(hint));
   };
+  return (
+    <sp-action-button
+      onClick={() => {
+        if (state.modes.importantMark) {
+          dispatch(changeImportantBtnsIds(id));
+          saveUiSettings(state.ui, "importantBtnsIds", id);
+        } else {
+          clickHandler(state);
+        }
+      }}
+      onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
+      onMouseLeave={() => onChangeHintEvent("")}
+      class={state.ui.importantBtnsIds.includes(id) ? "important" : ""}
+    >
+      {icon}
+    </sp-action-button>
+  );
+};
 
-  const standartExpandedLibraryOnClick = (action) => {
-    if (state.modes.expanded) {
-      runAction({
-        setName: "APs_RETOUCH_Expanded",
-        actionName: action,
-      });
-    } else {
-      runAction({
-        setName: "APs_RETOUCH_Standart",
-        actionName: action,
-      });
-    }
-  };
-
-  const retouchLibraryOnClick = (action) => {
-    runAction({
-      setName: "APs_RETOUCH_Library",
-      actionName: action,
-    });
-  };
-
-  const retouchServicesLibraryOnClick = (action) => {
-    runAction({
-      setName: "APs_RETOUCH_Services",
-      actionName: action,
-    });
-  };
+export default forwardRef(({ state, dispatch }, ref) => {
+  console.log(state.dispatch, ref, 6666);
 
   return (
     <div className="bottom-menu" ref={ref}>
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("Кисть")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.brushBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Brush />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => retouchLibraryOnClick("TOOL_Stamp")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.maskWhiteBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <MaskWhite />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("Анализ               F3")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.maskBlackBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <MaskBlack />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => retouchLibraryOnClick("SERVICE_Defects_Show_Solarization")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.maskRestoreBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <MaskRestore />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => retouchLibraryOnClick("SERVICE_Decomposition_Color-Luminosity")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.analyzeBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Analyse />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => retouchLibraryOnClick("СЕРВИС_Разница")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.defectsBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Defects />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.divideBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Divide />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("Соединить слои")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.differenceBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Difference />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() =>
-          standartExpandedLibraryOnClick(
-            state.modes.expanded ? "Сервисы      (Guru)" : "Сервисы      (Profi)"
-          )
-        }
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.servicesBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Services />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("Соединить слои")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.mergeBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <MergeLayers />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => retouchLibraryOnClick("DOCUMENT_Save_PSD_Autoindex")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.saveAutoIndexBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <SaveAutoIndex />
-      </sp-action-button>
-
-      <sp-action-button
-        onClick={() => standartExpandedLibraryOnClick("СЛЕДУЮЩИЙ")}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(btnsHints.nextBtn)}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Next />
-      </sp-action-button>
+      {btns.map(({ id, hint, clickHandler, icon }) => (
+        <BottomButton
+          id={id}
+          hint={hint}
+          clickHandler={clickHandler}
+          icon={icon}
+          state={state}
+          dispatch={dispatch}
+        />
+      ))}
     </div>
   );
 });

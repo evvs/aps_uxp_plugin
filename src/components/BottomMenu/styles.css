@@ -35,3 +35,7 @@
     margin-left:1px;
 }
 
+
+.important svg path {
+    fill: #ff5542;
+  }
