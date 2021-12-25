@@ -1,5 +1,6 @@
 import React, { forwardRef, useState, useEffect } from "react";
 import runAction from "../../utils/runAction";
+import saveUiSettings from "../../utils/saveUiSettings";
 import DropDownMenu from "../DropDownMenu";
 import Objects from "../../../plugin/icons/Objects";
 import Preset from "../../../plugin/icons/Preset";
@@ -52,7 +53,7 @@ const btns = [
   {
     hint: "«ПОМОЩЬ» (F4): Подсказки по работе с текущим инструментом и его слоями.",
     id: "helpBtn",
-    clickHandler: (state) => standartExpandedLibraryOnClick("ПОМОЩЬ          F4",  state),
+    clickHandler: (state) => standartExpandedLibraryOnClick("ПОМОЩЬ          F4", state),
     icon: <Help />,
   },
   {
@@ -64,7 +65,8 @@ const btns = [
   {
     hint: "Объекты- (F1): Выделите объект и выполните эту команду чтобы удалить объект «с учётом содержимого»",
     id: "objectsBtn",
-    clickHandler: (state) => standartExpandedLibraryOnClick("APs_RETOUCH_Services | Объекты-", state),
+    clickHandler: (state) =>
+      standartExpandedLibraryOnClick("APs_RETOUCH_Services | Объекты-", state),
     icon: <Objects />,
   },
   {
@@ -76,7 +78,8 @@ const btns = [
   {
     hint: "Слой-снимок текущего состояния документа.",
     id: "snapshotBtn",
-    clickHandler: (state ) => retouchLibraryOnClick("LAYERS_Shot visible_Top of the document", state),
+    clickHandler: (state) =>
+      retouchLibraryOnClick("LAYERS_Shot visible_Top of the document", state),
     icon: <Snapshot />,
   },
   {
@@ -122,15 +125,28 @@ const btns = [
   },
 ];
 
+const changeImportantBtnsIds = (btnid) => ({
+  type: "changeImportantBtnsIds",
+  payload: btnid,
+});
+
 const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   const onChangeHintEvent = (hint) => {
     dispatch(changeTopMenuHint(hint));
   };
   return (
     <sp-action-button
-      onClick={() => clickHandler(state)}
+      onClick={() => {
+        if (state.modes.importantMark) {
+          dispatch(changeImportantBtnsIds(id));
+          saveUiSettings(state.ui, "importantBtnsIds", id);
+        } else {
+          clickHandler(state);
+        }
+      }}
       onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
       onMouseLeave={() => onChangeHintEvent("")}
+      class={state.ui.importantBtnsIds.includes(id) ? "important" : ""}
     >
       {icon}
     </sp-action-button>
