@@ -36,6 +36,9 @@ var StrButtonsRowHelpTip = 	"текст текст текст текст тек�
 
 var SetsPath = 'APs_RETOUCH_ru/__Technical/APsRETOUCH_Buttons_Settings';
 
+var ManPdfPath = 'APs_RETOUCH_ru/__Technical/APsRETOUCH_Help/APs_RETOUCH_HELP_Panel.pdf';
+var ManButHelptip = 'Открыть руководство';
+
 //var DstFileName = "/Adobe/UXP/Plugins/External/aps.retouch.uxp/buttons_settings_modified.txt";
 //var DefFileName = "/Adobe/UXP/Plugins/External/aps.retouch.uxp/buttons_settings_.txt";
 var DstFileName = "buttons_settings_modified.txt";
@@ -103,7 +106,7 @@ var g_subplace		= '/APs_Scripts/APs_RETOUCH_set_ru';
 // Системная папка, в директории которой скрипт создёт свою именную папку для технических файлов (если нет - будет создана)
 var g_main_dat_folder_name = '/APs-files/APsRETOUCH_set-files';
 // "Имя программы", которое отображается в заголовке главного окна скрипта и всех подчинённых окон
-var g_main_title_text      = '[APsRETOUCH] Выбрать файл настроек';
+var g_main_title_text      = '[APsRETOUCH] Выбрать проект';
 
 // Путь к текущей папке со скриптом
 var g_script_fileName      = new File($.fileName);
@@ -182,11 +185,10 @@ try //для возможности выхода из скрипта в случ
 	}
 
 	var myfont;
-	var QuestionImg;
-	var QuestionDisableImg;
 	var OpenFldImg;
 	var OpenFldDisableImg;
 	var PresetControlImg;
+	var ManualImg;
 	
 	var webURL     = 'automate-ps.com';
 	// логотип в окне "О продукте"
@@ -285,37 +287,16 @@ function ParamsPut(id)
 ///////////////////// GUI /////////////
 
 //function warn_about(){ dlgAboutEx_Retouch(); }
-
-/*
-Функция добавления кнопки подсказки в правую часть строки
-	(Требует инициализированных QuestionImg, QuestionDisableImg и StrHelpAddoTittle)
- */
-	function addHelpBut(row, hlpText, posFName, vertAlign)
-	{
-		try	{ if ((QuestionImg == undefined) || (QuestionDisableImg == undefined) || (StrHelpAddoTittle == undefined))	return {};	}catch(_){ return {}}
 	
-		var resBut = row.add ("image", [0,0,21, (IsMacOs) ? 22 : 20], ScriptUI.newImage(QuestionImg,QuestionDisableImg,QuestionImg,QuestionImg));
-		resBut.alignment = ["right", (vertAlign == undefined) ? "middle" : vertAlign];
-		resBut.minimumSize = resBut.maximumSize = [21,(IsMacOs) ? 22 : 20];
-		resBut.hlpMess = hlpText;
-		resBut.wndposfname = posFName;
-		resBut.onClick = function() {
-										if (!this.enabled) return;
-	
-										FirmAlert(	this.hlpMess, this.wndposfname, StrHelpAddoTittle);
-									};
-		return resBut;
-	}
-	
-	function getNearestFolderPath(fldPath) //or desktop
-	{
+function getNearestFolderPath(fldPath) //or desktop
+{
 		var fld = Folder(fldPath);
 		//ищем ближайшую, если папки нет							
 		while ((fld != undefined) && !fld.exists)
 			fld = fld.parent;
 			                                   
 		return (fld != undefined) ? fld.absoluteURI : Folder.desktop.absoluteURI;
-	}
+}
 
 function mainWnd( paramHolder, strparam, tittle )
 {
@@ -331,12 +312,6 @@ function mainWnd( paramHolder, strparam, tittle )
 	var redPen = CreateSolidPen (fw.rg, 255, 41, 6);
 	
 	var idTheme = GetColorThemeWndIndex (fw);
-
-	if (QuestionImg == undefined)
-		QuestionImg = getPicByTheme (idTheme, "GetQuestionImg_v3", "tmp_questionimg");
-	
-	if (QuestionDisableImg == undefined)
-		QuestionDisableImg = getPicByTheme (idTheme, "GetQuestionDisableImg_v3", "tmp_questiondisableimg");
 	
 	if (OpenFldImg == undefined)
 		OpenFldImg = getPicByTheme (idTheme, "GetOpenFldImg_v3", "tmp_openfldimg");
@@ -346,6 +321,9 @@ function mainWnd( paramHolder, strparam, tittle )
 	
 	if (PresetControlImg == undefined)
 		PresetControlImg = getPicByTheme (idTheme, "GetPresetControlImg", "tmp_PresetControlImg");
+
+	if (ManualImg == undefined)
+		ManualImg = getPicByTheme (idTheme, "GetManualImg", "tmp_ManualImg");	
 	
 	//fw.lg.children[0].onClick = function(){warn_about()};
 		
@@ -450,16 +428,7 @@ function mainWnd( paramHolder, strparam, tittle )
 
 	if (!fw.rg.setgroup.showRedFrame3)
 		fw.rg.setgroup.showRedFrame3 = fw.rg.setgroup.showRedFrame1;
-	
-	fw.HelpImgEdit = fw.rg.setgroup.add ("image", [0,0,21,(IsMacOs) ? 22 : 20], ScriptUI.newImage(QuestionImg,QuestionDisableImg,QuestionImg,QuestionImg));
-	fw.HelpImgEdit.alignment = ["right","top"];
-	fw.HelpImgEdit.minimumSize = fw.HelpImgEdit.maximumSize = [21,(IsMacOs) ? 22 : 20];
-	fw.HelpImgEdit.onClick = function() {
-							if (!this.enabled) return;
-
-							FirmAlert(StrEditButHlp, '/HelpImgEditBut.pos', StrHelpAddoTittle);
-						};
-	
+		
 	fw.rg.setgroup.onDraw = function()
 				{
 					if (this.showRedFrame1)
@@ -524,8 +493,17 @@ function mainWnd( paramHolder, strparam, tittle )
 								return fw.close(11);
 						};
 
-	fw.HelpImgButs = addHelpBut(fw.rg.botgroup, StrButtonsRowHelpTip, 'HelpImgButs.pos', "top");
-	fw.HelpImgButs.minimumSize[1] = fw.HelpImgButs.maximumSize[1] = (IsMacOs)? 22: 20;
+	fw.butManual = fw.rg.botgroup.add ("image", [0,0,30, (IsMacOs)? 22: 20], ScriptUI.newImage(ManualImg,ManualImg,ManualImg,ManualImg));
+	fw.butManual.alignment = ["right","top"];
+	fw.butManual.margins = [0, 0, 0, 0];
+	fw.butManual.minimumSize[1] = fw.butManual.maximumSize[1] = (IsMacOs)? 22: 20;
+	fw.butManual.onClick = function ()
+		{
+			var pdf = File(PathVariables.pathCat +  '/' + ManPdfPath);
+			if (pdf.exists)
+					pdf.execute();
+		}
+	fw.butManual.helpTip = ManButHelptip;
 	
 	fw.onShow = function () 
 	{
@@ -544,11 +522,10 @@ function mainWnd( paramHolder, strparam, tittle )
 } catch(e) {} // конец глобального try
 
 if (FirmLogoImg != undefined) FirmLogoImg.remove();
-if (QuestionImg != undefined) QuestionImg.remove();
-if (QuestionDisableImg != undefined) QuestionDisableImg.remove();
 if (OpenFldImg != undefined) OpenFldImg.remove();
 if (OpenFldDisableImg != undefined) OpenFldDisableImg.remove();
 if (PresetControlImg != undefined) PresetControlImg.remove();
+if (ManualImg != undefined) ManualImg.remove();
 
 }// endif (all_ok)
 
@@ -572,4 +549,24 @@ function GetPresetControlImg_3()
 function GetPresetControlImg_4()
 {
 	return "\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x1E\x00\x00\x00\x14\b\x06\x00\x00\x00\u009A\u00AB\u008D\u00C4\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x05\u00CEiTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin=\"\u00EF\u00BB\u00BF\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 6.0-c006 79.164648, 2021/01/12-15:52:29        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmp:CreatorTool=\"Adobe Photoshop 22.2 (Macintosh)\" xmp:CreateDate=\"2021-02-26T15:39:33+03:00\" xmp:MetadataDate=\"2021-02-26T15:39:33+03:00\" xmp:ModifyDate=\"2021-02-26T15:39:33+03:00\" xmpMM:InstanceID=\"xmp.iid:ad1c583a-fcec-4909-a816-42b4960c2420\" xmpMM:DocumentID=\"adobe:docid:photoshop:709e4731-0156-974a-8b46-1cd7efb02418\" xmpMM:OriginalDocumentID=\"xmp.did:25a7feb4-7ca6-4673-9806-f305bacef6fc\" dc:format=\"image/png\" photoshop:ColorMode=\"3\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:25a7feb4-7ca6-4673-9806-f305bacef6fc\" stEvt:when=\"2021-02-26T15:39:33+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:ad1c583a-fcec-4909-a816-42b4960c2420\" stEvt:when=\"2021-02-26T15:39:33+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\" stEvt:changed=\"/\"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"r\"?>(H\x7FH\x00\x00\x00cIDATH\rc`\x00\u0082\u00FF\u00FF\u00FFK\u00D1\x19C,\x05\u00DA\u00ADFO\f\u00B6s\u00D4bl\u00F8\u00EB\u00D7\u00AFW\u00F0a\u0098\u00BA\u008E\u008E\u008Ehd>U,&\u00A4\x06f)\u0088\u00A6\u009B\u00C5\u00A4XJ5\u008BI\u00B5\u0094*\x16c\u00B3\u0094\u00E6q\u008C\u00CB\u00A74\u00B7\x18W\u00F0\u00D2=U\u008FZ<\u00F4-&\x05\u008F\u00D6N\u0083\u00CE\u00E2\x01i\u00FA\x00\x003j\"\x02\x04\f\u00FC\u008C\x00\x00\x00\x00IEND\u00AEB`\u0082";
+}
+
+function GetManualImg_1()
+{
+	return "\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x1E\x00\x00\x00\x14\b\x06\x00\x00\x00\u009A\u00AB\u008D\u00C4\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x05\u00CEiTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin=\"\u00EF\u00BB\u00BF\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 6.0-c006 79.164648, 2021/01/12-15:52:29        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmp:CreatorTool=\"Adobe Photoshop 22.2 (Macintosh)\" xmp:CreateDate=\"2021-02-26T15:30:03+03:00\" xmp:MetadataDate=\"2021-02-26T15:30:03+03:00\" xmp:ModifyDate=\"2021-02-26T15:30:03+03:00\" xmpMM:InstanceID=\"xmp.iid:31ce50dd-5cbf-43c1-9406-54dc01c9f22b\" xmpMM:DocumentID=\"adobe:docid:photoshop:dcdba7aa-0cc9-f041-906b-ab552835382b\" xmpMM:OriginalDocumentID=\"xmp.did:b57a4a1c-d49f-4720-a46b-684889437386\" dc:format=\"image/png\" photoshop:ColorMode=\"3\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:b57a4a1c-d49f-4720-a46b-684889437386\" stEvt:when=\"2021-02-26T15:30:03+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:31ce50dd-5cbf-43c1-9406-54dc01c9f22b\" stEvt:when=\"2021-02-26T15:30:03+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\" stEvt:changed=\"/\"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"r\"?>s\u00F3\u00FA\u00BE\x00\x00\x00GIDATH\rc\u00F8\u00FF\u00FF?\x03\x10\u00A8\u00D1\x19\u0083\u0081\x1A\u00D0\u00F2e@\u00BC\u0084Nx\x19\u00CC\u00F2Q\u008B\tbGG\u00C7\u00FB <r,\x1E\u0090\u00A0\u0086\u00F9vd\x05\u00F5\u00A8\u00C5\u00A3\x16\x0F_\u008B\u00C9\u00CC\u00D3\u00A3\u00B5\x13\u00FD-\x1E\u0090\u00A6\x0F\x00\u0087\u00C7\x02i\u00A2\u0096Z\u00BD\x00\x00\x00\x00IEND\u00AEB`\u0082";
+}
+
+function GetManualImg_2()
+{
+	return "\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x1E\x00\x00\x00\x14\b\x06\x00\x00\x00\u009A\u00AB\u008D\u00C4\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x05\u00CEiTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin=\"\u00EF\u00BB\u00BF\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 6.0-c006 79.164648, 2021/01/12-15:52:29        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmp:CreatorTool=\"Adobe Photoshop 22.2 (Macintosh)\" xmp:CreateDate=\"2021-02-26T15:33:29+03:00\" xmp:MetadataDate=\"2021-02-26T15:33:29+03:00\" xmp:ModifyDate=\"2021-02-26T15:33:29+03:00\" xmpMM:InstanceID=\"xmp.iid:67593a5a-b1d3-4127-a5d7-b4eeb8f312e3\" xmpMM:DocumentID=\"adobe:docid:photoshop:e80afc0b-63d0-ea4f-9017-94af276b752f\" xmpMM:OriginalDocumentID=\"xmp.did:873ffe92-36d6-4f9e-90f2-90430a3dfe41\" dc:format=\"image/png\" photoshop:ColorMode=\"3\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:873ffe92-36d6-4f9e-90f2-90430a3dfe41\" stEvt:when=\"2021-02-26T15:33:29+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:67593a5a-b1d3-4127-a5d7-b4eeb8f312e3\" stEvt:when=\"2021-02-26T15:33:29+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\" stEvt:changed=\"/\"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"r\"?>\x11\u00F4\u00BF\u00F9\x00\x00\x00GIDATH\rc\u00F8\u00FF\u00FF?\x03\x10\x18\u00D3\x19\u0083\u00811\u00D0\u00F2H \u008E\u00A0\x13\u008E\u0084Y>j1A,**z\x0F\u0084G\u008E\u00C5\x03\x12\u00D40\u00DF\u008E\u00AC\u00A0\x1E\u00B5x\u00D4\u00E2\u00E1k1\u0099yz\u00B4v\u00A2\u00BF\u00C5\x03\u00D2\u00F4\x01\x00!qkx\x07\u00816x\x00\x00\x00\x00IEND\u00AEB`\u0082";
+}
+
+function GetManualImg_3()
+{
+	return "\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x1E\x00\x00\x00\x14\b\x06\x00\x00\x00\u009A\u00AB\u008D\u00C4\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x05\u00CEiTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin=\"\u00EF\u00BB\u00BF\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 6.0-c006 79.164648, 2021/01/12-15:52:29        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmp:CreatorTool=\"Adobe Photoshop 22.2 (Macintosh)\" xmp:CreateDate=\"2021-02-26T15:36:28+03:00\" xmp:MetadataDate=\"2021-02-26T15:36:28+03:00\" xmp:ModifyDate=\"2021-02-26T15:36:28+03:00\" xmpMM:InstanceID=\"xmp.iid:d6c70b2c-2aa5-41c6-b2ad-bff651a059dd\" xmpMM:DocumentID=\"adobe:docid:photoshop:638791ab-e787-d64d-a9f5-2da152324066\" xmpMM:OriginalDocumentID=\"xmp.did:8f5affda-488f-4877-b273-cbfbd080ed55\" dc:format=\"image/png\" photoshop:ColorMode=\"3\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:8f5affda-488f-4877-b273-cbfbd080ed55\" stEvt:when=\"2021-02-26T15:36:28+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:d6c70b2c-2aa5-41c6-b2ad-bff651a059dd\" stEvt:when=\"2021-02-26T15:36:28+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\" stEvt:changed=\"/\"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"r\"?>\u00D0\u00BA\u00C0\u0082\x00\x00\x00CIDATH\rc`\x00\u0082\u00FF\u00FF\u00FFK\u00D1\x19C,\x05\u00DA\u00ADFO\f\u00B6s\u00D4bb\u00F0\u00D7\u00AF_\u00AF\u0080\u00F0\u00C8\u00B1x@\u0082\x1A\u00E6\u00DB\u0091\x15\u00D4\u00A3\x16\u008FZ<|-&7O\u008F\u00D6Nt\u00B7x@\u009A>\x00Uj\u00CCm>\u00DB\u009C\u00CE\x00\x00\x00\x00IEND\u00AEB`\u0082";
+}
+
+function GetManualImg_4()
+{
+	return "\u0089PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x1E\x00\x00\x00\x14\b\x06\x00\x00\x00\u009A\u00AB\u008D\u00C4\x00\x00\x00\tpHYs\x00\x00\x0B\x13\x00\x00\x0B\x13\x01\x00\u009A\u009C\x18\x00\x00\x05\u00CEiTXtXML:com.adobe.xmp\x00\x00\x00\x00\x00<?xpacket begin=\"\u00EF\u00BB\u00BF\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 6.0-c006 79.164648, 2021/01/12-15:52:29        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmp:CreatorTool=\"Adobe Photoshop 22.2 (Macintosh)\" xmp:CreateDate=\"2021-02-26T15:39:22+03:00\" xmp:MetadataDate=\"2021-02-26T15:39:22+03:00\" xmp:ModifyDate=\"2021-02-26T15:39:22+03:00\" xmpMM:InstanceID=\"xmp.iid:35c7c47e-2d9a-40db-b53d-8acbd9d5a297\" xmpMM:DocumentID=\"adobe:docid:photoshop:7f558999-e25a-194f-8ab1-8f631c80141c\" xmpMM:OriginalDocumentID=\"xmp.did:8c2681ca-310d-43a2-80f0-1e362e90c66e\" dc:format=\"image/png\" photoshop:ColorMode=\"3\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:8c2681ca-310d-43a2-80f0-1e362e90c66e\" stEvt:when=\"2021-02-26T15:39:22+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:35c7c47e-2d9a-40db-b53d-8acbd9d5a297\" stEvt:when=\"2021-02-26T15:39:22+03:00\" stEvt:softwareAgent=\"Adobe Photoshop 22.2 (Macintosh)\" stEvt:changed=\"/\"/> </rdf:Seq> </xmpMM:History> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"r\"?>i\t\tT\x00\x00\x00CIDATH\rc`\x00\u0082\u00FF\u00FF\u00FFK\u00D1\x19C,\x05\u00DA\u00ADFO\f\u00B6s\u00D4bb\u00F0\u00D7\u00AF_\u00AF\u0080\u00F0\u00C8\u00B1x@\u0082\x1A\u00E6\u00DB\u0091\x15\u00D4\u00A3\x16\u008FZ<|-&7O\u008F\u00D6Nt\u00B7x@\u009A>\x00Uj\u00CCm>\u00DB\u009C\u00CE\x00\x00\x00\x00IEND\u00AEB`\u0082";
 }

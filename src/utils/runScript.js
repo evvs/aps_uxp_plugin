@@ -45,9 +45,10 @@ const createFile = async (scriptname) => {
 
   nativePath = platform === "darwin" ? nativePath : nativePath.replace(/\\/gi, "/");
 
-  await file.write(`var sPath = Folder(app.path + "/" + localize("$$$/ScriptingSupport/InstalledScripts=Presets/Scripts")).absoluteURI + '/APs_Scripts/APs_RETOUCH_set_ru/${scriptname}.jsx';
-  var fjsx = File(sPath);
-  $.evalFile(fjsx);`);
+  await file.write(`var descS = new ActionDescriptor();
+  descS.putString( charIDToTypeID( 'jsNm' ), '${scriptname}' );
+   descS.putString( charIDToTypeID( 'jsMs' ), 'true' );
+   executeAction( stringIDToTypeID( 'AdobeScriptAutomation Scripts' ), descS, DialogModes.ALL );`);
 
   return "script.jsx";
 };

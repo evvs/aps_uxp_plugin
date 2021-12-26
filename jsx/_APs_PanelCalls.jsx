@@ -89,3 +89,18 @@ function show_APsWorkspaces()
 	if (hasModules)
         showAPsWorkspaces();
 }
+
+function executeApsCatPdf( pdfPath)
+{
+	PathVariables = new PathVariables_Init();
+	PathVariables_read(PathVariables);
+	PathVariables.pathCat = PathVariables_GetPath1ByName(PathVariables, CatVariable);
+	PathVariables.pathCatExist = (PathVariables.pathCat != "") && Folder(PathVariables.pathCat).exists;
+
+	if (PathVariables.pathCatExist || FixMissedApsCatalogDlg(StrErrNoCatalog, 0))
+	{
+		pdf = File(PathVariables.pathCat +  '/' + pdfPath);
+		if (pdf.exists)
+				pdf.execute();
+	}
+}
