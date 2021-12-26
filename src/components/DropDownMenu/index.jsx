@@ -47,9 +47,17 @@ export default ({ state, dispatch, top, size, btm, height }) => {
   };
 
   const maxHeight = height - top - btm - 8;
+  console.log(size, " sssize");
 
   return (
-    <div className="dropdown-menu" style={{ top: `${top}px`, maxHeight: `${maxHeight}px` }}>
+    <div
+      className="dropdown-menu"
+      style={{
+        minWidth: size >= 249 ? `250px` : `${size}px`,
+        top: `${top}px`,
+        maxHeight: `${maxHeight}px`,
+      }}
+    >
       <div className="textsize-slider dd-item">
         <p>Размер шрифта:</p>
         <sp-slider
@@ -117,7 +125,7 @@ export default ({ state, dispatch, top, size, btm, height }) => {
         Сбросить режимы
       </div>
       <div className="dd-item" onClick={() => runOption("aboutProduct();")}>
-        Настройки
+        Активация
       </div>
     </div>
   );

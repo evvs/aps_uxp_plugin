@@ -1,11 +1,10 @@
 .dropdown-menu {
   position: absolute;
-  right: -4px;
+  right: -5px;
   z-index: 10;
-  min-width: 250px;
   background-color: var(--uxp-host-background-color);
   border: 0.5px solid rgba(0, 0, 0, 0.24);
-  width: auto;
+  /*width: 100%;*/
   height: auto;
   border-radius: 2px;
   /*padding: 10px 0px 10px 10px;*/
@@ -14,29 +13,6 @@
   overflow-x: hidden;
 }
 
-@media (max-width: 384px) {
-  .dropdown-menu {
-    position: absolute;
-    right: 0;
-    top: 62px;
-    z-index: 1;
-    min-width: 250px;
-    background-color: var(--uxp-host-background-color);
-    border: 0.5px solid rgba(0, 0, 0, 0.24);
-  }
-}
-
-@media (max-width: 249px) {
-  .dropdown-menu {
-    position: absolute;
-    right: 0;
-    top: 62px;
-    z-index: 1;
-    min-width: 100vw;
-    background-color: var(--uxp-host-background-color);
-    border: 0.5px solid rgba(0, 0, 0, 0.24);
-  }
-}
 .checkbox-item {
   padding: 0 10px;
   height: 22px;
@@ -63,11 +39,6 @@
   flex-grow: 1;
 }
 
-@media (max-width: 395px) {
-  .dropdown-menu {
-    top: 55px;
-  }
-}
 
 @media (max-width: 260px) {
   .textsize-slider {
@@ -77,9 +48,6 @@
   .slider {
     margin-left: 0px;
     min-width: 90%;
-  }
-  .dropdown-menu {
-    min-width: 230px;
   }
 }
 
