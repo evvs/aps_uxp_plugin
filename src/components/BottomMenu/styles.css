@@ -5,6 +5,8 @@
     flex-wrap: wrap;
     background: var(--uxp-host-background-color);
     margin-top: 4px;
+    position: relative;
+    z-index: 2;
 }
 
 @media (max-width: 400px) {
@@ -23,9 +25,10 @@
 }
 
 .bottom-menu svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
+
 .bottom-menu sp-action-button {
     height: 28px;
     background: var(--uxp-host-background-color);

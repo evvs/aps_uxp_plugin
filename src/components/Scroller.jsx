@@ -14,6 +14,7 @@ const Scroller = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
+      if (!el.current) return;
       const contentHeight = el.current.content.offsetHeight;
       const wrapperHeight = el.current.wrapper.offsetHeight;
       setState({
@@ -31,6 +32,7 @@ const Scroller = (props) => {
   };
 
   const onMouseMove = (e) => {
+    if (!el.current) return;
     const delta = e.pageY - mouse.y;
     setMouse({ y: e.pageY });
 
@@ -63,7 +65,7 @@ const Scroller = (props) => {
           style={{ height: state.pixelRatio * state.wrapperHeight }}
           onMouseDown={onThumbMouseDown}
           ref={(el) => (el.current.thumb = el)}
-        ></div>
+        />
       </div>
     </div>
   );

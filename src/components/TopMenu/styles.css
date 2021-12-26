@@ -13,8 +13,8 @@
 }
 
 .top-menu svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .top-menu sp-action-button {
@@ -32,9 +32,11 @@
 .red-btn svg {
   height: 16px;
 }
+.settings-btn svg {
+  height: 16px;
+}
 
 .important svg path {
   fill: #ff5542;
 }
-
 

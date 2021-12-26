@@ -166,6 +166,7 @@ export const AllActionsPanel = () => {
   const top = React.createRef();
   const btm = React.createRef();
   const [size, setSize] = useState(0);
+  const [height, setHeight] = useState(0);
   const [btmHeight, setBtmHeight] = useState(0);
   const [topHeight, setTopHeight] = useState(0);
   const elRef = useRef(null);
@@ -178,6 +179,7 @@ export const AllActionsPanel = () => {
     function updateSize(e) {
       if (e) {
         setSize(e.target.clientWidth);
+        setHeight(e.target.clientHeight);
       }
     }
     function updateSizeB(e) {
@@ -229,12 +231,21 @@ export const AllActionsPanel = () => {
   return (
     <div className="panel-container" ref={elRef}>
       {/*<Dialogs updateLayoutCb={updateLayout} />*/}
-      <TopMenu state={state} dispatch={dispatch} ref={top} />
+      <TopMenu
+        state={state}
+        dispatch={dispatch}
+        ref={top}
+        size={size}
+        height={height}
+        top={topHeight}
+        btm={btmHeight}
+      />
       {state.data && (
         <ActionButtons
           state={state}
           dispatch={dispatch}
           size={size}
+          height={height}
           top={topHeight}
           btm={btmHeight}
         />

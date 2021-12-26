@@ -153,7 +153,7 @@ const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   );
 };
 
-export default forwardRef(({ state, dispatch }, ref) => {
+export default forwardRef(({ state, dispatch, size, top, btm, height }, ref) => {
   const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
   const [click, setClick] = useState(0);
 
@@ -192,13 +192,22 @@ export default forwardRef(({ state, dispatch }, ref) => {
       <sp-action-button
         onClick={() => setClick((prev) => prev + 1)}
         onDoubleClick={() => setClick((prev) => prev + 1)}
-        class={state.modes.expanded ? "red-btn" : ""}
+        class={state.modes.expanded ? "red-btn settings-btn" : "settings-btn"}
         onMouseEnter={() => state.modes.about && onChangeHintEvent("Настройки панели")}
         onMouseLeave={() => onChangeHintEvent("")}
       >
         <Settings />
       </sp-action-button>
-      {isVisibleDropDown && <DropDownMenu state={state} dispatch={dispatch} />}
+      {isVisibleDropDown && (
+        <DropDownMenu
+          state={state}
+          dispatch={dispatch}
+          size={size}
+          height={height}
+          top={top}
+          btm={btm}
+        />
+      )}
     </div>
   );
 });

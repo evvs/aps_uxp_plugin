@@ -10,7 +10,7 @@ const changeFontSize = (fontSize) => ({
   payload: fontSize,
 });
 
-export default ({ state, dispatch }) => {
+export default ({ state, dispatch, top, size, btm, height }) => {
   const [fontSize, setFontSize] = useState(state.ui.fontSize);
 
   useEffect(() => {
@@ -46,8 +46,10 @@ export default ({ state, dispatch }) => {
     dispatch({ type: "resetModes" });
   };
 
+  const maxHeight = height - top - btm - 8;
+
   return (
-    <div className="dropdown-menu">
+    <div className="dropdown-menu" style={{ top: `${top}px`, maxHeight: `${maxHeight}px` }}>
       <div className="textsize-slider dd-item">
         <p>Размер шрифта:</p>
         <sp-slider

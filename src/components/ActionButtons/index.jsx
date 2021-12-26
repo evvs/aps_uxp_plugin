@@ -15,7 +15,7 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-export default ({ state, dispatch, size, top, btm }) => {
+export default ({ state, dispatch, size, top, btm, height }) => {
   const [min, setMin] = useState(100);
   const [btnWidth, setBtnWidth] = useState(100);
   const [marg, setMarg] = useState(0);
