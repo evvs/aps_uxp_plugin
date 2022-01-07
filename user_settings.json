@@ -4,5 +4,11 @@
   "ui": {
     "fontSize": 13,
     "importantBtnsIds": []
+  },
+  "modes": {
+    "expanded": false,
+    "doubleClick": false,
+    "about": false,
+    "importantMark": false
   }
 }

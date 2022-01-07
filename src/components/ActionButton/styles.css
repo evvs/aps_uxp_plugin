@@ -1,11 +1,10 @@
-
 .importantBtn {
   background: #ff5542;
   border: 1px solid #ff5542;
 }
 
 .importantBtn * {
-  color: white!important;
+  color: white !important;
 }
 
 .action-btn {
@@ -30,12 +29,16 @@
   z-index: 1;
 }
 
-
 /*.action-btn:hover {*/
 /*  background: transparent;*/
 /*}*/
 
 @media (prefers-color-scheme: darkest) {
+  .btn-blue {
+    background: #9eb9e3;
+    border: 1px solid #9eb9e3;
+  }
+
   .btn-green {
     background: #3f624c;
     border: 1px solid #3f624c;
@@ -58,6 +61,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .btn-blue {
+    background: #9eb9e3;
+    border: 1px solid #9eb9e3;
+  }
+
   .btn-green {
     background: #537f63;
     border: 1px solid #537f63;
@@ -76,7 +84,6 @@
   .btn-gray {
     background: #797979;
     border: 1px solid #797979;
-
   }
 }
 
@@ -85,7 +92,7 @@
     background: #9eb9e3;
     border: 1px solid #9eb9e3;
     position: relative;
-    transition: all .35s ease-in-out;
+    transition: all 0.35s ease-in-out;
   }
 
   .btn-blue:before {
@@ -97,7 +104,7 @@
     height: 100%;
     /*background: linear-gradient(to bottom, #fff 20%, #d2cece 100%)!important;*/
     background: linear-gradient(to bottom, #f3f3f3, #9eb9e3);
-    transition: opacity .35s ease-in-out;
+    transition: opacity 0.35s ease-in-out;
   }
 
   .btn-blue:hover:before {
@@ -107,7 +114,7 @@
     background: #85cca0;
     border: 1px solid #85cca0;
     position: relative;
-    transition: all .35s ease-in-out;
+    transition: all 0.35s ease-in-out;
   }
 
   .btn-green:before {
@@ -119,7 +126,7 @@
     height: 100%;
     /*background: linear-gradient(to bottom, #fff 20%, #d2cece 100%)!important;*/
     background: linear-gradient(to bottom, #f3f3f3, #85cca0);
-    transition: opacity .35s ease-in-out;
+    transition: opacity 0.35s ease-in-out;
   }
 
   .btn-green:hover:before {
@@ -130,9 +137,8 @@
     background: #d8ad78;
     border: 1px solid #d8ad78;
     position: relative;
-    transition: all .35s ease-in-out;
+    transition: all 0.35s ease-in-out;
   }
-
 
   .btn-orange:before {
     content: "";
@@ -143,7 +149,7 @@
     height: 100%;
     /*background: linear-gradient(to bottom, #fff 20%, #d2cece 100%)!important;*/
     background: linear-gradient(to bottom, #f3f3f3, #d8ad78);
-    transition: opacity .35s ease-in-out;
+    transition: opacity 0.35s ease-in-out;
   }
 
   .btn-orange:hover:before {
@@ -154,9 +160,8 @@
     background: #e4cb87;
     border: 1px solid #e4cb87;
     position: relative;
-    transition: all .35s ease-in-out;
+    transition: all 0.35s ease-in-out;
   }
-
 
   .btn-yellow:before {
     content: "";
@@ -167,7 +172,7 @@
     height: 100%;
     /*background: linear-gradient(to bottom, #fff 20%, #d2cece 100%)!important;*/
     background: linear-gradient(to bottom, #f3f3f3, #e4cb87);
-    transition: opacity .35s ease-in-out;
+    transition: opacity 0.35s ease-in-out;
   }
 
   .btn-yellow:hover:before {
@@ -177,11 +182,10 @@
   .btn-gray {
     position: relative;
     border: 1px solid #cbcbcb;
-    transition: all .35s ease-in-out;
+    transition: all 0.35s ease-in-out;
     /*background: linear-gradient(#e8e8e8 10%, #bebfbe 90%);*/
     /*background: linear-gradient(to bottom, #dedede 2%, #ffffff, #ffffff )*/
     background: #cbcbcb;
-
   }
 
   .btn-gray:before {
@@ -193,7 +197,7 @@
     height: 100%;
     /*background: linear-gradient(to bottom, #fff 20%, #d2cece 100%)!important;*/
     background: linear-gradient(to bottom, #f3f3f3, #bebfbe);
-    transition: opacity .35s ease-in-out;
+    transition: opacity 0.35s ease-in-out;
   }
 
   .btn-gray:hover:before {

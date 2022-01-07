@@ -4,6 +4,8 @@ import changeBtnSettings from "../../utils/changeBtnSettings";
 import runOption from "../../utils/runOption";
 
 import "./styles.css";
+import saveMode from "../../utils/saveMode";
+import resetModes from "../../utils/resetModes";
 
 const changeFontSize = (fontSize) => ({
   type: "changeFontSize",
@@ -26,24 +28,29 @@ export default ({ state, dispatch, top, size, btm, height }) => {
     setFontSize(fontSize);
   };
 
-  const expandedModeEvent = () => {
-    dispatch({ type: "changeExpandedMode" });
+  const expandedModeEvent = async () => {
+    await dispatch({ type: "changeExpandedMode" });
+    await saveMode(state.modes, "expanded", !state.modes.expanded);
   };
 
-  const changeDoubleClickEvent = () => {
-    dispatch({ type: "changeDoubleClickMode" });
+  const changeDoubleClickEvent = async () => {
+    await dispatch({ type: "changeDoubleClickMode" });
+    await saveMode(state.modes, "doubleClick", !state.modes.doubleClick);
   };
 
-  const changeAboutEvent = () => {
-    dispatch({ type: "changeAboutkMode" });
+  const changeAboutEvent = async () => {
+    await dispatch({ type: "changeAboutkMode" });
+    await saveMode(state.modes, "about", !state.modes.about);
   };
 
-  const changeImportantMarkEvent = () => {
-    dispatch({ type: "changeImportantMarkMode" });
+  const changeImportantMarkEvent = async () => {
+    await dispatch({ type: "changeImportantMarkMode" });
+    await saveMode(state.modes, "importantMark", !state.modes.importantMark);
   };
 
-  const resetModesEvent = () => {
-    dispatch({ type: "resetModes" });
+  const resetModesEvent = async () => {
+    await dispatch({ type: "resetModes" });
+    await resetModes();
   };
 
   const maxHeight = height - top - btm - 8;

@@ -49,8 +49,12 @@ const reducer = (state, action) => {
         ...state,
         ui: {
           ...state.ui,
-          ...action.payload,
+          ...action.payload.ui,
         },
+        modes: {
+          ...state.modes,
+          ...action.payload.modes
+        }
       };
     case "changeFontSize":
       return {
@@ -155,7 +159,7 @@ const loadUiSettings = async () => {
   const entry = await fs.getEntryForPersistentToken(token);
   if (entry.isFile) {
     const data = await entry.read();
-    return JSON.parse(data).ui;
+    return JSON.parse(data);
   }
 
   return false;
