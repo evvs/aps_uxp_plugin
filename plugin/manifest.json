@@ -20,7 +20,7 @@
             "type": "panel",
             "id": "apsretouch",
             "label": {
-                "default": "APs Retouch"
+                "default": "APs Retouch Pro"
             },
             "minimumSize": {"width": 180, "height": 200},
             "maximumSize": {"width": 2000, "height": 2000},
