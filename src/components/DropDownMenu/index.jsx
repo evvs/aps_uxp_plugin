@@ -126,7 +126,7 @@ export default ({ state, dispatch, top, size, btm, height }) => {
           })()
         }
       >
-        Редактировать кнопки
+        Выбрать проект
       </div>
       <div className="dd-item" onClick={() => resetModesEvent()}>
         Сбросить режимы
