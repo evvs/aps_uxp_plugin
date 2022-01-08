@@ -20,7 +20,7 @@ const allActionsController = new PanelController(() => <AllActionsPanel />, {
   menuItems: [
     {
       id: "reload0",
-      label: "Перезапустить плагин",
+      label: "Перезапустить панель",
       enabled: true,
       checked: false,
       oninvoke: () => location.reload(),
@@ -51,7 +51,7 @@ const allActionsController = new PanelController(() => <AllActionsPanel />, {
       label: "APs Операции",
       enabled: true,
       checked: false,
-      oninvoke: () =>  runOption("show_APsActions();"),
+      oninvoke: () => runOption("show_APsActions();"),
     },
     {
       id: "workspaces0",

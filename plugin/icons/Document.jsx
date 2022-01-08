@@ -2,16 +2,22 @@ import React from "react";
 
 function Document() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-      <g>
-        <g>
-          <g fill="none">
-            <path d="M0 0v16h16V0zm1 1h14v14H1z"></path>
-            <path d="M5.5 3A2.5 2.5 0 108 5.5 2.5 2.5 0 005.5 3zm0 1A1.5 1.5 0 114 5.5 1.49 1.49 0 015.5 4z"></path>
-            <path d="M11.5 6.8l-6 6-5-5v1.41l5 5 6-6 3.64 3.64.71-.71z"></path>
-          </g>
-        </g>
-      </g>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0"
+      y="0"
+      version="1.1"
+      viewBox="0 0 16 16"
+      xmlSpace="preserve"
+    >
+      <path
+        fill="none"
+        d="M15 0H0v16h16V0h-1zm0 15H1V9.78l3.26 3.26.71.71.71-.71 6.36-6.36L15 9.64V15zm0-6.78l-2.26-2.26-.71-.71-.71.71-6.36 6.36L1 8.36V1h14v7.22z"
+      ></path>
+      <path
+        fill="none"
+        d="M5 7c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0-3c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"
+      ></path>
     </svg>
   );
 }
