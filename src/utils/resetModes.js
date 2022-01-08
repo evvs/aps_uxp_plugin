@@ -14,9 +14,9 @@ export default async () => {
     JSON.stringify({
       ...data,
       modes: {
+        ...data.modes,
         expanded: false,
         doubleClick: false,
-        about: false,
         importantMark: false,
       },
     })

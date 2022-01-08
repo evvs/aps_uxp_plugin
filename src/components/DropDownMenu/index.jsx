@@ -51,7 +51,6 @@ export default ({ state, dispatch, top, size, btm, height }) => {
   const resetModesEvent = async () => {
     await dispatch({ type: "resetModes" });
     await resetModes();
-    await changeAboutEvent();
   };
 
   const maxHeight = height - top - btm - 8;

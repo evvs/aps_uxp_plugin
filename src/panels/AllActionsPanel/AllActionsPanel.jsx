@@ -53,8 +53,8 @@ const reducer = (state, action) => {
         },
         modes: {
           ...state.modes,
-          ...action.payload.modes
-        }
+          ...action.payload.modes,
+        },
       };
     case "changeFontSize":
       return {
@@ -129,9 +129,9 @@ const reducer = (state, action) => {
       return {
         ...state,
         modes: {
+          ...state.modes,
           expanded: false,
           doubleClick: false,
-          about: false,
           importantMark: false,
         },
       };
