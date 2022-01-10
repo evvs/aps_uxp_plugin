@@ -23,7 +23,7 @@ import Help from "../../../plugin/icons/Help";
 import Favorites from "../../../plugin/icons/Favorites";
 import Document from "../../../plugin/icons/Document";
 import Container from "../../../plugin/icons/Container";
-import BeforeAfter from "../../../plugin/icons/BeforeAfter";
+import BeforeAfter from "../../../plugin/icons/BeforeAfterLeft";
 import TwoWindows from "../../../plugin/icons/TwoWindows";
 import Settings from "../../../plugin/icons/Settings";
 

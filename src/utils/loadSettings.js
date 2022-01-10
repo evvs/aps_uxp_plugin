@@ -38,9 +38,9 @@ export default async (fileName) => {
   } catch (e) {
     console.log(e, "err", "go default");
     errors.push(e);
-    const file = await getFile("default_settings.txt");
+    const file = await getFile("buttons_settings_.txt");
     content = {
-      filename: "default_settings.txt",
+      filename: "buttons_settings_.txt",
       data: await file.read(),
     };
   }

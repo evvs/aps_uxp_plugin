@@ -10,11 +10,13 @@ import Layers from "../../../plugin/icons/Layers";
 import Help from "../../../plugin/icons/Help";
 import Favorites from "../../../plugin/icons/Favorites";
 import Document from "../../../plugin/icons/Document";
-import BeforeAfter from "../../../plugin/icons/BeforeAfter";
+import BeforeAfterLeft from "../../../plugin/icons/BeforeAfterLeft";
 import TwoWindows from "../../../plugin/icons/TwoWindows";
 import Folder from "../../../plugin/icons/Folder";
 import Settings from "../../../plugin/icons/Settings";
+import BeforeAfterRight from "../../../plugin/icons/BeforeAfterRight";
 import "./styles.css";
+import runBeforeAfter from "../../utils/runBeforeAfter";
 
 const standartExpandedLibraryOnClick = (action, state) => {
   if (state.modes.expanded) {
@@ -59,8 +61,12 @@ const btns = [
   {
     hint: "сервис: До/После (F2)",
     id: "beforeAfterBtn",
-    clickHandler: (state) => standartExpandedLibraryOnClick("До / После         F2", state),
-    icon: <BeforeAfter />,
+    // clickHandler: (state) => standartExpandedLibraryOnClick("До / После         F2", state),
+    clickHandler: ([isAfter, changeIsAfter]) => {
+      runBeforeAfter(!isAfter);
+      changeIsAfter(!isAfter);
+    },
+    icon: <BeforeAfterLeft />,
   },
   {
     hint: "Объекты- (F1): Выделите объект и выполните эту команду чтобы удалить объект «с учётом содержимого»",
@@ -131,6 +137,8 @@ const changeImportantBtnsIds = (btnid) => ({
 });
 
 const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
+  const [isAfter, changeIsAfter] = useState(true);
+
   const onChangeHintEvent = (hint) => {
     dispatch(changeTopMenuHint(hint));
   };
@@ -141,14 +149,14 @@ const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
           dispatch(changeImportantBtnsIds(id));
           saveUiSettings(state.ui, "importantBtnsIds", id);
         } else {
-          clickHandler(state);
+          clickHandler(id === "beforeAfterBtn" ? [isAfter, changeIsAfter] : state);
         }
       }}
       onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
       onMouseLeave={() => onChangeHintEvent("")}
       class={state.ui.importantBtnsIds.includes(id) ? "important" : ""}
     >
-      {icon}
+      {id === "beforeAfterBtn" ? isAfter ? icon : <BeforeAfterRight /> : icon}
     </sp-action-button>
   );
 };
