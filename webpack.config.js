@@ -53,6 +53,7 @@ module.exports = {
     new CopyPlugin([
       { from: path.resolve(__dirname, "*.txt") },
       { from: path.resolve(__dirname, "user_settings.json") },
+      { from: path.resolve(__dirname, "jsx/**/*") },
     ]),
   ],
 };

@@ -12,6 +12,7 @@ const changeImportantBtnsIds = (btnid) => ({
 
 export default ({
   btnid,
+  isLastClicked,
   name,
   marg,
   btnWidth,
@@ -26,6 +27,7 @@ export default ({
   isImportantMark,
   dispatch,
   state,
+  setLastClickedAction,
 }) => {
   const onClickHandler = () => {
     if (isImportantMark) {
@@ -33,6 +35,8 @@ export default ({
       saveUiSettings(state.ui, "importantBtnsIds", btnid);
       return;
     }
+    setLastClickedAction(btnid);
+
     if (isExpanded) {
       expandedActions.actions.forEach((action) => {
         runAction(action);
@@ -52,6 +56,8 @@ export default ({
 
   const onDoubleClickHandler = () => {
     if (isDoubleClick) {
+      setLastClickedAction(btnid);
+
       expandedActions.actions.forEach((action) => {
         runAction(action);
       });
@@ -73,12 +79,14 @@ export default ({
     if (click === 2) onDoubleClickHandler();
 
     return () => clearTimeout(timer);
-  }, [click]);
+  }, [click, setLastClickedAction]);
 
   return (
     <div
       title={description}
-      className={`action-btn ${importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`}`}
+      className={`action-btn ${isLastClicked && "last-clicked "} ${
+        importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`
+      }`}
       onClick={() => setClick((prev) => prev + 1)}
       onDoubleClick={() => setClick((prev) => prev + 1)}
       style={{

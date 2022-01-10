@@ -1,6 +1,6 @@
 .importantBtn {
   background: #ff5542;
-  border: 1px solid #ff5542;
+  border: 1px solid #ff5542!important;
 }
 
 .importantBtn * {
@@ -14,6 +14,12 @@
   vertical-align: top;
   text-align: center;
   margin: 1.5px 1.5px;
+  border-radius: 4px;
+}
+
+.last-clicked {
+  border: solid 1px var(--uxp-host-text-color)!important;
+  border-color: var(--uxp-host-text-color)!important;
   border-radius: 4px;
 }
 

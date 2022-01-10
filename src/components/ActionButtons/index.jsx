@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import setLastAction from "../../utils/setLastAction";
 import ActionButton from "../ActionButton";
+import uxp from "uxp";
 import "./styles.css";
+
+const fs = uxp.storage.localFileSystem;
 
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -17,6 +21,7 @@ function useDebounce(value, delay) {
 
 export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) => {
   const [min, setMin] = useState(100);
+  const [lastClickedAction, setLastClickedAction] = useState(null);
   const [btnWidth, setBtnWidth] = useState(100);
   const [marg, setMarg] = useState(0);
   const debouncedsize = useDebounce(size, 20);
@@ -41,6 +46,23 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
     setBtnWidth(100 / containersCountInRow);
     setMarg((columnsCount * 3) / columnsCount);
   }, [debouncedsize, state.ui.fontSize, min]);
+
+  useLayoutEffect(async () => {
+    const pluginFolder = await fs.getPluginFolder();
+    const settingsFile = await pluginFolder.getEntry("user_settings.json");
+    const token = await fs.createPersistentToken(settingsFile);
+    // setSettingsFileToken(token);
+
+    const entry = await fs.getEntryForPersistentToken(token);
+    const data = JSON.parse(await entry.read());
+
+    setLastClickedAction(data.ui.lastActionBtnId);
+  }, []);
+
+  const setLastClickedActionCb = async (bntId) => {
+    setLastClickedAction(bntId);
+    setLastAction(bntId);
+  };
 
   return (
     <div
@@ -74,6 +96,8 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
             isImportantMark={state.modes.importantMark}
             dispatch={dispatch}
             state={state}
+            setLastClickedAction={setLastClickedActionCb}
+            isLastClicked={lastClickedAction === id}
           />
         ))
       ) : (

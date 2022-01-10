@@ -3,7 +3,8 @@
   "defaultFile": "default_settings.txt",
   "ui": {
     "fontSize": 13,
-    "importantBtnsIds": []
+    "importantBtnsIds": [],
+    "lastActionBtnId": null
   },
   "modes": {
     "expanded": false,
