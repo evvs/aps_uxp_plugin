@@ -41,8 +41,6 @@ const createFile = async (funcName) => {
     overwrite: true,
   });
 
-  console.log(folder)
-
   nativePath = platform === "darwin" ? nativePath : nativePath.replace(/\\/gi, "/");
 
   await file.write(`$.evalFile('${nativePath}jsx/_APs_PanelCalls.jsx');

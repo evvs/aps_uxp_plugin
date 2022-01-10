@@ -88,7 +88,7 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
     try {
       updateLayoutCb && updateLayoutCb(newSelectedFileName);
     } catch (e) {
-      console.log(e, 666);
+      console.log(e);
     }
 
     // можно передать данные в область основной панели
@@ -97,7 +97,6 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
 
   //прогнать файл через парсер чтобы дать юхеру понять что он валиден или нет
   const validate = async () => {
-    console.log(newSelectedFileContent);
     if (!newSelectedFileContent) return;
     try {
       const res = parse(newSelectedFileContent);
@@ -116,11 +115,8 @@ const Preferences = ({ dialog, updateLayoutCb }) => {
   useEffect(() => {
     const processUserSettingsFile = async () => {
       try {
-        console.log("initial process");
-
         const pluginFolder = await fs.getPluginFolder();
         const sdsds = await fs.getDataFolder("C:\\Users\\User\\Desktop\\jstasks");
-        console.log(sdsds);
         const settingsFile = await pluginFolder.getEntry(userSettingsFile);
         const token = await fs.createPersistentToken(settingsFile);
         setSettingsFileToken(token);

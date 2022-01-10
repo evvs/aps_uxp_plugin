@@ -41,8 +41,6 @@ const createFile = async (scriptname) => {
     overwrite: true,
   });
 
-  console.log(folder)
-
   nativePath = platform === "darwin" ? nativePath : nativePath.replace(/\\/gi, "/");
 
   await file.write(`var descS = new ActionDescriptor();

@@ -41,8 +41,6 @@ const createFile = async () => {
     overwrite: true,
   });
 
-  console.log(folder);
-
   nativePath = platform === "darwin" ? nativePath : nativePath.replace(/\\/gi, "/");
 
   await file.write(`$.evalFile('${nativePath}jsx/APsRETOUCH_SelectProject_ru.jsx');`);

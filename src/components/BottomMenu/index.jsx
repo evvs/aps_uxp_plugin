@@ -55,8 +55,6 @@ const retouchServicesLibraryOnClick = (action, state) => {
   });
 };
 
-
-
 const btns = [
   {
     hint: "Выбрать инструмент «Кисть» (мягкая круглая) с настройками для маски текущего слоя",
@@ -141,7 +139,6 @@ const changeImportantBtnsIds = (btnid) => ({
   payload: btnid,
 });
 
-
 const changeBottomMenuHint = (hint) => ({
   type: "changeBottomMenuHint",
   payload: hint,
@@ -171,8 +168,6 @@ const BottomButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
 };
 
 export default forwardRef(({ state, dispatch }, ref) => {
-  console.log(state.dispatch, ref, 6666);
-
   return (
     <div className="bottom-menu" ref={ref}>
       {btns.map(({ id, hint, clickHandler, icon }) => (

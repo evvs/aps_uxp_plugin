@@ -34,7 +34,6 @@ export default ({
       return;
     }
     if (isExpanded) {
-      console.log("Расширенный");
       expandedActions.actions.forEach((action) => {
         runAction(action);
       });
@@ -42,7 +41,6 @@ export default ({
         runScript(script);
       });
     } else {
-      console.log("Стандартный");
       standartActions.actions.forEach((action) => {
         runAction(action);
       });
@@ -54,7 +52,6 @@ export default ({
 
   const onDoubleClickHandler = () => {
     if (isDoubleClick) {
-      console.log("Расширенный");
       expandedActions.actions.forEach((action) => {
         runAction(action);
       });

@@ -222,7 +222,6 @@ export const AllActionsPanel = () => {
       // await runPathScript("call_set_setttings.jsx");
       const [data, errors] = await loadSettings();
       const uiData = await loadUiSettings();
-      console.log(uiData);
       if (uiData) {
         dispatch(uiDataLoading(uiData));
       }
