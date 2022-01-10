@@ -129,7 +129,7 @@ export default ({ state, dispatch, top, size, btm, height }) => {
         Выбрать проект
       </div>
       <div className="dd-item" onClick={() => resetModesEvent()}>
-        Сбросить режимы
+        Сбросить настройки
       </div>
       <div className="dd-item" onClick={() => runOption("aboutProduct();")}>
         Активация

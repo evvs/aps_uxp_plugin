@@ -13,6 +13,10 @@ export default async () => {
   await entry.write(
     JSON.stringify({
       ...data,
+      ui: {
+        ...data.ui,
+        fontSize: 13,
+      },
       modes: {
         ...data.modes,
         expanded: false,

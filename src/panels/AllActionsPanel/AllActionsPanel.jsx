@@ -128,6 +128,10 @@ const reducer = (state, action) => {
     case "resetModes":
       return {
         ...state,
+        ui: {
+          ...state.ui,
+          fontSize: 13,
+        },
         modes: {
           ...state.modes,
           expanded: false,
