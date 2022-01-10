@@ -10,6 +10,16 @@ const changeImportantBtnsIds = (btnid) => ({
   payload: btnid,
 });
 
+const changeBottomMenuHint = (hint) => ({
+  type: "changeBottomMenuHint",
+  payload: hint,
+});
+
+const changeTopMenuHint = (hint, state) => ({
+  type: "changeTopMenuHint",
+  payload: hint,
+});
+
 export default ({
   btnid,
   isLastClicked,
@@ -28,6 +38,7 @@ export default ({
   dispatch,
   state,
   setLastClickedAction,
+  hintSpot,
 }) => {
   const onClickHandler = () => {
     if (isImportantMark) {
@@ -81,9 +92,19 @@ export default ({
     return () => clearTimeout(timer);
   }, [click, setLastClickedAction]);
 
+  const onChangeHintEvent = (hint, spot) => {
+    if (spot) {
+      spot === "bottom" ? dispatch(changeBottomMenuHint(hint)) : dispatch(changeTopMenuHint(hint));
+    } else {
+      dispatch(changeBottomMenuHint(hint));
+      dispatch(changeTopMenuHint(hint));
+    }
+  };
+
   return (
     <div
-      title={description}
+      onMouseEnter={() => state.modes.about && onChangeHintEvent(description, hintSpot)}
+      onMouseLeave={() => onChangeHintEvent("")}
       className={`action-btn ${isLastClicked && "last-clicked "} ${
         importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`
       }`}
