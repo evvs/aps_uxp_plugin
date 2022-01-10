@@ -54,7 +54,6 @@ export default ({ state, dispatch, top, size, btm, height }) => {
   };
 
   const maxHeight = height - top - btm - 8;
-  console.log(size, " sssize");
 
   return (
     <div
@@ -123,6 +122,7 @@ export default ({ state, dispatch, top, size, btm, height }) => {
         onClick={() =>
           (async () => {
             await changeBtnSettings();
+            location.reload();
           })()
         }
       >

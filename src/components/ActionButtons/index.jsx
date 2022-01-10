@@ -15,7 +15,7 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-export default ({ state, dispatch, size, top, btm }) => {
+export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) => {
   const [min, setMin] = useState(100);
   const [btnWidth, setBtnWidth] = useState(100);
   const [marg, setMarg] = useState(0);
@@ -43,7 +43,13 @@ export default ({ state, dispatch, size, top, btm }) => {
   }, [debouncedsize, state.ui.fontSize, min]);
 
   return (
-    <div className="actionbuttons" style={{ maxHeight: `calc(100vh - ${top + btm + 12}px)` }}>
+    <div
+      className={`actionbuttons`}
+      style={{
+        maxHeight: `calc(100vh - ${top + btm + 12}px)`,
+        overflow: isVisibleDropDown && 215 > height - top - btm - 8 ? "hidden" : "auto",
+      }}
+    >
       {state.ui.topMenuHint.length > 0 && (
         <div style={{ fontSize: `${state.ui.fontSize}` }} className="top-hint">
           {state.ui.topMenuHint}

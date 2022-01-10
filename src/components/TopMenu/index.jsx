@@ -153,61 +153,63 @@ const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   );
 };
 
-export default forwardRef(({ state, dispatch, size, top, btm, height }, ref) => {
-  const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
-  const [click, setClick] = useState(0);
+export default forwardRef(
+  ({ state, dispatch, size, top, btm, height, setisVisibleDropDown, isVisibleDropDown }, ref) => {
+    const [click, setClick] = useState(0);
 
-  const onClickHandler = () => setisVisibleDropDown(!isVisibleDropDown);
+    const onClickHandler = () => setisVisibleDropDown(!isVisibleDropDown);
 
-  const onDoubleClickHandler = () => dispatch({ type: "changeExpandedMode" });
+    const onDoubleClickHandler = () => dispatch({ type: "changeExpandedMode" });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // simple click
-      if (click === 1) onClickHandler();
-      setClick(0);
-    }, 150); //delay
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        // simple click
+        if (click === 1) onClickHandler();
+        setClick(0);
+      }, 150); //delay
 
-    if (click === 2) onDoubleClickHandler();
+      if (click === 2) onDoubleClickHandler();
 
-    return () => clearTimeout(timer);
-  }, [click]);
+      return () => clearTimeout(timer);
+    }, [click]);
 
-  const onChangeHintEvent = (hint) => {
-    dispatch(changeTopMenuHint(hint));
-  };
+    const onChangeHintEvent = (hint) => {
+      dispatch(changeTopMenuHint(hint));
+    };
 
-  return (
-    <div className="top-menu" ref={ref}>
-      {btns.map(({ id, hint, clickHandler, icon }) => (
-        <TopButton
-          id={id}
-          hint={hint}
-          clickHandler={clickHandler}
-          icon={icon}
-          state={state}
-          dispatch={dispatch}
-        />
-      ))}
-      <sp-action-button
-        onClick={() => setClick((prev) => prev + 1)}
-        onDoubleClick={() => setClick((prev) => prev + 1)}
-        class={state.modes.expanded ? "red-btn settings-btn" : "settings-btn"}
-        onMouseEnter={() => state.modes.about && onChangeHintEvent("Настройки панели")}
-        onMouseLeave={() => onChangeHintEvent("")}
-      >
-        <Settings />
-      </sp-action-button>
-      {isVisibleDropDown && (
-        <DropDownMenu
-          state={state}
-          dispatch={dispatch}
-          size={size}
-          height={height}
-          top={top}
-          btm={btm}
-        />
-      )}
-    </div>
-  );
-});
+    return (
+      <div className="top-menu" ref={ref}>
+        {btns.map(({ id, hint, clickHandler, icon }) => (
+          <TopButton
+            id={id}
+            key={id}
+            hint={hint}
+            clickHandler={clickHandler}
+            icon={icon}
+            state={state}
+            dispatch={dispatch}
+          />
+        ))}
+        <sp-action-button
+          onClick={() => setClick((prev) => prev + 1)}
+          onDoubleClick={() => setClick((prev) => prev + 1)}
+          class={state.modes.expanded ? "red-btn settings-btn" : "settings-btn"}
+          onMouseEnter={() => state.modes.about && onChangeHintEvent("Настройки панели")}
+          onMouseLeave={() => onChangeHintEvent("")}
+        >
+          <Settings />
+        </sp-action-button>
+        {isVisibleDropDown && (
+          <DropDownMenu
+            state={state}
+            dispatch={dispatch}
+            size={size}
+            height={height}
+            top={top}
+            btm={btm}
+          />
+        )}
+      </div>
+    );
+  }
+);

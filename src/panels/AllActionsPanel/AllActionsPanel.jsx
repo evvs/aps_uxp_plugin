@@ -171,6 +171,7 @@ const loadUiSettings = async () => {
 
 export const AllActionsPanel = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isVisibleDropDown, setisVisibleDropDown] = useState(false);
   const top = React.createRef();
   const btm = React.createRef();
   const [size, setSize] = useState(0);
@@ -247,9 +248,12 @@ export const AllActionsPanel = () => {
         height={height}
         top={topHeight}
         btm={btmHeight}
+        setisVisibleDropDown={setisVisibleDropDown}
+        isVisibleDropDown={isVisibleDropDown}
       />
       {state.data && (
         <ActionButtons
+          isVisibleDropDown={isVisibleDropDown}
           state={state}
           dispatch={dispatch}
           size={size}
