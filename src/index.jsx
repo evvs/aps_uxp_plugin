@@ -2,20 +2,12 @@ import React from "react";
 
 import "./styles.css";
 import { PanelController } from "./controllers/PanelController.jsx";
-import { CommandController } from "./controllers/CommandController.jsx";
-import { About } from "./components/About.jsx";
 import { AllActionsPanel } from "./panels/AllActionsPanel/AllActionsPanel.jsx";
 import runOption from "./utils/runOption";
 import { entrypoints, shell, storage } from "uxp";
 
-const aboutController = new CommandController(({ dialog }) => <About dialog={dialog} />, {
-  id: "showAbout",
-  title: "React Starter Plugin Demo",
-  size: { width: 480, height: 480 },
-});
-
 const allActionsController = new PanelController(() => <AllActionsPanel />, {
-  id: "apsretouch",
+  id: "aps_photo",
   menuItems: [
     {
       id: "catalog0",
@@ -153,10 +145,7 @@ entrypoints.setup({
       /*optional */ console.log("destroyed");
     },
   },
-  commands: {
-    showAbout: aboutController,
-  },
   panels: {
-    apsretouch: allActionsController,
+    aps_photo: allActionsController,
   },
 });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import setLastAction from "../../utils/setLastAction";
 import ActionButton from "../ActionButton";
 import uxp from "uxp";
@@ -26,6 +26,7 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
   const [btnWidth, setBtnWidth] = useState(100);
   const [marg, setMarg] = useState(0);
   const debouncedsize = useDebounce(size, 20);
+  const [heightBtns, setHeightBtns] = useState(0);
 
   useLayoutEffect(() => {
     const all = document.querySelectorAll(".action-btn > p");
@@ -35,7 +36,7 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
         if (btnText.clientWidth > val) val = btnText.clientWidth;
       });
       setMin(val);
-    }, 250);
+    }, 300);
   }, [state.ui.fontSize]);
 
   useLayoutEffect(() => {
@@ -45,9 +46,7 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
     const containersCountInRow = Math.min(columnsCount, count);
 
     const buttonsToShowHintBottom = containersCountInRow * 5;
-    // const buttonsToShowHintTop = state.data.length - buttonsToShowHintBottom;
     setHintsIndex(buttonsToShowHintBottom);
-
     setBtnWidth(100 / containersCountInRow);
     setMarg((columnsCount * 3) / columnsCount);
   }, [debouncedsize, state.ui.fontSize, min]);
@@ -56,7 +55,6 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
     const pluginFolder = await fs.getPluginFolder();
     const settingsFile = await pluginFolder.getEntry("user_settings.json");
     const token = await fs.createPersistentToken(settingsFile);
-    // setSettingsFileToken(token);
 
     const entry = await fs.getEntryForPersistentToken(token);
     const data = JSON.parse(await entry.read());
@@ -69,8 +67,26 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
     setLastAction(bntId);
   };
 
+  const elRef = useRef(null);
+
+  useLayoutEffect(() => {
+    function updateSize(e) {
+      if (e) {
+        console.log(e.target);
+        setHeightBtns(e.target.clientHeight);
+      }
+    }
+    const el = elRef.current;
+    el.addEventListener("resize", updateSize);
+    updateSize();
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, []);
+
   return (
     <div
+      ref={elRef}
       className={`actionbuttons`}
       style={{
         maxHeight: `calc(100vh - ${top + btm + 12}px)`,
@@ -113,7 +129,10 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
       )}
       {state.ui.bottomMenuHint.length > 0 && (
         <div
-          style={{ fontSize: `${state.ui.fontSize}`, bottom: `${btm}px` }}
+          style={{
+            fontSize: `${state.ui.fontSize}`,
+            bottom: `${height - heightBtns - top - 11}px`,
+          }}
           className="bottom-hint"
         >
           {state.ui.bottomMenuHint}

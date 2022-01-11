@@ -179,10 +179,6 @@ export const AllActionsPanel = () => {
   const [btmHeight, setBtmHeight] = useState(0);
   const [topHeight, setTopHeight] = useState(0);
   const elRef = useRef(null);
-  // const uploadUiSettingsFile = useCallback(async (fileName, isAbsolutePath) => {
-  //   const [data, errors] = await loadSettings(fileName, isAbsolutePath);
-  //   dispatch(dataLoaded(data, errors));
-  // }, []);
 
   useLayoutEffect(() => {
     function updateSize(e) {
@@ -229,11 +225,6 @@ export const AllActionsPanel = () => {
     } catch (e) {
       console.log(e);
     }
-  }, []);
-
-  const updateLayout = useCallback(async (filename) => {
-    const [data, errors] = await loadSettings(filename);
-    dispatch(dataLoaded(data, errors));
   }, []);
 
   return (

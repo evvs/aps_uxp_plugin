@@ -143,7 +143,7 @@ const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
     dispatch(changeTopMenuHint(hint));
   };
   return (
-    <sp-action-button
+    <div
       onClick={() => {
         if (state.modes.importantMark) {
           dispatch(changeImportantBtnsIds(id));
@@ -154,10 +154,10 @@ const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
       }}
       onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
       onMouseLeave={() => onChangeHintEvent("")}
-      class={state.ui.importantBtnsIds.includes(id) ? "important" : ""}
+      className={state.ui.importantBtnsIds.includes(id) ? "important btn-custom" : "btn-custom"}
     >
       {id === "beforeAfterBtn" ? isAfter ? icon : <BeforeAfterRight /> : icon}
-    </sp-action-button>
+    </div>
   );
 };
 
@@ -198,15 +198,17 @@ export default forwardRef(
             dispatch={dispatch}
           />
         ))}
-        <sp-action-button
+        <div
           onClick={() => setClick((prev) => prev + 1)}
           onDoubleClick={() => setClick((prev) => prev + 1)}
-          class={state.modes.expanded ? "red-btn settings-btn" : "settings-btn"}
+          className={
+            state.modes.expanded ? "red settings-btn btn-custom" : "settings-btn btn-custom"
+          }
           onMouseEnter={() => state.modes.about && onChangeHintEvent("Настройки панели")}
           onMouseLeave={() => onChangeHintEvent("")}
         >
           <Settings />
-        </sp-action-button>
+        </div>
         {isVisibleDropDown && (
           <DropDownMenu
             state={state}

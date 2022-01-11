@@ -29,16 +29,73 @@
     height: 18px;
 }
 
-.bottom-menu sp-action-button {
+.btn-custom {
     height: 28px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: var(--uxp-host-background-color);
-
-}
-.bottom-menu sp-action-button:not(:first-child) {
-    margin-left:1px;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
 }
 
-
+.btn-custom:not(:first-child) {
+    margin-left: 1px;
+}
 .important svg path {
-    fill: #ff5542;
-  }
+    fill: #ff5542!important;
+}
+.important {
+    border-color: #ff5542!important;
+}
+
+@media (prefers-color-scheme: darkest) {
+    .btn-custom {
+        background: #2a2a2a;
+        border:1px solid #626262;
+    }
+    .btn-custom:hover {
+        border:1px solid #b0b0b0 !important;
+    }
+    .top-menu svg path {
+        fill: #bbbbbb;
+    }
+
+}
+@media (prefers-color-scheme: dark) {
+    .btn-custom {
+        background: #474747;
+        border:1px solid #6c6c6c;
+    }
+    .btn-custom:hover {
+        border:1px solid #929292 !important;
+    }
+    .top-menu svg path {
+        fill: #d9d9d9;
+    }
+}
+@media (prefers-color-scheme: light) {
+    .btn-custom {
+        background: #cdcdcd;
+        border:1px solid #a8a8a8;
+    }
+    .btn-custom:hover {
+        border:1px solid #818080 !important;
+    }
+    .top-menu svg path {
+        fill: #444444;
+    }
+}
+@media (prefers-color-scheme: lightest) {
+    .btn-custom {
+        background: #ffffff;
+        border:1px solid #d1d1d1;
+    }
+    .btn-custom:hover {
+        border:1px solid #a7a7a7!important;
+    }
+    .top-menu svg path {
+        fill: #525252;
+    }
+}

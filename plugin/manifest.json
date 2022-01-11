@@ -1,6 +1,6 @@
 {
-    "id": "apsretouchuxp",
-    "name": "APs RETOUCH",
+    "id": "aps_photo",
+    "name": "Automate-Ps",
     "version": "1.0.0",
     "main": "index.html",
     "manifestVersion": 4,
@@ -10,17 +10,10 @@
     },
     "entrypoints": [
         {
-            "type": "command",
-            "id": "showAbout",
-            "label": {
-                "default": "About APs RETOUCH"
-            }
-        },
-        {
             "type": "panel",
-            "id": "apsretouch",
+            "id": "aps_photo",
             "label": {
-                "default": "APs Retouch Pro"
+                "default": "APs Photo"
             },
             "minimumSize": {"width": 174, "height": 200},
             "maximumSize": {"width": 2000, "height": 2000},
@@ -39,9 +32,11 @@
     ],
     "icons": [
         {
-            "width": 48, "height": 48, "path": "icons/plugin.png", "scale": [ 1, 2 ],
-            "theme": [ "darkest", "dark", "medium", "lightest", "light", "all" ],
-            "species": [ "pluginList" ]
+            "width": 48, "height": 48, "path": "icons/dark-panel.png", "scale": [ 1, 2 ],
+            "theme": [ "darkest", "dark", "medium" ], "species": [ "pluginList" ]
+        }, {
+            "width": 48, "height": 48, "path": "icons/light-panel.png", "scale": [ 1, 2 ],
+            "theme": [ "lightest", "light" ], "species": [ "pluginList" ]
         }
     ]
 }

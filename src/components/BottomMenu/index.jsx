@@ -14,18 +14,6 @@ import SaveAutoIndex from "../../../plugin/icons/SaveAutoIndex";
 import Next from "../../../plugin/icons/Next";
 import MergeLayers from "../../../plugin/icons/MergeLayers";
 import Divide from "../../../plugin/icons/Divide";
-import Objects from "../../../plugin/icons/Objects";
-import Preset from "../../../plugin/icons/Preset";
-import Raw from "../../../plugin/icons/Raw";
-import Snapshot from "../../../plugin/icons/Snapshot";
-import Layers from "../../../plugin/icons/Layers";
-import Help from "../../../plugin/icons/Help";
-import Favorites from "../../../plugin/icons/Favorites";
-import Document from "../../../plugin/icons/Document";
-import Container from "../../../plugin/icons/Container";
-import BeforeAfter from "../../../plugin/icons/BeforeAfterLeft";
-import TwoWindows from "../../../plugin/icons/TwoWindows";
-import Settings from "../../../plugin/icons/Settings";
 
 const standartExpandedLibraryOnClick = (action, state) => {
   if (state.modes.expanded) {
@@ -149,7 +137,7 @@ const BottomButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
     dispatch(changeBottomMenuHint(hint));
   };
   return (
-    <sp-action-button
+    <div
       onClick={() => {
         if (state.modes.importantMark) {
           dispatch(changeImportantBtnsIds(id));
@@ -160,10 +148,10 @@ const BottomButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
       }}
       onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
       onMouseLeave={() => onChangeHintEvent("")}
-      class={state.ui.importantBtnsIds.includes(id) ? "important" : ""}
+      className={state.ui.importantBtnsIds.includes(id) ? "important btn-custom" : "btn-custom"}
     >
       {icon}
-    </sp-action-button>
+    </div>
   );
 };
 
