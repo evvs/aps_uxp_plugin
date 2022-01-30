@@ -15,7 +15,7 @@
             "label": {
                 "default": "APs Photo"
             },
-            "minimumSize": {"width": 174, "height": 200},
+            "minimumSize": {"width": 206, "height": 200},
             "maximumSize": {"width": 2000, "height": 2000},
             "preferredDockedSize": {"width": 430, "height": 500},
             "preferredFloatingSize": {"width": 430, "height": 500},

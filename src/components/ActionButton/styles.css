@@ -1,6 +1,6 @@
 .importantBtn {
   background: #ff5542;
-  border: 1px solid #ff5542!important;
+  border: 1px solid #ff5542 !important;
 }
 
 .importantBtn * {
@@ -14,32 +14,32 @@
   vertical-align: top;
   text-align: center;
   margin: 1.5px 1.5px;
-  border-radius: 4px;
+  border-radius: 2px;
+}
+
+.action-btn:first-child {
+  margin-left: 1.5px!important;
 }
 
 .last-clicked {
-  border: solid 1px var(--uxp-host-text-color)!important;
-  border-color: var(--uxp-host-text-color)!important;
-  border-radius: 4px;
+  border: solid 1px var(--uxp-host-text-color) !important;
+  border-color: var(--uxp-host-text-color) !important;
 }
 
 .action-btn p {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  border-radius: 3px;
   padding: 0;
   white-space: nowrap;
   margin-bottom: 2px;
   position: relative;
   z-index: 4;
-  color: var(--uxp-host-text-color)!important;
 }
-
 
 @media (prefers-color-scheme: darkest) {
   .btn-blue {
-    background: linear-gradient(to bottom, #56647a 2%, #353535, #353535 );
+    background: linear-gradient(to bottom, #56647a 2%, #353535, #353535);
     border: 1px solid #56647a;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -63,7 +63,7 @@
   /*--------------------*/
 
   .btn-green {
-    background: linear-gradient(to bottom, #44634d 2%, #353535, #353535 );
+    background: linear-gradient(to bottom, #44634d 2%, #353535, #353535);
     border: 1px solid #44634d;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -86,7 +86,7 @@
   /*--------------------*/
 
   .btn-orange {
-    background: linear-gradient(to bottom, #66543e 2%, #353535, #353535 );
+    background: linear-gradient(to bottom, #66543e 2%, #353535, #353535);
     border: 1px solid #66543e;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -109,7 +109,7 @@
   /*--------------------*/
 
   .btn-yellow {
-    background: linear-gradient(to bottom, #756b49 2%, #353535, #353535 );
+    background: linear-gradient(to bottom, #756b49 2%, #353535, #353535);
     border: 1px solid #756b49;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -135,7 +135,7 @@
     position: relative;
     border: 1px solid #5f5f5f;
     transition: all 0.35s ease-in-out;
-    background: linear-gradient(to bottom, #5f5f5f 2%, #353535, #353535 );
+    background: linear-gradient(to bottom, #5f5f5f 2%, #353535, #353535);
   }
 
   .btn-gray:before {
@@ -156,7 +156,7 @@
 
 @media (prefers-color-scheme: dark) {
   .btn-blue {
-    background: linear-gradient(to bottom, #6b7d99 2%, #545454, #545454 );
+    background: linear-gradient(to bottom, #6b7d99 2%, #545454, #545454);
     border: 1px solid #6b7d99;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -180,7 +180,7 @@
   /*--------------------*/
 
   .btn-green {
-    background: linear-gradient(to bottom, #577f63 2%, #545454, #545454 );
+    background: linear-gradient(to bottom, #577f63 2%, #545454, #545454);
     border: 1px solid #577f63;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -203,7 +203,7 @@
   /*--------------------*/
 
   .btn-orange {
-    background: linear-gradient(to bottom, #876f50 2%, #545454, #545454 );
+    background: linear-gradient(to bottom, #876f50 2%, #545454, #545454);
     border: 1px solid #876f50;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -226,7 +226,7 @@
   /*--------------------*/
 
   .btn-yellow {
-    background: linear-gradient(to bottom, #95885c 2%, #545454, #545454 );
+    background: linear-gradient(to bottom, #95885c 2%, #545454, #545454);
     border: 1px solid #95885c;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -252,7 +252,7 @@
     position: relative;
     border: 1px solid #787878;
     transition: all 0.35s ease-in-out;
-    background: linear-gradient(to bottom, #787878 2%, #545454, #545454 );
+    background: linear-gradient(to bottom, #787878 2%, #545454, #545454);
   }
 
   .btn-gray:before {
@@ -273,20 +273,23 @@
 
 @media (prefers-color-scheme: lightest) {
   .btn-blue {
-    background: linear-gradient(to bottom, #c2d4ef 2%, #ffffff, #ffffff );
-    border: 1px solid #9eb9e3;
+    background: linear-gradient(to bottom, #cfdcf1, #f4f8fe);
+    border: 1px solid #97a5bc;
     position: relative;
     transition: all 0.35s ease-in-out;
+    height: 20px;
   }
 
   .btn-blue:before {
     content: "";
     position: absolute;
+    z-index: 1;
+    outline: 1px solid #a8b5ca;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #e7e7e7, #9eb9e3);
+    background: linear-gradient(to bottom, #dde8f8, #a2bbe4);
     transition: opacity 0.35s ease-in-out;
   }
 
@@ -294,11 +297,15 @@
     opacity: 0;
   }
 
+  .btn-blue:hover {
+    border: 1px solid #a8b5ca;
+  }
+
   /*--------------------*/
 
   .btn-green {
-    background: linear-gradient(to bottom, #b1f1c3 2%, #ffffff, #ffffff );
-    border: 1px solid #8cce9e;
+    background: linear-gradient(to bottom, #c6e3cf, #f4fcf6);
+    border: 1px solid #8cb497;
     position: relative;
     transition: all 0.35s ease-in-out;
   }
@@ -306,34 +313,38 @@
   .btn-green:before {
     content: "";
     position: absolute;
+    outline: 1px solid #b3c8b9;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #e7e7e7, #8cce9e);
+    background: linear-gradient(to bottom, #d2edd9, #92c29f);
     transition: opacity 0.35s ease-in-out;
   }
 
   .btn-green:hover:before {
     opacity: 0;
+    border: 1px solid #b3c8b9;
   }
+
   /*--------------------*/
 
   .btn-orange {
-    background: linear-gradient(to bottom, #f3d6aa 2%, #ffffff, #ffffff );
-    border: 1px solid #ccac7a;
+    background: linear-gradient(to bottom, #dec9aa, #faf3e9);
+    border: 1px solid #c6b59a;
     position: relative;
     transition: all 0.35s ease-in-out;
   }
 
   .btn-orange:before {
     content: "";
+    outline: 1px solid #b7a384;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #e7e7e7, #ccac7a);
+    background: linear-gradient(to bottom, #efe0c7, #cfac74);
     transition: opacity 0.35s ease-in-out;
   }
 
@@ -343,8 +354,8 @@
   /*--------------------*/
 
   .btn-yellow {
-    background: linear-gradient(to bottom, #f6ebb4 2%, #ffffff, #ffffff );
-    border: 1px solid #dbcd89;
+    background: linear-gradient(to bottom, #e7e1c1, #faf8f0);
+    border: 1px solid #bdb277;
     position: relative;
     transition: all 0.35s ease-in-out;
   }
@@ -352,11 +363,12 @@
   .btn-yellow:before {
     content: "";
     position: absolute;
+    outline: 1px solid #c5bfa1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #e7e7e7, #dbcd89);
+    background: linear-gradient(to bottom, #f3ebc1, #cec28a);
     transition: opacity 0.35s ease-in-out;
   }
 
@@ -366,11 +378,11 @@
   /*--------------------*/
 
   .btn-gray {
+    border: 1px solid #c0c0c0;
     position: relative;
-    border: 1px solid #bebebe;
-    transition: all 0.35s ease-in-out;
-    background: linear-gradient(to bottom, #dddddd 2%, #ffffff, #ffffff );
+    background-image: linear-gradient(to bottom, #c9c9c9, #f3f4f4);
   }
+
 
   .btn-gray:before {
     content: "";
@@ -379,18 +391,68 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #e7e7e7, #bbbbbb);
+    background-image: linear-gradient(to bottom, #e9e9e9, #ababab);
     transition: opacity 0.35s ease-in-out;
   }
 
   .btn-gray:hover:before {
     opacity: 0;
   }
+  /*--------------------*/
+
+  .btn-none {
+    border: 1px solid #c0c0c0;
+    position: relative;
+    background-image: linear-gradient(to bottom, #e2e2e2, #ffffff);
+  }
+
+  .btn-none:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #ffffff, #cacaca);
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  .btn-none:hover:before {
+    opacity: 0;
+  } /*--------------------*/
+
+  .action-btn > p {
+    color: #000000;
+  }
+
+  .btn-important {
+    border: 1px solid #ff5542;
+    position: relative;
+    background-image: linear-gradient(to bottom, #fc938a, #fdc9c6);
+  }
+  .btn-important >p {
+    color: white!important;
+  }
+
+  .btn-important:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #fc938a, #ff5542);
+  }
+
+  .btn-important:hover:before {
+    opacity: 0;
+  }
+
 }
 
 @media (prefers-color-scheme: light) {
   .btn-blue {
-    background: linear-gradient(to bottom, #7d91b3 2%, #b7b7b7, #b7b7b7 );
+    background: linear-gradient(to bottom, #7d91b3 2%, #b7b7b7, #b7b7b7);
     border: 1px solid #7d91b3;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -414,7 +476,7 @@
   /*--------------------*/
 
   .btn-green {
-    background: linear-gradient(to bottom, #70a680 2%, #b7b7b7, #b7b7b7 );
+    background: linear-gradient(to bottom, #70a680 2%, #b7b7b7, #b7b7b7);
     border: 1px solid #70a680;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -437,7 +499,7 @@
   /*--------------------*/
 
   .btn-orange {
-    background: linear-gradient(to bottom, #ad8f65 2%, #b7b7b7, #b7b7b7 );
+    background: linear-gradient(to bottom, #ad8f65 2%, #b7b7b7, #b7b7b7);
     border: 1px solid #ad8f65;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -460,7 +522,7 @@
   /*--------------------*/
 
   .btn-yellow {
-    background: linear-gradient(to bottom, #b9a971  2%, #b7b7b7, #b7b7b7 );
+    background: linear-gradient(to bottom, #b9a971 2%, #b7b7b7, #b7b7b7);
     border: 1px solid #b9a971;
     position: relative;
     transition: all 0.35s ease-in-out;
@@ -486,7 +548,7 @@
     position: relative;
     border: 1px solid #979797;
     transition: all 0.35s ease-in-out;
-    background: linear-gradient(to bottom, #979797 2%, #b7b7b7, #b7b7b7 );
+    background: linear-gradient(to bottom, #979797 2%, #b7b7b7, #b7b7b7);
   }
 
   .btn-gray:before {
@@ -504,3 +566,5 @@
     opacity: 0;
   }
 }
+
+/*}*/

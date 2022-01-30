@@ -3,6 +3,7 @@ import setLastAction from "../../utils/setLastAction";
 import ActionButton from "../ActionButton";
 import uxp from "uxp";
 import "./styles.css";
+import runOption from "../../utils/runOption";
 
 const fs = uxp.storage.localFileSystem;
 
@@ -21,6 +22,7 @@ function useDebounce(value, delay) {
 
 export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) => {
   const [min, setMin] = useState(100);
+  const [heightBtn, setHeightBtn] = useState(state.ui.fontSize * 1.6);
   const [hintsIndex, setHintsIndex] = useState(0);
   const [lastClickedAction, setLastClickedAction] = useState(null);
   const [btnWidth, setBtnWidth] = useState(100);
@@ -28,16 +30,15 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
   const debouncedsize = useDebounce(size, 20);
   const [heightBtns, setHeightBtns] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const all = document.querySelectorAll(".action-btn > p");
-    setTimeout(() => {
-      let val = 0;
-      all.forEach((btnText) => {
-        if (btnText.clientWidth > val) val = btnText.clientWidth;
-      });
-      setMin(val);
-    }, 300);
-  }, [state.ui.fontSize]);
+    let val = 0;
+    all.forEach((btnText) => {
+      if (btnText.clientWidth > val) val = btnText.clientWidth;
+    });
+    setHeightBtn(Math.ceil(state.ui.fontSize * 1.6));
+    setMin(val);
+  }, [heightBtns, state.ui.fontSize]);
 
   useLayoutEffect(() => {
     const count = state.data.length;
@@ -72,7 +73,6 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
   useLayoutEffect(() => {
     function updateSize(e) {
       if (e) {
-        console.log(e.target);
         setHeightBtns(e.target.clientHeight);
       }
     }
@@ -105,13 +105,13 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
               btnWidth={btnWidth}
               key={id}
               marg={marg}
+              height={heightBtn}
               btnid={id}
               name={name}
               description={description}
-              color={color}
+              color={color || "none"}
               standartActions={standartActions}
               expandedActions={expandedActions}
-              importantBtnsIds={state.ui.importantBtnsIds}
               fontSize={state.ui.fontSize}
               isExpanded={state.modes.expanded}
               isDoubleClick={state.modes.doubleClick}
@@ -127,6 +127,68 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
       ) : (
         <h1>No buttons to load</h1>
       )}
+      {/*<button*/}
+      {/*  onClick={() =>*/}
+      {/*    runOption(*/}
+      {/*      'openAtn(">1.atn");' +*/}
+      {/*        "const count = 20;" +*/}
+      {/*        "async function doA() {" +*/}
+      {/*        "await new Promise(resolve => {" +*/}
+      {/*        'let timerId = setInterval(() => {const r = checkActSet("1"); if (r) {clearInterval(timerId); resolve(true)}  }, 200);' +*/}
+      {/*        "});" +*/}
+      {/*        'do_Action("1", "1"); removeActSet("1");' +*/}
+      {/*        "}; doA();"*/}
+      {/*    )*/}
+      {/*  }*/}
+      {/*>*/}
+      {/*  1 do_Action sync call*/}
+      {/*</button>*/}
+
+      {/*<button*/}
+      {/*  onClick={async () => {*/}
+      {/*    await runOption('openAtn(">1.atn"); ');*/}
+      {/*    console.log(1);*/}
+      {/*    location.reload();*/}
+
+      {/*    await new Promise((resolve) =>*/}
+      {/*      setTimeout(() => {*/}
+      {/*        resolve(true);*/}
+      {/*      }, 300)*/}
+      {/*    );*/}
+      {/*    await runOption('do_Action("1", "1"); ');*/}
+      {/*    console.log(1);*/}
+
+      {/*    // await new Promise((resolve) =>*/}
+      {/*    //   setTimeout(() => {*/}
+      {/*    //     resolve(true);*/}
+      {/*    //   }, 1500)*/}
+      {/*    // );*/}
+      {/*    await runOption('removeActSet("1"); ');*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  1 do_Action async*/}
+      {/*</button>*/}
+      {/*<button*/}
+      {/*  onClick={async () => {*/}
+      {/*    await runOption('openAtn(">1.atn"); ');*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  openAtn*/}
+      {/*</button>*/}
+      {/*<button*/}
+      {/*  onClick={async () => {*/}
+      {/*    await runOption('do_Action("1", "1"); ');*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  doAction1*/}
+      {/*</button>*/}
+      {/*<button*/}
+      {/*  onClick={async () => {*/}
+      {/*    await runOption('removeActSet("1"); ');*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  remove set*/}
+      {/*</button>*/}
       {state.ui.bottomMenuHint.length > 0 && (
         <div
           style={{

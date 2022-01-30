@@ -4,7 +4,9 @@
   "ui": {
     "fontSize": 13,
     "importantBtnsIds": [],
-    "lastActionBtnId": null
+    "importantBtnsIdsExpanded": [],
+    "lastActionBtnId": null,
+    "lastActionBtnIdExpanded": null
   },
   "modes": {
     "expanded": false,

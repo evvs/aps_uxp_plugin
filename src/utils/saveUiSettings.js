@@ -23,6 +23,10 @@ export default async (uistate, property, value) => {
     const idsArr = uistate.importantBtnsIds;
     value = idsArr.includes(value) ? idsArr.filter((id) => id !== value) : [...idsArr, value];
   }
+  if (property === "importantBtnsIdsExpanded") {
+    const idsArr = uistate.importantBtnsIdsExpanded;
+    value = idsArr.includes(value) ? idsArr.filter((id) => id !== value) : [...idsArr, value];
+  }
   const pluginFolder = await fs.getPluginFolder();
   const settingsFile = await pluginFolder.getEntry("user_settings.json");
   const token = await fs.createPersistentToken(settingsFile);

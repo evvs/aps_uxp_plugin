@@ -17,6 +17,7 @@ import Settings from "../../../plugin/icons/Settings";
 import BeforeAfterRight from "../../../plugin/icons/BeforeAfterRight";
 import "./styles.css";
 import runBeforeAfter from "../../utils/runBeforeAfter";
+import changeImportantBtnsIds from "../../actions/setImportantBtns";
 
 const standartExpandedLibraryOnClick = (action, state) => {
   if (state.modes.expanded) {
@@ -131,30 +132,29 @@ const btns = [
   },
 ];
 
-const changeImportantBtnsIds = (btnid) => ({
-  type: "changeImportantBtnsIds",
-  payload: btnid,
-});
-
 const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   const [isAfter, changeIsAfter] = useState(true);
 
   const onChangeHintEvent = (hint) => {
     dispatch(changeTopMenuHint(hint));
   };
+  const isImportant = state.modes.expanded
+    ? state.ui.importantBtnsIdsExpanded.includes(id)
+    : state.ui.importantBtnsIds.includes(id);
   return (
     <div
       onClick={() => {
         if (state.modes.importantMark) {
-          dispatch(changeImportantBtnsIds(id));
-          saveUiSettings(state.ui, "importantBtnsIds", id);
+          const name = state.modes.expanded ? "importantBtnsIdsExpanded" : "importantBtnsIds";
+          dispatch(changeImportantBtnsIds(id, state.modes.expanded));
+          saveUiSettings(state.ui, name, id);
         } else {
           clickHandler(id === "beforeAfterBtn" ? [isAfter, changeIsAfter] : state);
         }
       }}
       onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
-      onMouseLeave={() => onChangeHintEvent("")}
-      className={state.ui.importantBtnsIds.includes(id) ? "important btn-custom" : "btn-custom"}
+      onMouseLeave={() => state.modes.about && onChangeHintEvent("")}
+      className={isImportant ? "important btn-custom" : "btn-custom"}
     >
       {id === "beforeAfterBtn" ? isAfter ? icon : <BeforeAfterRight /> : icon}
     </div>
@@ -174,7 +174,7 @@ export default forwardRef(
         // simple click
         if (click === 1) onClickHandler();
         setClick(0);
-      }, 150); //delay
+      }, 200); //delay
 
       if (click === 2) onDoubleClickHandler();
 
@@ -205,7 +205,7 @@ export default forwardRef(
             state.modes.expanded ? "red settings-btn btn-custom" : "settings-btn btn-custom"
           }
           onMouseEnter={() => state.modes.about && onChangeHintEvent("Настройки панели")}
-          onMouseLeave={() => onChangeHintEvent("")}
+          onMouseLeave={() => state.modes.about && onChangeHintEvent("")}
         >
           <Settings />
         </div>

@@ -136,19 +136,23 @@ const BottomButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   const onChangeHintEvent = (hint) => {
     dispatch(changeBottomMenuHint(hint));
   };
+  const isImportant = state.modes.expanded
+    ? state.ui.importantBtnsIdsExpanded.includes(id)
+    : state.ui.importantBtnsIds.includes(id);
   return (
     <div
       onClick={() => {
         if (state.modes.importantMark) {
-          dispatch(changeImportantBtnsIds(id));
-          saveUiSettings(state.ui, "importantBtnsIds", id);
+          const name = state.modes.expanded ? "importantBtnsIdsExpanded" : "importantBtnsIds";
+          dispatch(changeImportantBtnsIds(id, state.modes.expanded));
+          saveUiSettings(state.ui, name, id);
         } else {
           clickHandler(state);
         }
       }}
       onMouseEnter={() => state.modes.about && onChangeHintEvent(hint)}
-      onMouseLeave={() => onChangeHintEvent("")}
-      className={state.ui.importantBtnsIds.includes(id) ? "important btn-custom" : "btn-custom"}
+      onMouseLeave={() => state.modes.about && onChangeHintEvent("")}
+      className={isImportant ? "important btn-custom" : "btn-custom"}
     >
       {icon}
     </div>
@@ -161,6 +165,7 @@ export default forwardRef(({ state, dispatch }, ref) => {
       {btns.map(({ id, hint, clickHandler, icon }) => (
         <BottomButton
           id={id}
+          key={id}
           hint={hint}
           clickHandler={clickHandler}
           icon={icon}

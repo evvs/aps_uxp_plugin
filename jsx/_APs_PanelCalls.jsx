@@ -104,3 +104,46 @@ function executeApsCatPdf( pdfPath)
 				pdf.execute();
 	}
 }
+
+function openAtn( atnPath)
+{
+	var atn = File(atnPath);
+
+	if (atnPath[0] == '>')
+	{
+		PathVariables = new PathVariables_Init();
+		PathVariables_read(PathVariables);
+		PathVariables.pathCat = PathVariables_GetPath1ByName(PathVariables, CatVariable);
+		PathVariables.pathCatExist = (PathVariables.pathCat != "") && Folder(PathVariables.pathCat).exists;
+
+		if (PathVariables.pathCatExist || FixMissedApsCatalogDlg(StrErrNoCatalog, 0))
+			atn = File(PathVariables.pathCat +  '/' + atnPath.substr(1));
+	}
+
+	if (atn.exists)
+		atn.execute();
+}
+
+function removeActSet( setname )
+{
+	try{
+		var desc = new ActionDescriptor();
+		var ref = new ActionReference();
+		ref.putName( charIDToTypeID( "ASet" ), setname );
+		desc.putReference( charIDToTypeID( "null" ), ref );
+		executeAction( charIDToTypeID( "Dlt " ), desc, DialogModes.NO );
+	}catch(__){}
+}
+
+// проверка наличия набора в панеи операций
+// возвращает true, если набор есть
+function checkActSet ( setname )
+{
+	if (setname == '*')
+		return true;
+
+	if (indexOf(Stdlib.getActionSets(), setname) < 0) 
+		return false;
+	else
+		return true;
+}

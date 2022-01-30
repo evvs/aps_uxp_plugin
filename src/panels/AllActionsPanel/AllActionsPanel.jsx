@@ -1,11 +1,4 @@
-import React, {
-  useReducer,
-  useEffect,
-  useCallback,
-  useLayoutEffect,
-  useState,
-  useRef,
-} from "react";
+import React, { useReducer, useEffect, useLayoutEffect, useState, useRef } from "react";
 
 import loadSettings from "../../utils/loadSettings";
 import "./AllactionsPanel.css";
@@ -23,6 +16,9 @@ const initialState = {
   ui: {
     fontSize: 13,
     importantBtnsIds: [],
+    importantBtnsIdsExpanded: [],
+    lastActionBtnId: null,
+    lastActionBtnIdExpanded: null,
     topMenuHint: "",
     bottomMenuHint: "",
   },
@@ -91,6 +87,19 @@ const reducer = (state, action) => {
         ui: {
           ...state.ui,
           importantBtnsIds: newIdsArr,
+        },
+      };
+    case "changeImportantBtnsIdsExpanded":
+      const importantBtnsIdsExpArr = state.ui.importantBtnsIdsExpanded;
+      const newExpIdsArr = importantBtnsIdsExpArr.includes(action.payload)
+        ? importantBtnsIdsExpArr.filter((id) => id !== action.payload)
+        : [...state.ui.importantBtnsIdsExpanded, action.payload];
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          importantBtnsIdsExpanded: newExpIdsArr,
         },
       };
     case "changeExpandedMode":
@@ -213,18 +222,20 @@ export const AllActionsPanel = () => {
     };
   }, []);
 
-  useEffect(async () => {
-    try {
-      // await runPathScript("call_set_setttings.jsx");
-      const [data, errors] = await loadSettings();
-      const uiData = await loadUiSettings();
-      if (uiData) {
-        dispatch(uiDataLoading(uiData));
+  useEffect(() => {
+    (async () => {
+      try {
+        // await runPathScript("call_set_setttings.jsx");
+        const [data, errors] = await loadSettings();
+        const uiData = await loadUiSettings();
+        if (uiData) {
+          dispatch(uiDataLoading(uiData));
+        }
+        dispatch(dataLoaded(data, errors));
+      } catch (e) {
+        console.log(e);
       }
-      dispatch(dataLoaded(data, errors));
-    } catch (e) {
-      console.log(e);
-    }
+    })();
   }, []);
 
   return (

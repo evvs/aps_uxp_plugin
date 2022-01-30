@@ -1,14 +1,10 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState, useEffect, memo } from "react";
 import "./styles.css";
 
 import saveUiSettings from "../../utils/saveUiSettings";
 import runAction from "../../utils/runAction";
 import runScript from "../../utils/runScript";
-
-const changeImportantBtnsIds = (btnid) => ({
-  type: "changeImportantBtnsIds",
-  payload: btnid,
-});
+import changeImportantBtnsIds from "../../actions/setImportantBtns";
 
 const changeBottomMenuHint = (hint) => ({
   type: "changeBottomMenuHint",
@@ -20,109 +16,120 @@ const changeTopMenuHint = (hint, state) => ({
   payload: hint,
 });
 
-export default ({
-  btnid,
-  isLastClicked,
-  name,
-  marg,
-  btnWidth,
-  description,
-  color,
-  standartActions,
-  expandedActions,
-  importantBtnsIds,
-  fontSize,
-  isExpanded,
-  isDoubleClick,
-  isImportantMark,
-  dispatch,
-  state,
-  setLastClickedAction,
-  hintSpot,
-}) => {
-  const onClickHandler = () => {
-    if (isImportantMark) {
-      dispatch(changeImportantBtnsIds(btnid));
-      saveUiSettings(state.ui, "importantBtnsIds", btnid);
-      return;
-    }
-    setLastClickedAction(btnid);
+export default memo(
+  ({
+    btnid,
+    height,
+    isLastClicked,
+    name,
+    marg,
+    btnWidth,
+    description,
+    color,
+    standartActions,
+    expandedActions,
+    fontSize,
+    isExpanded,
+    isDoubleClick,
+    isImportantMark,
+    dispatch,
+    state,
+    setLastClickedAction,
+    hintSpot,
+  }) => {
+    const isImp = state.modes.expanded
+      ? state.ui.importantBtnsIdsExpanded.includes(btnid)
+      : state.ui.importantBtnsIds.includes(btnid);
 
-    if (isExpanded) {
-      expandedActions.actions.forEach((action) => {
-        runAction(action);
-      });
-      expandedActions.scripts.forEach((script) => {
-        runScript(script);
-      });
-    } else {
-      standartActions.actions.forEach((action) => {
-        runAction(action);
-      });
-      standartActions.scripts.forEach((script) => {
-        runScript(script);
-      });
-    }
-  };
-
-  const onDoubleClickHandler = () => {
-    if (isDoubleClick) {
+    const onClickHandler = () => {
+      if (isImportantMark) {
+        const name = state.modes.expanded ? "importantBtnsIdsExpanded" : "importantBtnsIds";
+        dispatch(changeImportantBtnsIds(btnid, state.modes.expanded));
+        saveUiSettings(state.ui, name, btnid);
+        return;
+      }
       setLastClickedAction(btnid);
 
-      expandedActions.actions.forEach((action) => {
-        runAction(action);
-      });
-      expandedActions.scripts.forEach((script) => {
-        runScript(script);
-      });
-    }
-  };
+      if (isExpanded) {
+        expandedActions.actions.forEach((action) => {
+          runAction(action);
+        });
+        expandedActions.scripts.forEach((script) => {
+          runScript(script);
+        });
+      } else {
+        standartActions.actions.forEach((action) => {
+          runAction(action);
+        });
+        standartActions.scripts.forEach((script) => {
+          runScript(script);
+        });
+      }
+    };
 
-  const [click, setClick] = useState(0);
+    const onDoubleClickHandler = () => {
+      if (isDoubleClick) {
+        setLastClickedAction(btnid);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // simple click
-      if (click === 1) onClickHandler();
-      setClick(0);
-    }, 500); //delay
+        expandedActions.actions.forEach((action) => {
+          runAction(action);
+        });
+        expandedActions.scripts.forEach((script) => {
+          runScript(script);
+        });
+      }
+    };
 
-    if (click === 2) onDoubleClickHandler();
+    const [click, setClick] = useState(0);
 
-    return () => clearTimeout(timer);
-  }, [click, setLastClickedAction]);
+    const doubleClickDelay = isDoubleClick ? 500 : 1;
 
-  const onChangeHintEvent = (hint, spot) => {
-    if (spot) {
-      spot === "bottom" ? dispatch(changeBottomMenuHint(hint)) : dispatch(changeTopMenuHint(hint));
-    } else {
-      dispatch(changeBottomMenuHint(hint));
-      dispatch(changeTopMenuHint(hint));
-    }
-  };
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        // simple click
+        if (click === 1) onClickHandler();
+        setClick(0);
+      }, doubleClickDelay); //delay
 
-  return (
-    <div
-      onMouseEnter={() => state.modes.about && onChangeHintEvent(description, hintSpot)}
-      onMouseLeave={() => onChangeHintEvent("")}
-      className={`action-btn ${isLastClicked && "last-clicked "} ${
-        importantBtnsIds.includes(btnid) ? "importantBtn" : `btn-${color}`
-      }`}
-      onClick={() => setClick((prev) => prev + 1)}
-      onDoubleClick={() => setClick((prev) => prev + 1)}
-      style={{
-        fontSize: `${fontSize}`,
-        // width: btnWidth + "px",
-        width: "calc(" + btnWidth + "% - " + marg + "px)",
-      }}
-    >
-      <p
+      if (click === 2) onDoubleClickHandler();
+
+      return () => clearTimeout(timer);
+    }, [click, setLastClickedAction, doubleClickDelay]);
+
+    const onChangeHintEvent = (hint, spot) => {
+      if (spot) {
+        spot === "bottom"
+          ? dispatch(changeBottomMenuHint(hint))
+          : dispatch(changeTopMenuHint(hint));
+      } else {
+        dispatch(changeBottomMenuHint(hint));
+        dispatch(changeTopMenuHint(hint));
+      }
+    };
+
+    return (
+      <div
+        onMouseEnter={() => state.modes.about && onChangeHintEvent(description, hintSpot)}
+        onMouseLeave={() => state.modes.about && onChangeHintEvent("")}
+        className={`action-btn ${isLastClicked && "last-clicked "} ${`btn-${
+          isImp ? "important" : color
+        }`}`}
+        onClick={() => setClick((prev) => prev + 1)}
+        onDoubleClick={() => setClick((prev) => prev + 1)}
         style={{
+          height: `${height}px`,
           fontSize: `${fontSize}`,
+          width: "calc(" + btnWidth + "% - " + marg + "px)",
         }}
       >
-        {name}
-      </p>
-    </div>
-  );
-};
+        <p
+          style={{
+            fontSize: `${fontSize}`,
+          }}
+        >
+          {name}
+        </p>
+      </div>
+    );
+  }
+);

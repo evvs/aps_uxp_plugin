@@ -12,20 +12,38 @@ const changeFontSize = (fontSize) => ({
   payload: fontSize,
 });
 
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  return debouncedValue;
+}
+
 export default ({ state, dispatch, top, size, btm, height }) => {
   const [fontSize, setFontSize] = useState(state.ui.fontSize);
+  const dfontSize = useDebounce(fontSize, 150);
 
   useEffect(() => {
-    let timer = setTimeout(() => saveUiSettings(state.ui, "fontSize", fontSize), 1000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [fontSize]);
+    if (state.ui.fontSize !== dfontSize) {
+      console.log("dddd");
+
+      const fontSizee = dfontSize * 13;
+      dispatch(changeFontSize(fontSizee));
+      let timer = setTimeout(() => saveUiSettings(state.ui, "fontSize", fontSizee), 1000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [dfontSize]);
 
   const sliderEvent = async ({ target: { value } }) => {
-    const fontSize = value * 13;
-    dispatch(changeFontSize(fontSize));
-    setFontSize(fontSize);
+    setFontSize(value);
   };
 
   const expandedModeEvent = async () => {
