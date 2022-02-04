@@ -15,6 +15,7 @@ const initialState = {
   errors: [],
   ui: {
     fontSize: 13,
+    fontSizeExpanded: 13,
     importantBtnsIds: [],
     importantBtnsIdsExpanded: [],
     lastActionBtnId: null,
@@ -25,8 +26,10 @@ const initialState = {
   modes: {
     expanded: false,
     doubleClick: false,
+    doubleClickExpanded: false,
     about: false,
-    importantMark: false,
+    aboutExpanded: false,
+    importantMarkExpanded: false,
   },
 };
 
@@ -58,6 +61,14 @@ const reducer = (state, action) => {
         ui: {
           ...state.ui,
           fontSize: action.payload,
+        },
+      };
+    case "changeFontSizeExpanded":
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          fontSizeExpanded: action.payload,
         },
       };
     case "changeTopMenuHint":
@@ -118,12 +129,28 @@ const reducer = (state, action) => {
           doubleClick: !state.modes.doubleClick,
         },
       };
-    case "changeAboutkMode":
+    case "changeDoubleClickModeExpanded":
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          doubleClickExpanded: !state.modes.doubleClickExpanded,
+        },
+      };
+    case "changeAboutMode":
       return {
         ...state,
         modes: {
           ...state.modes,
           about: !state.modes.about,
+        },
+      };
+    case "changeAboutModeExpanded":
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          aboutExpanded: !state.modes.about,
         },
       };
     case "changeImportantMarkMode":
@@ -132,6 +159,14 @@ const reducer = (state, action) => {
         modes: {
           ...state.modes,
           importantMark: !state.modes.importantMark,
+        },
+      };
+    case "changeImportantMarkModeExpanded":
+      return {
+        ...state,
+        modes: {
+          ...state.modes,
+          importantMarkExpanded: !state.modes.importantMarkExpanded,
         },
       };
     case "resetModes":

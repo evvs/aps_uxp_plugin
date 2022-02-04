@@ -7,8 +7,8 @@ import "./styles.css";
 import saveMode from "../../utils/saveMode";
 import resetModes from "../../utils/resetModes";
 
-const changeFontSize = (fontSize) => ({
-  type: "changeFontSize",
+const changeFontSize = (fontSize, type) => ({
+  type,
   payload: fontSize,
 });
 
@@ -26,16 +26,29 @@ function useDebounce(value, delay) {
 }
 
 export default ({ state, dispatch, top, size, btm, height }) => {
-  const [fontSize, setFontSize] = useState(state.ui.fontSize);
+  const fontS = state.modes.expanded ? state.ui.fontSizeExpanded : state.ui.fontSize;
+
+  const [fontSize, setFontSize] = useState(fontS);
   const dfontSize = useDebounce(fontSize, 150);
 
   useEffect(() => {
     if (state.ui.fontSize !== dfontSize) {
-      console.log("dddd");
-
       const fontSizee = dfontSize * 13;
-      dispatch(changeFontSize(fontSizee));
-      let timer = setTimeout(() => saveUiSettings(state.ui, "fontSize", fontSizee), 1000);
+      const name = dispatch(
+        changeFontSize(
+          fontSizee,
+          state.modes.expanded ? "changeFontSizeExpanded" : "changeFontSize"
+        )
+      );
+      let timer = setTimeout(
+        () =>
+          saveUiSettings(
+            state.ui,
+            state.modes.expanded ? "fontSizeExpanded" : "fontSize",
+            fontSizee
+          ),
+        1000
+      );
       return () => {
         clearTimeout(timer);
       };
@@ -52,18 +65,34 @@ export default ({ state, dispatch, top, size, btm, height }) => {
   };
 
   const changeDoubleClickEvent = async () => {
-    await dispatch({ type: "changeDoubleClickMode" });
-    await saveMode(state.modes, "doubleClick", !state.modes.doubleClick);
+    await dispatch({
+      type: state.modes.expanded ? "changeDoubleClickModeExpanded" : "changeDoubleClickMode",
+    });
+    await saveMode(
+      state.modes,
+      state.modes.expanded ? "doubleClickExpanded" : "doubleClick",
+      state.modes.expanded ? !state.modes.doubleClickExpanded : !state.modes.doubleClick
+    );
   };
 
   const changeAboutEvent = async () => {
-    await dispatch({ type: "changeAboutkMode" });
-    await saveMode(state.modes, "about", !state.modes.about);
+    await dispatch({ type: state.modes.expanded ? "changeAboutModeExpanded" : "changeAboutMode" });
+    await saveMode(
+      state.modes,
+      state.modes.expanded ? "aboutExpanded" : "about",
+      state.modes.expanded ? !state.modes.aboutExpanded : !state.modes.about
+    );
   };
 
   const changeImportantMarkEvent = async () => {
-    await dispatch({ type: "changeImportantMarkMode" });
-    await saveMode(state.modes, "importantMark", !state.modes.importantMark);
+    await dispatch({
+      type: state.modes.expanded ? "changeImportantMarkModeExpanded" : "changeImportantMarkMode",
+    });
+    await saveMode(
+      state.modes,
+      state.modes.expanded ? "importantMarkExpanded" : "importantMark",
+      !state.modes.importantMark
+    );
   };
 
   const resetModesEvent = async () => {
@@ -72,6 +101,15 @@ export default ({ state, dispatch, top, size, btm, height }) => {
   };
 
   const maxHeight = height - top - btm - 8;
+  const dClick = state.modes.expanded
+    ? { ...(state.modes.doubleClickExpanded ? { checked: true } : {}) }
+    : { ...(state.modes.doubleClick ? { checked: true } : {}) };
+  const about = state.modes.expanded
+    ? { ...(state.modes.aboutExpanded ? { checked: true } : {}) }
+    : { ...(state.modes.about ? { checked: true } : {}) };
+  const importantMark = state.modes.expanded
+    ? { ...(state.modes.importantMarkExpanded ? { checked: true } : {}) }
+    : { ...(state.modes.importantMark ? { checked: true } : {}) };
 
   return (
     <div
@@ -88,7 +126,7 @@ export default ({ state, dispatch, top, size, btm, height }) => {
           min="1"
           max="2"
           step={0.01}
-          value={`${state.ui.fontSize / 13}`}
+          value={`${fontS / 13}`}
           variant="filled"
           fill-offset="left"
           class="slider"
@@ -107,20 +145,12 @@ export default ({ state, dispatch, top, size, btm, height }) => {
           </sp-checkbox>
         </div>
         <div>
-          <sp-checkbox
-            class="checkbox-item"
-            onClick={() => changeDoubleClickEvent()}
-            {...(state.modes.doubleClick ? { checked: true } : {})}
-          >
+          <sp-checkbox class="checkbox-item" onClick={() => changeDoubleClickEvent()} {...dClick}>
             режим "Двойной клик"
           </sp-checkbox>
         </div>
         <div>
-          <sp-checkbox
-            class="checkbox-item"
-            onClick={() => changeAboutEvent()}
-            {...(state.modes.about ? { checked: true } : {})}
-          >
+          <sp-checkbox class="checkbox-item" onClick={() => changeAboutEvent()} {...about}>
             режим "Подсказки"
           </sp-checkbox>
         </div>
@@ -128,7 +158,7 @@ export default ({ state, dispatch, top, size, btm, height }) => {
           <sp-checkbox
             class="checkbox-item"
             onClick={() => changeImportantMarkEvent()}
-            {...(state.modes.importantMark ? { checked: true } : {})}
+            {...importantMark}
           >
             метка "Важно"
           </sp-checkbox>

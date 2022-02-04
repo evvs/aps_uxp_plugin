@@ -41,8 +41,16 @@ export default memo(
       ? state.ui.importantBtnsIdsExpanded.includes(btnid)
       : state.ui.importantBtnsIds.includes(btnid);
 
+    const isImportant =
+      (!state.modes.expanded && state.modes.importantMark) ||
+      (state.modes.expanded && state.modes.importantMarkExpanded);
+
+    const isDCl =
+      (!state.modes.expanded && state.modes.doubleClick) ||
+      (state.modes.expanded && state.modes.doubleClickExpanded);
+
     const onClickHandler = () => {
-      if (isImportantMark) {
+      if (isImportant) {
         const name = state.modes.expanded ? "importantBtnsIdsExpanded" : "importantBtnsIds";
         dispatch(changeImportantBtnsIds(btnid, state.modes.expanded));
         saveUiSettings(state.ui, name, btnid);
@@ -68,7 +76,7 @@ export default memo(
     };
 
     const onDoubleClickHandler = () => {
-      if (isDoubleClick) {
+      if (isDCl) {
         setLastClickedAction(btnid);
 
         expandedActions.actions.forEach((action) => {
@@ -106,11 +114,14 @@ export default memo(
         dispatch(changeTopMenuHint(hint));
       }
     };
+    const isAbout =
+      (!state.modes.expanded && state.modes.about) ||
+      (state.modes.expanded && state.modes.aboutExpanded);
 
     return (
       <div
-        onMouseEnter={() => state.modes.about && onChangeHintEvent(description, hintSpot)}
-        onMouseLeave={() => state.modes.about && onChangeHintEvent("")}
+        onMouseEnter={() => isAbout && onChangeHintEvent(description, hintSpot)}
+        onMouseLeave={() => isAbout && onChangeHintEvent("")}
         className={`action-btn ${isLastClicked && "last-clicked "} ${`btn-${
           isImp ? "important" : color
         }`}`}

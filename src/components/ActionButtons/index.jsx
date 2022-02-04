@@ -22,7 +22,8 @@ function useDebounce(value, delay) {
 
 export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) => {
   const [min, setMin] = useState(100);
-  const [heightBtn, setHeightBtn] = useState(state.ui.fontSize * 1.6);
+  const fontS = state.modes.expanded ? state.ui.fontSizeExpanded : state.ui.fontSize;
+  const [heightBtn, setHeightBtn] = useState(fontS * 1.6);
   const [hintsIndex, setHintsIndex] = useState(0);
   const [lastClickedAction, setLastClickedAction] = useState(null);
   const [btnWidth, setBtnWidth] = useState(100);
@@ -36,9 +37,9 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
     all.forEach((btnText) => {
       if (btnText.clientWidth > val) val = btnText.clientWidth;
     });
-    setHeightBtn(Math.ceil(state.ui.fontSize * 1.6));
+    setHeightBtn(Math.ceil(fontS * 1.6));
     setMin(val);
-  }, [heightBtns, state.ui.fontSize]);
+  }, [heightBtns, fontS]);
 
   useLayoutEffect(() => {
     const count = state.data.length;
@@ -50,7 +51,7 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
     setHintsIndex(buttonsToShowHintBottom);
     setBtnWidth(100 / containersCountInRow);
     setMarg((columnsCount * 3) / columnsCount);
-  }, [debouncedsize, state.ui.fontSize, min]);
+  }, [debouncedsize, fontS, min]);
 
   useLayoutEffect(async () => {
     const pluginFolder = await fs.getPluginFolder();
@@ -94,7 +95,7 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
       }}
     >
       {state.ui.topMenuHint.length > 0 && (
-        <div style={{ fontSize: `${state.ui.fontSize}`, top: `${top}px` }} className="top-hint">
+        <div style={{ fontSize: `${fontS}`, top: `${top}px` }} className="top-hint">
           {state.ui.topMenuHint}
         </div>
       )}
@@ -112,7 +113,7 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
               color={color || "none"}
               standartActions={standartActions}
               expandedActions={expandedActions}
-              fontSize={state.ui.fontSize}
+              fontSize={fontS}
               isExpanded={state.modes.expanded}
               isDoubleClick={state.modes.doubleClick}
               isImportantMark={state.modes.importantMark}
@@ -127,72 +128,29 @@ export default ({ state, dispatch, size, top, btm, isVisibleDropDown, height }) 
       ) : (
         <h1>No buttons to load</h1>
       )}
-      {/*<button*/}
-      {/*  onClick={() =>*/}
-      {/*    runOption(*/}
-      {/*      'openAtn(">1.atn");' +*/}
-      {/*        "const count = 20;" +*/}
-      {/*        "async function doA() {" +*/}
-      {/*        "await new Promise(resolve => {" +*/}
-      {/*        'let timerId = setInterval(() => {const r = checkActSet("1"); if (r) {clearInterval(timerId); resolve(true)}  }, 200);' +*/}
-      {/*        "});" +*/}
-      {/*        'do_Action("1", "1"); removeActSet("1");' +*/}
-      {/*        "}; doA();"*/}
-      {/*    )*/}
-      {/*  }*/}
-      {/*>*/}
-      {/*  1 do_Action sync call*/}
-      {/*</button>*/}
 
       {/*<button*/}
       {/*  onClick={async () => {*/}
-      {/*    await runOption('openAtn(">1.atn"); ');*/}
-      {/*    console.log(1);*/}
-      {/*    location.reload();*/}
-
-      {/*    await new Promise((resolve) =>*/}
-      {/*      setTimeout(() => {*/}
-      {/*        resolve(true);*/}
-      {/*      }, 300)*/}
-      {/*    );*/}
-      {/*    await runOption('do_Action("1", "1"); ');*/}
-      {/*    console.log(1);*/}
-
-      {/*    // await new Promise((resolve) =>*/}
-      {/*    //   setTimeout(() => {*/}
-      {/*    //     resolve(true);*/}
-      {/*    //   }, 1500)*/}
-      {/*    // );*/}
-      {/*    await runOption('removeActSet("1"); ');*/}
+      {/*    await runOption('openAtn(">1.atn");');*/}
+      {/*    await new Promise((resolve) => {*/}
+      {/*      let count = 5;*/}
+      {/*      const t = setInterval(() => {*/}
+      {/*        runOption('if (checkActSet("1")) {do_Action("1", "1"); removeActSet("1");}');*/}
+      {/*        count--;*/}
+      {/*        if (count === 0) {*/}
+      {/*          clearInterval(t);*/}
+      {/*          resolve();*/}
+      {/*        }*/}
+      {/*      }, 300);*/}
+      {/*    });*/}
       {/*  }}*/}
       {/*>*/}
-      {/*  1 do_Action async*/}
-      {/*</button>*/}
-      {/*<button*/}
-      {/*  onClick={async () => {*/}
-      {/*    await runOption('openAtn(">1.atn"); ');*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  openAtn*/}
-      {/*</button>*/}
-      {/*<button*/}
-      {/*  onClick={async () => {*/}
-      {/*    await runOption('do_Action("1", "1"); ');*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  doAction1*/}
-      {/*</button>*/}
-      {/*<button*/}
-      {/*  onClick={async () => {*/}
-      {/*    await runOption('removeActSet("1"); ');*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  remove set*/}
+      {/*  do_Action 1 and remove*/}
       {/*</button>*/}
       {state.ui.bottomMenuHint.length > 0 && (
         <div
           style={{
-            fontSize: `${state.ui.fontSize}`,
+            fontSize: `${fontS}`,
             bottom: `${height - heightBtns - top - 11}px`,
           }}
           className="bottom-hint"

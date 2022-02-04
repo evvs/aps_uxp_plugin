@@ -144,7 +144,10 @@ const TopButton = ({ id, hint, clickHandler, icon, state, dispatch }) => {
   return (
     <div
       onClick={() => {
-        if (state.modes.importantMark) {
+        if (
+          (!state.modes.expanded && state.modes.importantMark) ||
+          (state.modes.expanded && state.modes.importantMarkExpanded)
+        ) {
           const name = state.modes.expanded ? "importantBtnsIdsExpanded" : "importantBtnsIds";
           dispatch(changeImportantBtnsIds(id, state.modes.expanded));
           saveUiSettings(state.ui, name, id);
